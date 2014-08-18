@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.basicdatas.ParameterCreditMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.basicdatas.ParameterCredit" >
+    <id column="temp_parameter_credit_credit_id" property="creditId" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_credit_name" property="creditName" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_credit_begin_integral" property="creditBeginIntegral" jdbcType="INTEGER" />
+    <result column="temp_parameter_credit_credit_end_integral" property="creditEndIntegral" jdbcType="INTEGER" />
+    <result column="temp_parameter_credit_credit_photo" property="creditPhoto" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_credit_num" property="creditNum" jdbcType="INTEGER" />
+    <result column="temp_parameter_credit_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_credit_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_credit_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_credit_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_parameter_credit_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_parameter_credit.credit_id as temp_parameter_credit_credit_id, temp_parameter_credit.credit_name as temp_parameter_credit_credit_name, 
+    temp_parameter_credit.credit_begin_integral as temp_parameter_credit_credit_begin_integral, 
+    temp_parameter_credit.credit_end_integral as temp_parameter_credit_credit_end_integral, 
+    temp_parameter_credit.credit_photo as temp_parameter_credit_credit_photo, temp_parameter_credit.accessory as temp_parameter_credit_accessory, 
+    temp_parameter_credit.credit_num as temp_parameter_credit_credit_num, temp_parameter_credit.remark as temp_parameter_credit_remark, 
+    temp_parameter_credit.creater as temp_parameter_credit_creater, temp_parameter_credit.create_time as temp_parameter_credit_create_time, 
+    temp_parameter_credit.updater as temp_parameter_credit_updater, temp_parameter_credit.update_time as temp_parameter_credit_update_time
+     <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_parameter_credit_creater_display
+    ,temp_updater.user_cn_name as temp_parameter_credit_updater_display
+  </sql>
+   <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_parameter_credit.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_parameter_credit.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.basicdatas.ParameterCreditExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_parameter_credit temp_parameter_credit
+    <include refid="Base_extend" /><!-- 扩展 -->
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_parameter_credit temp_parameter_credit
+    <include refid="Base_extend" /><!-- 扩展 -->
+    where temp_parameter_credit.credit_id = #{creditId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_parameter_credit
+    where credit_id = #{creditId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterCreditExample" >
+    delete temp_parameter_credit from t_parameter_credit temp_parameter_credit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.basicdatas.ParameterCredit" >
+    insert into t_parameter_credit (credit_id, credit_name, credit_begin_integral, 
+      credit_end_integral, credit_photo, accessory, 
+      credit_num, remark, creater, 
+      create_time, updater, update_time
+      )
+    values (#{creditId,jdbcType=VARCHAR}, #{creditName,jdbcType=VARCHAR}, #{creditBeginIntegral,jdbcType=INTEGER}, 
+      #{creditEndIntegral,jdbcType=INTEGER}, #{creditPhoto,jdbcType=VARCHAR}, #{accessory,jdbcType=VARCHAR}, 
+      #{creditNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterCredit" >
+    insert into t_parameter_credit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="creditId != null" >
+        credit_id,
+      </if>
+      <if test="creditName != null" >
+        credit_name,
+      </if>
+      <if test="creditBeginIntegral != null" >
+        credit_begin_integral,
+      </if>
+      <if test="creditEndIntegral != null" >
+        credit_end_integral,
+      </if>
+      <if test="creditPhoto != null" >
+        credit_photo,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="creditNum != null" >
+        credit_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="creditId != null" >
+        #{creditId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditName != null" >
+        #{creditName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditBeginIntegral != null" >
+        #{creditBeginIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="creditEndIntegral != null" >
+        #{creditEndIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="creditPhoto != null" >
+        #{creditPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="creditNum != null" >
+        #{creditNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterCreditExample" resultType="java.lang.Integer" >
+    select count(*) from t_parameter_credit temp_parameter_credit
+    <include refid="Base_extend" /><!-- 扩展 -->
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_parameter_credit temp_parameter_credit
+    <set >
+      <if test="record.creditId != null" >
+        temp_parameter_credit.credit_id = #{record.creditId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditName != null" >
+        temp_parameter_credit.credit_name = #{record.creditName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditBeginIntegral != null" >
+        temp_parameter_credit.credit_begin_integral = #{record.creditBeginIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditEndIntegral != null" >
+        temp_parameter_credit.credit_end_integral = #{record.creditEndIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditPhoto != null" >
+        temp_parameter_credit.credit_photo = #{record.creditPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessory != null" >
+        temp_parameter_credit.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditNum != null" >
+        temp_parameter_credit.credit_num = #{record.creditNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_parameter_credit.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_parameter_credit.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_parameter_credit.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_parameter_credit.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_parameter_credit.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_parameter_credit temp_parameter_credit
+    set temp_parameter_credit.credit_id = #{record.creditId,jdbcType=VARCHAR},
+      temp_parameter_credit.credit_name = #{record.creditName,jdbcType=VARCHAR},
+      temp_parameter_credit.credit_begin_integral = #{record.creditBeginIntegral,jdbcType=INTEGER},
+      temp_parameter_credit.credit_end_integral = #{record.creditEndIntegral,jdbcType=INTEGER},
+      temp_parameter_credit.credit_photo = #{record.creditPhoto,jdbcType=VARCHAR},
+      temp_parameter_credit.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_parameter_credit.credit_num = #{record.creditNum,jdbcType=INTEGER},
+      temp_parameter_credit.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_parameter_credit.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_parameter_credit.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_parameter_credit.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_parameter_credit.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterCredit" >
+    update t_parameter_credit
+    <set >
+      <if test="creditName != null" >
+        credit_name = #{creditName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditBeginIntegral != null" >
+        credit_begin_integral = #{creditBeginIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="creditEndIntegral != null" >
+        credit_end_integral = #{creditEndIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="creditPhoto != null" >
+        credit_photo = #{creditPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="creditNum != null" >
+        credit_num = #{creditNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where credit_id = #{creditId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.basicdatas.ParameterCredit" >
+    update t_parameter_credit
+    set credit_name = #{creditName,jdbcType=VARCHAR},
+      credit_begin_integral = #{creditBeginIntegral,jdbcType=INTEGER},
+      credit_end_integral = #{creditEndIntegral,jdbcType=INTEGER},
+      credit_photo = #{creditPhoto,jdbcType=VARCHAR},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      credit_num = #{creditNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where credit_id = #{creditId,jdbcType=VARCHAR}
+  </update>
+</mapper>

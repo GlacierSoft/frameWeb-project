@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.basicdatas.ParameterIntegralMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.basicdatas.ParameterIntegral" >
+    <id column="temp_parameter_integral_integral_id" property="integralId" jdbcType="VARCHAR" />
+    <result column="temp_parameter_integral_integral_name" property="integralName" jdbcType="VARCHAR" />
+    <result column="temp_parameter_integral_integral_begin" property="integralBegin" jdbcType="INTEGER" />
+    <result column="temp_parameter_integral_integral_end" property="integralEnd" jdbcType="INTEGER" />
+    <result column="temp_parameter_integral_integral_photo" property="integralPhoto" jdbcType="VARCHAR" />
+    <result column="temp_parameter_integral_integral_num" property="integralNum" jdbcType="INTEGER" />
+    <result column="temp_parameter_integral_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_parameter_integral_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_integral_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_integral_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_integral_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_integral_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_parameter_integral_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_parameter_integral.integral_id as temp_parameter_integral_integral_id, temp_parameter_integral.integral_name as temp_parameter_integral_integral_name, 
+    temp_parameter_integral.integral_begin as temp_parameter_integral_integral_begin, 
+    temp_parameter_integral.integral_end as temp_parameter_integral_integral_end, temp_parameter_integral.integral_photo as temp_parameter_integral_integral_photo, 
+    temp_parameter_integral.integral_num as temp_parameter_integral_integral_num, temp_parameter_integral.remark as temp_parameter_integral_remark, 
+    temp_parameter_integral.creater as temp_parameter_integral_creater, temp_parameter_integral.create_time as temp_parameter_integral_create_time, 
+    temp_parameter_integral.updater as temp_parameter_integral_updater, temp_parameter_integral.update_time as temp_parameter_integral_update_time
+ 	<!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_parameter_integral_creater_display
+    ,temp_updater.user_cn_name as temp_parameter_integral_updater_display
+  </sql>
+   <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_parameter_integral.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_parameter_integral.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegralExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_parameter_integral temp_parameter_integral
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_parameter_integral temp_parameter_integral
+    <include refid="Base_extend" />
+    where temp_parameter_integral.integral_id = #{integralId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_parameter_integral
+    where integral_id = #{integralId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegralExample" >
+    delete temp_parameter_integral from t_parameter_integral temp_parameter_integral
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegral" >
+    insert into t_parameter_integral (integral_id, integral_name, integral_begin, 
+      integral_end, integral_photo, integral_num, 
+      remark, creater, create_time, 
+      updater, update_time)
+    values (#{integralId,jdbcType=VARCHAR}, #{integralName,jdbcType=VARCHAR}, #{integralBegin,jdbcType=INTEGER}, 
+      #{integralEnd,jdbcType=INTEGER}, #{integralPhoto,jdbcType=VARCHAR}, #{integralNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegral" >
+    insert into t_parameter_integral
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="integralId != null" >
+        integral_id,
+      </if>
+      <if test="integralName != null" >
+        integral_name,
+      </if>
+      <if test="integralBegin != null" >
+        integral_begin,
+      </if>
+      <if test="integralEnd != null" >
+        integral_end,
+      </if>
+      <if test="integralPhoto != null" >
+        integral_photo,
+      </if>
+      <if test="integralNum != null" >
+        integral_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="integralId != null" >
+        #{integralId,jdbcType=VARCHAR},
+      </if>
+      <if test="integralName != null" >
+        #{integralName,jdbcType=VARCHAR},
+      </if>
+      <if test="integralBegin != null" >
+        #{integralBegin,jdbcType=INTEGER},
+      </if>
+      <if test="integralEnd != null" >
+        #{integralEnd,jdbcType=INTEGER},
+      </if>
+      <if test="integralPhoto != null" >
+        #{integralPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="integralNum != null" >
+        #{integralNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegralExample" resultType="java.lang.Integer" >
+    select count(*) from t_parameter_integral temp_parameter_integral
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_parameter_integral temp_parameter_integral
+    <set >
+      <if test="record.integralId != null" >
+        temp_parameter_integral.integral_id = #{record.integralId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralName != null" >
+        temp_parameter_integral.integral_name = #{record.integralName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralBegin != null" >
+        temp_parameter_integral.integral_begin = #{record.integralBegin,jdbcType=INTEGER},
+      </if>
+      <if test="record.integralEnd != null" >
+        temp_parameter_integral.integral_end = #{record.integralEnd,jdbcType=INTEGER},
+      </if>
+      <if test="record.integralPhoto != null" >
+        temp_parameter_integral.integral_photo = #{record.integralPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralNum != null" >
+        temp_parameter_integral.integral_num = #{record.integralNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_parameter_integral.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_parameter_integral.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_parameter_integral.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_parameter_integral.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_parameter_integral.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_parameter_integral temp_parameter_integral
+    set temp_parameter_integral.integral_id = #{record.integralId,jdbcType=VARCHAR},
+      temp_parameter_integral.integral_name = #{record.integralName,jdbcType=VARCHAR},
+      temp_parameter_integral.integral_begin = #{record.integralBegin,jdbcType=INTEGER},
+      temp_parameter_integral.integral_end = #{record.integralEnd,jdbcType=INTEGER},
+      temp_parameter_integral.integral_photo = #{record.integralPhoto,jdbcType=VARCHAR},
+      temp_parameter_integral.integral_num = #{record.integralNum,jdbcType=INTEGER},
+      temp_parameter_integral.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_parameter_integral.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_parameter_integral.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_parameter_integral.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_parameter_integral.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegral" >
+    update t_parameter_integral
+    <set >
+      <if test="integralName != null" >
+        integral_name = #{integralName,jdbcType=VARCHAR},
+      </if>
+      <if test="integralBegin != null" >
+        integral_begin = #{integralBegin,jdbcType=INTEGER},
+      </if>
+      <if test="integralEnd != null" >
+        integral_end = #{integralEnd,jdbcType=INTEGER},
+      </if>
+      <if test="integralPhoto != null" >
+        integral_photo = #{integralPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="integralNum != null" >
+        integral_num = #{integralNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where integral_id = #{integralId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.basicdatas.ParameterIntegral" >
+    update t_parameter_integral
+    set integral_name = #{integralName,jdbcType=VARCHAR},
+      integral_begin = #{integralBegin,jdbcType=INTEGER},
+      integral_end = #{integralEnd,jdbcType=INTEGER},
+      integral_photo = #{integralPhoto,jdbcType=VARCHAR},
+      integral_num = #{integralNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where integral_id = #{integralId,jdbcType=VARCHAR}
+  </update>
+</mapper>

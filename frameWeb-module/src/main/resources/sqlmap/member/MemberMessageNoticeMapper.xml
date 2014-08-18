@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.member.MemberMessageNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.member.MemberMessageNotice" >
+    <id column="temp_member_message_notice_message_notice_id" property="messageNoticeId" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_sender" property="sender" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_addressee" property="addressee" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_title" property="title" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_content" property="content" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_sendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_message_notice_letterStatus" property="letterstatus" jdbcType="CHAR" />
+    <result column="temp_member_message_notice_letterType" property="lettertype" jdbcType="CHAR" />
+    <result column="temp_member_message_notice_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_message_notice_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_member_message_notice_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_message_notice_sender_display" property="senderDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_message_notice_addressee_display" property="addresseeDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_message_notice_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_message_notice_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_member_message_notice.message_notice_id as temp_member_message_notice_message_notice_id, 
+    temp_member_message_notice.sender as temp_member_message_notice_sender, temp_member_message_notice.addressee as temp_member_message_notice_addressee, 
+    temp_member_message_notice.title as temp_member_message_notice_title, temp_member_message_notice.content as temp_member_message_notice_content, 
+    temp_member_message_notice.sendTime as temp_member_message_notice_sendTime, temp_member_message_notice.letterStatus as temp_member_message_notice_letterStatus, 
+    temp_member_message_notice.letterType as temp_member_message_notice_letterType, temp_member_message_notice.remark as temp_member_message_notice_remark, 
+    temp_member_message_notice.creater as temp_member_message_notice_creater, temp_member_message_notice.create_time as temp_member_message_notice_create_time, 
+    temp_member_message_notice.updater as temp_member_message_notice_updater, temp_member_message_notice.update_time as temp_member_message_notice_update_time
+    <!-- 以下字段属于扩展 -->
+    ,temp_addressee.member_real_name as temp_member_message_notice_addressee_display
+    ,temp_sender.user_cn_name as temp_member_message_notice_sender_display
+    ,temp_creater.user_cn_name as temp_member_message_notice_creater_display
+    ,temp_updater.user_cn_name as temp_member_message_notice_updater_display
+  </sql>
+  <sql id="Base_extend">
+  	LEFT JOIN t_member temp_addressee ON temp_addressee.member_id = temp_member_message_notice.addressee <!-- 扩展 -->
+  	LEFT JOIN t_user temp_sender ON temp_sender.user_id = temp_member_message_notice.sender <!-- 扩展 -->
+  	LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_member_message_notice.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_member_message_notice.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.member.MemberMessageNoticeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_message_notice temp_member_message_notice
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_member_message_notice temp_member_message_notice
+    <include refid="Base_extend" />
+    where temp_member_message_notice.message_notice_id = #{messageNoticeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_member_message_notice
+    where message_notice_id = #{messageNoticeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.member.MemberMessageNoticeExample" >
+    delete temp_member_message_notice from t_member_message_notice temp_member_message_notice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.member.MemberMessageNotice" >
+    insert into t_member_message_notice (message_notice_id, sender, addressee, 
+      title, content, sendTime, 
+      letterStatus, letterType, remark, 
+      creater, create_time, updater, 
+      update_time)
+    values (#{messageNoticeId,jdbcType=VARCHAR}, #{sender,jdbcType=VARCHAR}, #{addressee,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{letterstatus,jdbcType=CHAR}, #{lettertype,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.member.MemberMessageNotice" >
+    insert into t_member_message_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageNoticeId != null" >
+        message_notice_id,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="addressee != null" >
+        addressee,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="sendtime != null" >
+        sendTime,
+      </if>
+      <if test="letterstatus != null" >
+        letterStatus,
+      </if>
+      <if test="lettertype != null" >
+        letterType,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageNoticeId != null" >
+        #{messageNoticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null" >
+        #{addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="letterstatus != null" >
+        #{letterstatus,jdbcType=CHAR},
+      </if>
+      <if test="lettertype != null" >
+        #{lettertype,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.member.MemberMessageNoticeExample" resultType="java.lang.Integer" >
+    select count(*) from t_member_message_notice temp_member_message_notice
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_member_message_notice temp_member_message_notice
+    <set >
+      <if test="record.messageNoticeId != null" >
+        temp_member_message_notice.message_notice_id = #{record.messageNoticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sender != null" >
+        temp_member_message_notice.sender = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressee != null" >
+        temp_member_message_notice.addressee = #{record.addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        temp_member_message_notice.title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        temp_member_message_notice.content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendtime != null" >
+        temp_member_message_notice.sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.letterstatus != null" >
+        temp_member_message_notice.letterStatus = #{record.letterstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.lettertype != null" >
+        temp_member_message_notice.letterType = #{record.lettertype,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        temp_member_message_notice.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_member_message_notice.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_member_message_notice.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_member_message_notice.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_member_message_notice.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_member_message_notice temp_member_message_notice
+    set temp_member_message_notice.message_notice_id = #{record.messageNoticeId,jdbcType=VARCHAR},
+      temp_member_message_notice.sender = #{record.sender,jdbcType=VARCHAR},
+      temp_member_message_notice.addressee = #{record.addressee,jdbcType=VARCHAR},
+      temp_member_message_notice.title = #{record.title,jdbcType=VARCHAR},
+      temp_member_message_notice.content = #{record.content,jdbcType=VARCHAR},
+      temp_member_message_notice.sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      temp_member_message_notice.letterStatus = #{record.letterstatus,jdbcType=CHAR},
+      temp_member_message_notice.letterType = #{record.lettertype,jdbcType=CHAR},
+      temp_member_message_notice.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_member_message_notice.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_member_message_notice.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_member_message_notice.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_member_message_notice.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.member.MemberMessageNotice" >
+    update t_member_message_notice
+    <set >
+      <if test="sender != null" >
+        sender = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="addressee != null" >
+        addressee = #{addressee,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="letterstatus != null" >
+        letterStatus = #{letterstatus,jdbcType=CHAR},
+      </if>
+      <if test="lettertype != null" >
+        letterType = #{lettertype,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where message_notice_id = #{messageNoticeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.member.MemberMessageNotice" >
+    update t_member_message_notice
+    set sender = #{sender,jdbcType=VARCHAR},
+      addressee = #{addressee,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      letterStatus = #{letterstatus,jdbcType=CHAR},
+      letterType = #{lettertype,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where message_notice_id = #{messageNoticeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.member.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.member.Member" >
+    <id column="temp_member_member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="temp_member_member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="temp_member_member_password" property="memberPassword" jdbcType="VARCHAR" />
+    <result column="temp_member_traders_password" property="tradersPassword" jdbcType="VARCHAR" />
+    <result column="temp_member_member_real_name" property="memberRealName" jdbcType="VARCHAR" />
+    <result column="temp_member_member_photo" property="memberPhoto" jdbcType="VARCHAR" />
+    <result column="temp_member_member_age" property="memberAge" jdbcType="INTEGER" />
+    <result column="temp_member_mobile_number" property="mobileNumber" jdbcType="VARCHAR" />
+    <result column="temp_member_sex" property="sex" jdbcType="CHAR" />
+    <result column="temp_member_marital_status" property="maritalStatus" jdbcType="CHAR" />
+    <result column="temp_member_card_id" property="cardId" jdbcType="VARCHAR" />
+    <result column="temp_member_email" property="email" jdbcType="VARCHAR" />
+    <result column="temp_member_registration_time" property="registrationTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_credit_integral" property="creditIntegral" jdbcType="REAL" />
+    <result column="temp_member_integral" property="integral" jdbcType="REAL" />
+    <result column="temp_member_creditAmount" property="creditamount" jdbcType="REAL" />
+    <result column="temp_member_status" property="status" jdbcType="CHAR" />
+    <result column="temp_member_type" property="type" jdbcType="CHAR" />
+    <result column="temp_member_valid_time" property="validTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_member_educational" property="educational" jdbcType="VARCHAR" />
+    <result column="temp_member_personal_des" property="personalDes" jdbcType="VARCHAR" />
+    <result column="temp_member_hometown" property="hometown" jdbcType="VARCHAR" />
+    <result column="temp_member_live_address" property="liveAddress" jdbcType="VARCHAR" />
+    <result column="temp_member_home_phone" property="homePhone" jdbcType="VARCHAR" />
+    <result column="temp_member_first_contact" property="firstContact" jdbcType="VARCHAR" />
+    <result column="temp_member_first_contact_relation" property="firstContactRelation" jdbcType="CHAR" />
+    <result column="temp_member_first_contact_phone" property="firstContactPhone" jdbcType="VARCHAR" />
+    <result column="temp_member_first_contact_address" property="firstContactAddress" jdbcType="VARCHAR" />
+    <result column="temp_member_second_contact" property="secondContact" jdbcType="VARCHAR" />
+    <result column="temp_member_second_contact_relation" property="secondContactRelation" jdbcType="CHAR" />
+    <result column="temp_member_second_contact_phone" property="secondContactPhone" jdbcType="VARCHAR" />
+    <result column="temp_member_second_contact_address" property="secondContactAddress" jdbcType="VARCHAR" />
+    <result column="temp_member_last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_last_login_ip_address" property="lastLoginIpAddress" jdbcType="VARCHAR" />
+    <result column="temp_member_login_count" property="loginCount" jdbcType="INTEGER" />
+    <result column="temp_member_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_member_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_member_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_member_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	<result column="temp_member_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_member.member_id as temp_member_member_id, temp_member.member_name as temp_member_member_name, 
+    temp_member.member_password as temp_member_member_password, temp_member.traders_password as temp_member_traders_password, 
+    temp_member.member_real_name as temp_member_member_real_name, temp_member.member_photo as temp_member_member_photo, 
+    temp_member.member_age as temp_member_member_age, temp_member.mobile_number as temp_member_mobile_number, 
+    temp_member.sex as temp_member_sex, temp_member.marital_status as temp_member_marital_status, 
+    temp_member.card_id as temp_member_card_id, temp_member.email as temp_member_email, 
+    temp_member.registration_time as temp_member_registration_time, temp_member.credit_integral as temp_member_credit_integral, 
+    temp_member.integral as temp_member_integral, temp_member.creditAmount as temp_member_creditAmount, 
+    temp_member.status as temp_member_status, temp_member.type as temp_member_type, temp_member.valid_time as temp_member_valid_time, 
+    temp_member.expire_time as temp_member_expire_time, temp_member.accessory as temp_member_accessory, 
+    temp_member.educational as temp_member_educational, temp_member.personal_des as temp_member_personal_des, 
+    temp_member.hometown as temp_member_hometown, temp_member.live_address as temp_member_live_address, 
+    temp_member.home_phone as temp_member_home_phone, temp_member.first_contact as temp_member_first_contact, 
+    temp_member.first_contact_relation as temp_member_first_contact_relation, temp_member.first_contact_phone as temp_member_first_contact_phone, 
+    temp_member.first_contact_address as temp_member_first_contact_address, temp_member.second_contact as temp_member_second_contact, 
+    temp_member.second_contact_relation as temp_member_second_contact_relation, temp_member.second_contact_phone as temp_member_second_contact_phone, 
+    temp_member.second_contact_address as temp_member_second_contact_address, temp_member.last_login_time as temp_member_last_login_time, 
+    temp_member.last_login_ip_address as temp_member_last_login_ip_address, temp_member.login_count as temp_member_login_count, 
+    temp_member.remark as temp_member_remark, temp_member.creater as temp_member_creater, 
+    temp_member.create_time as temp_member_create_time, temp_member.updater as temp_member_updater, 
+    temp_member.update_time as temp_member_update_time
+	<!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_member_creater_display
+    ,temp_updater.user_cn_name as temp_member_updater_display
+  </sql>
+  <sql id="Base_extend">
+  	LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_member.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_member.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.member.MemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member temp_member
+	<include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_member temp_member
+	<include refid="Base_extend" />
+    where temp_member.member_id = #{memberId,jdbcType=VARCHAR}
+  </select>
+  <!-- 自定义方法，根据会员用户名进行查找会员信息 -->
+  <select id="selectByMemberName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_member temp_member
+	<include refid="Base_extend" />
+    where temp_member.member_name = #{memberName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_member
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.member.MemberExample" >
+    delete temp_member from t_member temp_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.member.Member" >
+    insert into t_member (member_id, member_name, member_password, 
+      traders_password, member_real_name, member_photo, 
+      member_age, mobile_number, sex, 
+      marital_status, card_id, email, 
+      registration_time, credit_integral, integral, 
+      creditAmount, status, type, 
+      valid_time, expire_time, accessory, 
+      educational, personal_des, hometown, 
+      live_address, home_phone, first_contact, 
+      first_contact_relation, first_contact_phone, first_contact_address, 
+      second_contact, second_contact_relation, second_contact_phone, 
+      second_contact_address, last_login_time, 
+      last_login_ip_address, login_count, remark, 
+      creater, create_time, updater, 
+      update_time)
+    values (#{memberId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{memberPassword,jdbcType=VARCHAR}, 
+      #{tradersPassword,jdbcType=VARCHAR}, #{memberRealName,jdbcType=VARCHAR}, #{memberPhoto,jdbcType=VARCHAR}, 
+      #{memberAge,jdbcType=INTEGER}, #{mobileNumber,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{maritalStatus,jdbcType=CHAR}, #{cardId,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{registrationTime,jdbcType=TIMESTAMP}, #{creditIntegral,jdbcType=REAL}, #{integral,jdbcType=REAL}, 
+      #{creditamount,jdbcType=REAL}, #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR}, 
+      #{validTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, #{accessory,jdbcType=VARCHAR}, 
+      #{educational,jdbcType=VARCHAR}, #{personalDes,jdbcType=VARCHAR}, #{hometown,jdbcType=VARCHAR}, 
+      #{liveAddress,jdbcType=VARCHAR}, #{homePhone,jdbcType=VARCHAR}, #{firstContact,jdbcType=VARCHAR}, 
+      #{firstContactRelation,jdbcType=CHAR}, #{firstContactPhone,jdbcType=VARCHAR}, #{firstContactAddress,jdbcType=VARCHAR}, 
+      #{secondContact,jdbcType=VARCHAR}, #{secondContactRelation,jdbcType=CHAR}, #{secondContactPhone,jdbcType=VARCHAR}, 
+      #{secondContactAddress,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginIpAddress,jdbcType=VARCHAR}, #{loginCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.member.Member" >
+    insert into t_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="memberPassword != null" >
+        member_password,
+      </if>
+      <if test="tradersPassword != null" >
+        traders_password,
+      </if>
+      <if test="memberRealName != null" >
+        member_real_name,
+      </if>
+      <if test="memberPhoto != null" >
+        member_photo,
+      </if>
+      <if test="memberAge != null" >
+        member_age,
+      </if>
+      <if test="mobileNumber != null" >
+        mobile_number,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="registrationTime != null" >
+        registration_time,
+      </if>
+      <if test="creditIntegral != null" >
+        credit_integral,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="creditamount != null" >
+        creditAmount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="validTime != null" >
+        valid_time,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="educational != null" >
+        educational,
+      </if>
+      <if test="personalDes != null" >
+        personal_des,
+      </if>
+      <if test="hometown != null" >
+        hometown,
+      </if>
+      <if test="liveAddress != null" >
+        live_address,
+      </if>
+      <if test="homePhone != null" >
+        home_phone,
+      </if>
+      <if test="firstContact != null" >
+        first_contact,
+      </if>
+      <if test="firstContactRelation != null" >
+        first_contact_relation,
+      </if>
+      <if test="firstContactPhone != null" >
+        first_contact_phone,
+      </if>
+      <if test="firstContactAddress != null" >
+        first_contact_address,
+      </if>
+      <if test="secondContact != null" >
+        second_contact,
+      </if>
+      <if test="secondContactRelation != null" >
+        second_contact_relation,
+      </if>
+      <if test="secondContactPhone != null" >
+        second_contact_phone,
+      </if>
+      <if test="secondContactAddress != null" >
+        second_contact_address,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="lastLoginIpAddress != null" >
+        last_login_ip_address,
+      </if>
+      <if test="loginCount != null" >
+        login_count,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null" >
+        #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tradersPassword != null" >
+        #{tradersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRealName != null" >
+        #{memberRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPhoto != null" >
+        #{memberPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAge != null" >
+        #{memberAge,jdbcType=INTEGER},
+      </if>
+      <if test="mobileNumber != null" >
+        #{mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=CHAR},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationTime != null" >
+        #{registrationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditIntegral != null" >
+        #{creditIntegral,jdbcType=REAL},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=REAL},
+      </if>
+      <if test="creditamount != null" >
+        #{creditamount,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="validTime != null" >
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="educational != null" >
+        #{educational,jdbcType=VARCHAR},
+      </if>
+      <if test="personalDes != null" >
+        #{personalDes,jdbcType=VARCHAR},
+      </if>
+      <if test="hometown != null" >
+        #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homePhone != null" >
+        #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="firstContact != null" >
+        #{firstContact,jdbcType=VARCHAR},
+      </if>
+      <if test="firstContactRelation != null" >
+        #{firstContactRelation,jdbcType=CHAR},
+      </if>
+      <if test="firstContactPhone != null" >
+        #{firstContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="firstContactAddress != null" >
+        #{firstContactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="secondContact != null" >
+        #{secondContact,jdbcType=VARCHAR},
+      </if>
+      <if test="secondContactRelation != null" >
+        #{secondContactRelation,jdbcType=CHAR},
+      </if>
+      <if test="secondContactPhone != null" >
+        #{secondContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="secondContactAddress != null" >
+        #{secondContactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIpAddress != null" >
+        #{lastLoginIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null" >
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.member.MemberExample" resultType="java.lang.Integer" >
+    select count(*) from t_member temp_member
+	<include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_member temp_member
+    <set >
+      <if test="record.memberId != null" >
+        temp_member.member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberName != null" >
+        temp_member.member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberPassword != null" >
+        temp_member.member_password = #{record.memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradersPassword != null" >
+        temp_member.traders_password = #{record.tradersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberRealName != null" >
+        temp_member.member_real_name = #{record.memberRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberPhoto != null" >
+        temp_member.member_photo = #{record.memberPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberAge != null" >
+        temp_member.member_age = #{record.memberAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobileNumber != null" >
+        temp_member.mobile_number = #{record.mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        temp_member.sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.maritalStatus != null" >
+        temp_member.marital_status = #{record.maritalStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.cardId != null" >
+        temp_member.card_id = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        temp_member.email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationTime != null" >
+        temp_member.registration_time = #{record.registrationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creditIntegral != null" >
+        temp_member.credit_integral = #{record.creditIntegral,jdbcType=REAL},
+      </if>
+      <if test="record.integral != null" >
+        temp_member.integral = #{record.integral,jdbcType=REAL},
+      </if>
+      <if test="record.creditamount != null" >
+        temp_member.creditAmount = #{record.creditamount,jdbcType=REAL},
+      </if>
+      <if test="record.status != null" >
+        temp_member.status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        temp_member.type = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.validTime != null" >
+        temp_member.valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireTime != null" >
+        temp_member.expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accessory != null" >
+        temp_member.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educational != null" >
+        temp_member.educational = #{record.educational,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personalDes != null" >
+        temp_member.personal_des = #{record.personalDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hometown != null" >
+        temp_member.hometown = #{record.hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liveAddress != null" >
+        temp_member.live_address = #{record.liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homePhone != null" >
+        temp_member.home_phone = #{record.homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstContact != null" >
+        temp_member.first_contact = #{record.firstContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstContactRelation != null" >
+        temp_member.first_contact_relation = #{record.firstContactRelation,jdbcType=CHAR},
+      </if>
+      <if test="record.firstContactPhone != null" >
+        temp_member.first_contact_phone = #{record.firstContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstContactAddress != null" >
+        temp_member.first_contact_address = #{record.firstContactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondContact != null" >
+        temp_member.second_contact = #{record.secondContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondContactRelation != null" >
+        temp_member.second_contact_relation = #{record.secondContactRelation,jdbcType=CHAR},
+      </if>
+      <if test="record.secondContactPhone != null" >
+        temp_member.second_contact_phone = #{record.secondContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondContactAddress != null" >
+        temp_member.second_contact_address = #{record.secondContactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null" >
+        temp_member.last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastLoginIpAddress != null" >
+        temp_member.last_login_ip_address = #{record.lastLoginIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginCount != null" >
+        temp_member.login_count = #{record.loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_member.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_member.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_member.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_member.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_member.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_member temp_member
+    set temp_member.member_id = #{record.memberId,jdbcType=VARCHAR},
+      temp_member.member_name = #{record.memberName,jdbcType=VARCHAR},
+      temp_member.member_password = #{record.memberPassword,jdbcType=VARCHAR},
+      temp_member.traders_password = #{record.tradersPassword,jdbcType=VARCHAR},
+      temp_member.member_real_name = #{record.memberRealName,jdbcType=VARCHAR},
+      temp_member.member_photo = #{record.memberPhoto,jdbcType=VARCHAR},
+      temp_member.member_age = #{record.memberAge,jdbcType=INTEGER},
+      temp_member.mobile_number = #{record.mobileNumber,jdbcType=VARCHAR},
+      temp_member.sex = #{record.sex,jdbcType=CHAR},
+      temp_member.marital_status = #{record.maritalStatus,jdbcType=CHAR},
+      temp_member.card_id = #{record.cardId,jdbcType=VARCHAR},
+      temp_member.email = #{record.email,jdbcType=VARCHAR},
+      temp_member.registration_time = #{record.registrationTime,jdbcType=TIMESTAMP},
+      temp_member.credit_integral = #{record.creditIntegral,jdbcType=REAL},
+      temp_member.integral = #{record.integral,jdbcType=REAL},
+      temp_member.creditAmount = #{record.creditamount,jdbcType=REAL},
+      temp_member.status = #{record.status,jdbcType=CHAR},
+      temp_member.type = #{record.type,jdbcType=CHAR},
+      temp_member.valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+      temp_member.expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+      temp_member.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_member.educational = #{record.educational,jdbcType=VARCHAR},
+      temp_member.personal_des = #{record.personalDes,jdbcType=VARCHAR},
+      temp_member.hometown = #{record.hometown,jdbcType=VARCHAR},
+      temp_member.live_address = #{record.liveAddress,jdbcType=VARCHAR},
+      temp_member.home_phone = #{record.homePhone,jdbcType=VARCHAR},
+      temp_member.first_contact = #{record.firstContact,jdbcType=VARCHAR},
+      temp_member.first_contact_relation = #{record.firstContactRelation,jdbcType=CHAR},
+      temp_member.first_contact_phone = #{record.firstContactPhone,jdbcType=VARCHAR},
+      temp_member.first_contact_address = #{record.firstContactAddress,jdbcType=VARCHAR},
+      temp_member.second_contact = #{record.secondContact,jdbcType=VARCHAR},
+      temp_member.second_contact_relation = #{record.secondContactRelation,jdbcType=CHAR},
+      temp_member.second_contact_phone = #{record.secondContactPhone,jdbcType=VARCHAR},
+      temp_member.second_contact_address = #{record.secondContactAddress,jdbcType=VARCHAR},
+      temp_member.last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+      temp_member.last_login_ip_address = #{record.lastLoginIpAddress,jdbcType=VARCHAR},
+      temp_member.login_count = #{record.loginCount,jdbcType=INTEGER},
+      temp_member.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_member.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_member.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_member.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_member.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.member.Member" >
+    update t_member
+    <set >
+      <if test="memberName != null" >
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null" >
+        member_password = #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tradersPassword != null" >
+        traders_password = #{tradersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRealName != null" >
+        member_real_name = #{memberRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPhoto != null" >
+        member_photo = #{memberPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAge != null" >
+        member_age = #{memberAge,jdbcType=INTEGER},
+      </if>
+      <if test="mobileNumber != null" >
+        mobile_number = #{mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status = #{maritalStatus,jdbcType=CHAR},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationTime != null" >
+        registration_time = #{registrationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditIntegral != null" >
+        credit_integral = #{creditIntegral,jdbcType=REAL},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=REAL},
+      </if>
+      <if test="creditamount != null" >
+        creditAmount = #{creditamount,jdbcType=REAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="validTime != null" >
+        valid_time = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="educational != null" >
+        educational = #{educational,jdbcType=VARCHAR},
+      </if>
+      <if test="personalDes != null" >
+        personal_des = #{personalDes,jdbcType=VARCHAR},
+      </if>
+      <if test="hometown != null" >
+        hometown = #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        live_address = #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="homePhone != null" >
+        home_phone = #{homePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="firstContact != null" >
+        first_contact = #{firstContact,jdbcType=VARCHAR},
+      </if>
+      <if test="firstContactRelation != null" >
+        first_contact_relation = #{firstContactRelation,jdbcType=CHAR},
+      </if>
+      <if test="firstContactPhone != null" >
+        first_contact_phone = #{firstContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="firstContactAddress != null" >
+        first_contact_address = #{firstContactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="secondContact != null" >
+        second_contact = #{secondContact,jdbcType=VARCHAR},
+      </if>
+      <if test="secondContactRelation != null" >
+        second_contact_relation = #{secondContactRelation,jdbcType=CHAR},
+      </if>
+      <if test="secondContactPhone != null" >
+        second_contact_phone = #{secondContactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="secondContactAddress != null" >
+        second_contact_address = #{secondContactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIpAddress != null" >
+        last_login_ip_address = #{lastLoginIpAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null" >
+        login_count = #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.member.Member" >
+    update t_member
+    set member_name = #{memberName,jdbcType=VARCHAR},
+      member_password = #{memberPassword,jdbcType=VARCHAR},
+      traders_password = #{tradersPassword,jdbcType=VARCHAR},
+      member_real_name = #{memberRealName,jdbcType=VARCHAR},
+      member_photo = #{memberPhoto,jdbcType=VARCHAR},
+      member_age = #{memberAge,jdbcType=INTEGER},
+      mobile_number = #{mobileNumber,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      marital_status = #{maritalStatus,jdbcType=CHAR},
+      card_id = #{cardId,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      registration_time = #{registrationTime,jdbcType=TIMESTAMP},
+      credit_integral = #{creditIntegral,jdbcType=REAL},
+      integral = #{integral,jdbcType=REAL},
+      creditAmount = #{creditamount,jdbcType=REAL},
+      status = #{status,jdbcType=CHAR},
+      type = #{type,jdbcType=CHAR},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      educational = #{educational,jdbcType=VARCHAR},
+      personal_des = #{personalDes,jdbcType=VARCHAR},
+      hometown = #{hometown,jdbcType=VARCHAR},
+      live_address = #{liveAddress,jdbcType=VARCHAR},
+      home_phone = #{homePhone,jdbcType=VARCHAR},
+      first_contact = #{firstContact,jdbcType=VARCHAR},
+      first_contact_relation = #{firstContactRelation,jdbcType=CHAR},
+      first_contact_phone = #{firstContactPhone,jdbcType=VARCHAR},
+      first_contact_address = #{firstContactAddress,jdbcType=VARCHAR},
+      second_contact = #{secondContact,jdbcType=VARCHAR},
+      second_contact_relation = #{secondContactRelation,jdbcType=CHAR},
+      second_contact_phone = #{secondContactPhone,jdbcType=VARCHAR},
+      second_contact_address = #{secondContactAddress,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip_address = #{lastLoginIpAddress,jdbcType=VARCHAR},
+      login_count = #{loginCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+</mapper>

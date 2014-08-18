@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.member.MemberTokenMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.member.MemberToken" >
+    <id column="temp_member_token_member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="temp_member_token_username" property="username" jdbcType="VARCHAR" />
+    <result column="temp_member_token_password" property="password" jdbcType="VARCHAR" />
+    <result column="temp_member_token_salt" property="salt" jdbcType="VARCHAR" />
+    <result column="temp_member_token_traters_password" property="tratersPassword" jdbcType="VARCHAR" />
+    <result column="temp_member_token_traders_salt" property="tradersSalt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_member_token.member_id as temp_member_token_member_id, temp_member_token.username as temp_member_token_username, 
+    temp_member_token.password as temp_member_token_password, temp_member_token.salt as temp_member_token_salt, 
+    temp_member_token.traters_password as temp_member_token_traters_password, temp_member_token.traders_salt as temp_member_token_traders_salt
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.member.MemberTokenExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_token temp_member_token
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_member_token temp_member_token
+    where temp_member_token.member_id = #{memberId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_member_token
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.member.MemberTokenExample" >
+    delete from t_member_token temp_member_token
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.member.MemberToken" >
+    insert into t_member_token (member_id, username, password, 
+      salt, traters_password, traders_salt
+      )
+    values (#{memberId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{tratersPassword,jdbcType=VARCHAR}, #{tradersSalt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.member.MemberToken" >
+    insert into t_member_token
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="tratersPassword != null" >
+        traters_password,
+      </if>
+      <if test="tradersSalt != null" >
+        traders_salt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="tratersPassword != null" >
+        #{tratersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tradersSalt != null" >
+        #{tradersSalt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.member.MemberTokenExample" resultType="java.lang.Integer" >
+    select count(*) from t_member_token temp_member_token
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_member_token temp_member_token
+    <set >
+      <if test="record.memberId != null" >
+        temp_member_token.member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        temp_member_token.username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        temp_member_token.password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salt != null" >
+        temp_member_token.salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tratersPassword != null" >
+        temp_member_token.traters_password = #{record.tratersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradersSalt != null" >
+        temp_member_token.traders_salt = #{record.tradersSalt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_member_token temp_member_token
+    set temp_member_token.member_id = #{record.memberId,jdbcType=VARCHAR},
+      temp_member_token.username = #{record.username,jdbcType=VARCHAR},
+      temp_member_token.password = #{record.password,jdbcType=VARCHAR},
+      temp_member_token.salt = #{record.salt,jdbcType=VARCHAR},
+      temp_member_token.traters_password = #{record.tratersPassword,jdbcType=VARCHAR},
+      temp_member_token.traders_salt = #{record.tradersSalt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.member.MemberToken" >
+    update t_member_token
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="tratersPassword != null" >
+        traters_password = #{tratersPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tradersSalt != null" >
+        traders_salt = #{tradersSalt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.member.MemberToken" >
+    update t_member_token
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      traters_password = #{tratersPassword,jdbcType=VARCHAR},
+      traders_salt = #{tradersSalt,jdbcType=VARCHAR}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+</mapper>

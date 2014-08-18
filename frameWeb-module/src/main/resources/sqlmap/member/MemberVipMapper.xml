@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.member.MemberVipMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.member.MemberVip" >
+    <id column="temp_member_vip_vip_id" property="vipId" jdbcType="VARCHAR" />
+    <result column="temp_member_vip_member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="temp_member_vip_vip_level" property="vipLevel" jdbcType="VARCHAR" />
+    <result column="temp_member_vip_vip_integral" property="vipIntegral" jdbcType="INTEGER" />
+    <result column="temp_member_vip_vip_start" property="vipStart" jdbcType="TIMESTAMP" />
+    <result column="temp_member_vip_vip_end" property="vipEnd" jdbcType="TIMESTAMP" />
+    <result column="temp_member_vip_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_member_vip_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_vip_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_member_vip_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_member_vip.vip_id as temp_member_vip_vip_id, temp_member_vip.member_id as temp_member_vip_member_id, 
+    temp_member_vip.vip_level as temp_member_vip_vip_level, temp_member_vip.vip_integral as temp_member_vip_vip_integral, 
+    temp_member_vip.vip_start as temp_member_vip_vip_start, temp_member_vip.vip_end as temp_member_vip_vip_end, 
+    temp_member_vip.creater as temp_member_vip_creater, temp_member_vip.create_time as temp_member_vip_create_time, 
+    temp_member_vip.updater as temp_member_vip_updater, temp_member_vip.update_time as temp_member_vip_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.member.MemberVipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_vip temp_member_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_member_vip temp_member_vip
+    where temp_member_vip.vip_id = #{vipId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_member_vip
+    where vip_id = #{vipId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.member.MemberVipExample" >
+    delete from t_member_vip temp_member_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.member.MemberVip" >
+    insert into t_member_vip (vip_id, member_id, vip_level, 
+      vip_integral, vip_start, vip_end, 
+      creater, create_time, updater, 
+      update_time)
+    values (#{vipId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{vipLevel,jdbcType=VARCHAR}, 
+      #{vipIntegral,jdbcType=INTEGER}, #{vipStart,jdbcType=TIMESTAMP}, #{vipEnd,jdbcType=TIMESTAMP}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.member.MemberVip" >
+    insert into t_member_vip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vipId != null" >
+        vip_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="vipLevel != null" >
+        vip_level,
+      </if>
+      <if test="vipIntegral != null" >
+        vip_integral,
+      </if>
+      <if test="vipStart != null" >
+        vip_start,
+      </if>
+      <if test="vipEnd != null" >
+        vip_end,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vipId != null" >
+        #{vipId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="vipLevel != null" >
+        #{vipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="vipIntegral != null" >
+        #{vipIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="vipStart != null" >
+        #{vipStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipEnd != null" >
+        #{vipEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.member.MemberVipExample" resultType="java.lang.Integer" >
+    select count(*) from t_member_vip temp_member_vip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_member_vip temp_member_vip
+    <set >
+      <if test="record.vipId != null" >
+        temp_member_vip.vip_id = #{record.vipId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberId != null" >
+        temp_member_vip.member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipLevel != null" >
+        temp_member_vip.vip_level = #{record.vipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipIntegral != null" >
+        temp_member_vip.vip_integral = #{record.vipIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.vipStart != null" >
+        temp_member_vip.vip_start = #{record.vipStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vipEnd != null" >
+        temp_member_vip.vip_end = #{record.vipEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creater != null" >
+        temp_member_vip.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_member_vip.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_member_vip.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_member_vip.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_member_vip temp_member_vip
+    set temp_member_vip.vip_id = #{record.vipId,jdbcType=VARCHAR},
+      temp_member_vip.member_id = #{record.memberId,jdbcType=VARCHAR},
+      temp_member_vip.vip_level = #{record.vipLevel,jdbcType=VARCHAR},
+      temp_member_vip.vip_integral = #{record.vipIntegral,jdbcType=INTEGER},
+      temp_member_vip.vip_start = #{record.vipStart,jdbcType=TIMESTAMP},
+      temp_member_vip.vip_end = #{record.vipEnd,jdbcType=TIMESTAMP},
+      temp_member_vip.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_member_vip.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_member_vip.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_member_vip.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.member.MemberVip" >
+    update t_member_vip
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="vipLevel != null" >
+        vip_level = #{vipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="vipIntegral != null" >
+        vip_integral = #{vipIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="vipStart != null" >
+        vip_start = #{vipStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipEnd != null" >
+        vip_end = #{vipEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vip_id = #{vipId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.member.MemberVip" >
+    update t_member_vip
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      vip_level = #{vipLevel,jdbcType=VARCHAR},
+      vip_integral = #{vipIntegral,jdbcType=INTEGER},
+      vip_start = #{vipStart,jdbcType=TIMESTAMP},
+      vip_end = #{vipEnd,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where vip_id = #{vipId,jdbcType=VARCHAR}
+  </update>
+</mapper>

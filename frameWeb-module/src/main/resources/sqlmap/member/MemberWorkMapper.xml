@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.member.MemberWorkMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.member.MemberWork" >
+    <id column="temp_member_work_member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="temp_member_work_unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="temp_member_work_unit_phone" property="unitPhone" jdbcType="VARCHAR" />
+    <result column="temp_member_work_unit_adress" property="unitAdress" jdbcType="VARCHAR" />
+    <result column="temp_member_work_work_age" property="workAge" jdbcType="INTEGER" />
+    <result column="temp_member_work_salary" property="salary" jdbcType="REAL" />
+    <result column="temp_member_work_proof_person" property="proofPerson" jdbcType="VARCHAR" />
+    <result column="temp_member_work_proof_phone" property="proofPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_member_work.member_id as temp_member_work_member_id, temp_member_work.unit_name as temp_member_work_unit_name, 
+    temp_member_work.unit_phone as temp_member_work_unit_phone, temp_member_work.unit_adress as temp_member_work_unit_adress, 
+    temp_member_work.work_age as temp_member_work_work_age, temp_member_work.salary as temp_member_work_salary, 
+    temp_member_work.proof_person as temp_member_work_proof_person, temp_member_work.proof_phone as temp_member_work_proof_phone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.member.MemberWorkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_work temp_member_work
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_member_work temp_member_work
+    where temp_member_work.member_id = #{memberId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_member_work
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.member.MemberWorkExample" >
+    delete temp_member_work from t_member_work temp_member_work
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.member.MemberWork" >
+    insert into t_member_work (member_id, unit_name, unit_phone, 
+      unit_adress, work_age, salary, 
+      proof_person, proof_phone)
+    values (#{memberId,jdbcType=VARCHAR}, #{unitName,jdbcType=VARCHAR}, #{unitPhone,jdbcType=VARCHAR}, 
+      #{unitAdress,jdbcType=VARCHAR}, #{workAge,jdbcType=INTEGER}, #{salary,jdbcType=REAL}, 
+      #{proofPerson,jdbcType=VARCHAR}, #{proofPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.member.MemberWork" >
+    insert into t_member_work
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="unitName != null" >
+        unit_name,
+      </if>
+      <if test="unitPhone != null" >
+        unit_phone,
+      </if>
+      <if test="unitAdress != null" >
+        unit_adress,
+      </if>
+      <if test="workAge != null" >
+        work_age,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="proofPerson != null" >
+        proof_person,
+      </if>
+      <if test="proofPhone != null" >
+        proof_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="unitName != null" >
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPhone != null" >
+        #{unitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="unitAdress != null" >
+        #{unitAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workAge != null" >
+        #{workAge,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=REAL},
+      </if>
+      <if test="proofPerson != null" >
+        #{proofPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="proofPhone != null" >
+        #{proofPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.member.MemberWorkExample" resultType="java.lang.Integer" >
+    select count(*) from t_member_work temp_member_work
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_member_work temp_member_work
+    <set >
+      <if test="record.memberId != null" >
+        temp_member_work.member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitName != null" >
+        temp_member_work.unit_name = #{record.unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPhone != null" >
+        temp_member_work.unit_phone = #{record.unitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitAdress != null" >
+        temp_member_work.unit_adress = #{record.unitAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAge != null" >
+        temp_member_work.work_age = #{record.workAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.salary != null" >
+        temp_member_work.salary = #{record.salary,jdbcType=REAL},
+      </if>
+      <if test="record.proofPerson != null" >
+        temp_member_work.proof_person = #{record.proofPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proofPhone != null" >
+        temp_member_work.proof_phone = #{record.proofPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_member_work temp_member_work
+    set temp_member_work.member_id = #{record.memberId,jdbcType=VARCHAR},
+      temp_member_work.unit_name = #{record.unitName,jdbcType=VARCHAR},
+      temp_member_work.unit_phone = #{record.unitPhone,jdbcType=VARCHAR},
+      temp_member_work.unit_adress = #{record.unitAdress,jdbcType=VARCHAR},
+      temp_member_work.work_age = #{record.workAge,jdbcType=INTEGER},
+      temp_member_work.salary = #{record.salary,jdbcType=REAL},
+      temp_member_work.proof_person = #{record.proofPerson,jdbcType=VARCHAR},
+      temp_member_work.proof_phone = #{record.proofPhone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.member.MemberWork" >
+    update t_member_work
+    <set >
+      <if test="unitName != null" >
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPhone != null" >
+        unit_phone = #{unitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="unitAdress != null" >
+        unit_adress = #{unitAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="workAge != null" >
+        work_age = #{workAge,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=REAL},
+      </if>
+      <if test="proofPerson != null" >
+        proof_person = #{proofPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="proofPhone != null" >
+        proof_phone = #{proofPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.member.MemberWork" >
+    update t_member_work
+    set unit_name = #{unitName,jdbcType=VARCHAR},
+      unit_phone = #{unitPhone,jdbcType=VARCHAR},
+      unit_adress = #{unitAdress,jdbcType=VARCHAR},
+      work_age = #{workAge,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=REAL},
+      proof_person = #{proofPerson,jdbcType=VARCHAR},
+      proof_phone = #{proofPhone,jdbcType=VARCHAR}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+</mapper>

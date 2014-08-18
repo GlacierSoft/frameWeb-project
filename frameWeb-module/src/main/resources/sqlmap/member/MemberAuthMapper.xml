@@ -1,0 +1,1383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.member.MemberAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.member.MemberAuth" >
+    <id column="temp_member_auth_member_id" property="memberId" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_info_name" property="infoName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_info_auth" property="infoAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_info_auditor" property="infoAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_info_remark" property="infoRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_info_time" property="infoTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_info_num" property="infoNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_vip_name" property="vipName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_vip_auth" property="vipAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_vip_auditor" property="vipAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_vip_remark" property="vipRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_vip_time" property="vipTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_vip_num" property="vipNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_email_name" property="emailName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_email_auth" property="emailAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_email_auditor" property="emailAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_email_remark" property="emailRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_email_time" property="emailTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_email_num" property="emailNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_mobile_name" property="mobileName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_mobile_auth" property="mobileAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_mobile_auditor" property="mobileAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_mobile_remark" property="mobileRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_mobile_time" property="mobileTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_mobile_num" property="mobileNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_credit_name" property="creditName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_credit_auth" property="creditAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_credit_auditor" property="creditAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_credit_remark" property="creditRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_credit_time" property="creditTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_credit_num" property="creditNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_company_auth" property="companyAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_company_auditor" property="companyAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_company_remark" property="companyRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_company_time" property="companyTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_company_num" property="companyNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_real_name_auth" property="realNameAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_real_name_auditor" property="realNameAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_real_name_remark" property="realNameRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_real_name_time" property="realNameTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_real_name_num" property="realNameNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_id_card_name" property="idCardName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_id_card_auth" property="idCardAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_id_card_auditor" property="idCardAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_id_card_remark" property="idCardRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_id_card_time" property="idCardTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_id_card_num" property="idCardNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_work_auth" property="workAuth" jdbcType="CHAR" />
+    <result column="temp_member_auth_work_auditor" property="workAuditor" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_work_remark" property="workRemark" jdbcType="VARCHAR" />
+    <result column="temp_member_auth_work_time" property="workTime" jdbcType="TIMESTAMP" />
+    <result column="temp_member_auth_work_num" property="workNum" jdbcType="INTEGER" />
+    <result column="temp_member_auth_member_name" property="memberName" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_auth_member_real_name" property="memberRealName" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_auth_infoAuditor_display" property="infoAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_auth_vipAuditor_display" property="vipAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->  
+    <result column="temp_member_auth_emailAuditor_display" property="emailAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_auth_mobileAuditor_display" property="mobileAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->  
+    <result column="temp_member_auth_creditAuditor_display" property="creditAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_auth_companyAuditor_display" property="companyAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->  
+    <result column="temp_member_auth_realNameAuditor_display" property="realNameAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_member_auth_idCardAuditor_display" property="idCardAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->  
+    <result column="temp_member_auth_workAuditor_display" property="workAuditorDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->  
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.glacier.frame.entity.member.MemberAuthWithBLOBs" extends="BaseResultMap" >
+    <result column="temp_member_auth_info_accessory" property="infoAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_vip_accessory" property="vipAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_email_accessory" property="emailAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_mobile_accessory" property="mobileAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_credit_accessory" property="creditAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_company_accessory" property="companyAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_real_name_accessory" property="realNameAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_id_card_accessory" property="idCardAccessory" jdbcType="LONGVARCHAR" />
+    <result column="temp_member_auth_work_accessory" property="workAccessory" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_member_auth.member_id as temp_member_auth_member_id, temp_member_auth.info_name as temp_member_auth_info_name, 
+    temp_member_auth.info_auth as temp_member_auth_info_auth, temp_member_auth.info_auditor as temp_member_auth_info_auditor, 
+    temp_member_auth.info_remark as temp_member_auth_info_remark, temp_member_auth.info_time as temp_member_auth_info_time, 
+    temp_member_auth.info_num as temp_member_auth_info_num, temp_member_auth.vip_name as temp_member_auth_vip_name, 
+    temp_member_auth.vip_auth as temp_member_auth_vip_auth, temp_member_auth.vip_auditor as temp_member_auth_vip_auditor, 
+    temp_member_auth.vip_remark as temp_member_auth_vip_remark, temp_member_auth.vip_time as temp_member_auth_vip_time, 
+    temp_member_auth.vip_num as temp_member_auth_vip_num, temp_member_auth.email_name as temp_member_auth_email_name, 
+    temp_member_auth.email_auth as temp_member_auth_email_auth, temp_member_auth.email_auditor as temp_member_auth_email_auditor, 
+    temp_member_auth.email_remark as temp_member_auth_email_remark, temp_member_auth.email_time as temp_member_auth_email_time, 
+    temp_member_auth.email_num as temp_member_auth_email_num, temp_member_auth.mobile_name as temp_member_auth_mobile_name, 
+    temp_member_auth.mobile_auth as temp_member_auth_mobile_auth, temp_member_auth.mobile_auditor as temp_member_auth_mobile_auditor, 
+    temp_member_auth.mobile_remark as temp_member_auth_mobile_remark, temp_member_auth.mobile_time as temp_member_auth_mobile_time, 
+    temp_member_auth.mobile_num as temp_member_auth_mobile_num, temp_member_auth.credit_name as temp_member_auth_credit_name, 
+    temp_member_auth.credit_auth as temp_member_auth_credit_auth, temp_member_auth.credit_auditor as temp_member_auth_credit_auditor, 
+    temp_member_auth.credit_remark as temp_member_auth_credit_remark, temp_member_auth.credit_time as temp_member_auth_credit_time, 
+    temp_member_auth.credit_num as temp_member_auth_credit_num, temp_member_auth.company_name as temp_member_auth_company_name, 
+    temp_member_auth.company_auth as temp_member_auth_company_auth, temp_member_auth.company_auditor as temp_member_auth_company_auditor, 
+    temp_member_auth.company_remark as temp_member_auth_company_remark, temp_member_auth.company_time as temp_member_auth_company_time, 
+    temp_member_auth.company_num as temp_member_auth_company_num, temp_member_auth.real_name as temp_member_auth_real_name, 
+    temp_member_auth.real_name_auth as temp_member_auth_real_name_auth, temp_member_auth.real_name_auditor as temp_member_auth_real_name_auditor, 
+    temp_member_auth.real_name_remark as temp_member_auth_real_name_remark, temp_member_auth.real_name_time as temp_member_auth_real_name_time, 
+    temp_member_auth.real_name_num as temp_member_auth_real_name_num, temp_member_auth.id_card_name as temp_member_auth_id_card_name, 
+    temp_member_auth.id_card_auth as temp_member_auth_id_card_auth, temp_member_auth.id_card_auditor as temp_member_auth_id_card_auditor, 
+    temp_member_auth.id_card_remark as temp_member_auth_id_card_remark, temp_member_auth.id_card_time as temp_member_auth_id_card_time, 
+    temp_member_auth.id_card_num as temp_member_auth_id_card_num, temp_member_auth.work_name as temp_member_auth_work_name, 
+    temp_member_auth.work_auth as temp_member_auth_work_auth, temp_member_auth.work_auditor as temp_member_auth_work_auditor, 
+    temp_member_auth.work_remark as temp_member_auth_work_remark, temp_member_auth.work_time as temp_member_auth_work_time, 
+    temp_member_auth.work_num as temp_member_auth_work_num
+                <!-- 以下字段属于扩展 -->
+    ,temp_member.member_name as temp_member_auth_member_name
+    ,temp_member.member_real_name as temp_member_auth_member_real_name
+    ,temp_infoAuditor.user_cn_name as temp_member_auth_infoAuditor_display
+    ,temp_vipAuditor.user_cn_name as temp_member_auth_vipAuditor_display
+    ,temp_emailAuditor.user_cn_name as temp_member_auth_emailAuditor_display
+    ,temp_mobileAuditor.user_cn_name as temp_member_auth_mobileAuditor_display
+    ,temp_creditAuditor.user_cn_name as temp_member_auth_creditAuditor_display
+    ,temp_companyAuditor.user_cn_name as temp_member_auth_companyAuditor_display
+    ,temp_realNameAuditor.user_cn_name as temp_member_auth_realNameAuditor_display
+    ,temp_idCardAuditor.user_cn_name as temp_member_auth_idCardAuditor_display
+    ,temp_workAuditor.user_cn_name as temp_member_auth_workAuditor_display
+    
+  </sql>
+  <sql id="Blob_Column_List" >
+    temp_member_auth.info_accessory as temp_member_auth_info_accessory, temp_member_auth.vip_accessory as temp_member_auth_vip_accessory, 
+    temp_member_auth.email_accessory as temp_member_auth_email_accessory, temp_member_auth.mobile_accessory as temp_member_auth_mobile_accessory, 
+    temp_member_auth.credit_accessory as temp_member_auth_credit_accessory, temp_member_auth.company_accessory as temp_member_auth_company_accessory, 
+    temp_member_auth.real_name_accessory as temp_member_auth_real_name_accessory, temp_member_auth.id_card_accessory as temp_member_auth_id_card_accessory, 
+    temp_member_auth.work_accessory as temp_member_auth_work_accessory
+  </sql>
+   <sql id="Base_extend"><!-- 扩展 -->
+  	LEFT JOIN t_member temp_member ON temp_member.member_id = temp_member_auth.member_id <!-- 扩展 -->
+  	LEFT JOIN t_user temp_infoAuditor ON temp_infoAuditor.user_id = temp_member_auth.info_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_vipAuditor ON temp_vipAuditor.user_id = temp_member_auth.vip_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_emailAuditor ON temp_emailAuditor.user_id = temp_member_auth.email_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_mobileAuditor ON temp_mobileAuditor.user_id = temp_member_auth.mobile_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_creditAuditor ON temp_creditAuditor.user_id = temp_member_auth.credit_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_companyAuditor ON temp_companyAuditor.user_id = temp_member_auth.company_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_realNameAuditor ON temp_realNameAuditor.user_id = temp_member_auth.real_name_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_idCardAuditor ON temp_idCardAuditor.user_id = temp_member_auth.id_card_auditor <!-- 扩展 -->
+    LEFT JOIN t_user temp_workAuditor ON temp_workAuditor.user_id = temp_member_auth.work_auditor <!-- 扩展 -->
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.glacier.frame.entity.member.MemberAuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_member_auth temp_member_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.member.MemberAuthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_member_auth temp_member_auth
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_member_auth temp_member_auth
+    <include refid="Base_extend" />
+    where temp_member_auth.member_id = #{memberId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_member_auth
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.member.MemberAuthExample" >
+    delete temp_member_auth from t_member_auth temp_member_auth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.member.MemberAuthWithBLOBs" >
+    insert into t_member_auth (member_id, info_name, info_auth, 
+      info_auditor, info_remark, info_time, 
+      info_num, vip_name, vip_auth, 
+      vip_auditor, vip_remark, vip_time, 
+      vip_num, email_name, email_auth, 
+      email_auditor, email_remark, email_time, 
+      email_num, mobile_name, mobile_auth, 
+      mobile_auditor, mobile_remark, mobile_time, 
+      mobile_num, credit_name, credit_auth, 
+      credit_auditor, credit_remark, credit_time, 
+      credit_num, company_name, company_auth, 
+      company_auditor, company_remark, company_time, 
+      company_num, real_name, real_name_auth, 
+      real_name_auditor, real_name_remark, real_name_time, 
+      real_name_num, id_card_name, id_card_auth, 
+      id_card_auditor, id_card_remark, id_card_time, 
+      id_card_num, work_name, work_auth, 
+      work_auditor, work_remark, work_time, 
+      work_num, info_accessory, vip_accessory, 
+      email_accessory, mobile_accessory, 
+      credit_accessory, company_accessory, 
+      real_name_accessory, id_card_accessory, 
+      work_accessory)
+    values (#{memberId,jdbcType=VARCHAR}, #{infoName,jdbcType=VARCHAR}, #{infoAuth,jdbcType=CHAR}, 
+      #{infoAuditor,jdbcType=VARCHAR}, #{infoRemark,jdbcType=VARCHAR}, #{infoTime,jdbcType=TIMESTAMP}, 
+      #{infoNum,jdbcType=INTEGER}, #{vipName,jdbcType=VARCHAR}, #{vipAuth,jdbcType=CHAR}, 
+      #{vipAuditor,jdbcType=VARCHAR}, #{vipRemark,jdbcType=VARCHAR}, #{vipTime,jdbcType=TIMESTAMP}, 
+      #{vipNum,jdbcType=INTEGER}, #{emailName,jdbcType=VARCHAR}, #{emailAuth,jdbcType=CHAR}, 
+      #{emailAuditor,jdbcType=VARCHAR}, #{emailRemark,jdbcType=VARCHAR}, #{emailTime,jdbcType=TIMESTAMP}, 
+      #{emailNum,jdbcType=INTEGER}, #{mobileName,jdbcType=VARCHAR}, #{mobileAuth,jdbcType=CHAR}, 
+      #{mobileAuditor,jdbcType=VARCHAR}, #{mobileRemark,jdbcType=VARCHAR}, #{mobileTime,jdbcType=TIMESTAMP}, 
+      #{mobileNum,jdbcType=INTEGER}, #{creditName,jdbcType=VARCHAR}, #{creditAuth,jdbcType=CHAR}, 
+      #{creditAuditor,jdbcType=VARCHAR}, #{creditRemark,jdbcType=VARCHAR}, #{creditTime,jdbcType=TIMESTAMP}, 
+      #{creditNum,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyAuth,jdbcType=CHAR}, 
+      #{companyAuditor,jdbcType=VARCHAR}, #{companyRemark,jdbcType=VARCHAR}, #{companyTime,jdbcType=TIMESTAMP}, 
+      #{companyNum,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{realNameAuth,jdbcType=CHAR}, 
+      #{realNameAuditor,jdbcType=VARCHAR}, #{realNameRemark,jdbcType=VARCHAR}, #{realNameTime,jdbcType=TIMESTAMP}, 
+      #{realNameNum,jdbcType=INTEGER}, #{idCardName,jdbcType=VARCHAR}, #{idCardAuth,jdbcType=CHAR}, 
+      #{idCardAuditor,jdbcType=VARCHAR}, #{idCardRemark,jdbcType=VARCHAR}, #{idCardTime,jdbcType=TIMESTAMP}, 
+      #{idCardNum,jdbcType=INTEGER}, #{workName,jdbcType=VARCHAR}, #{workAuth,jdbcType=CHAR}, 
+      #{workAuditor,jdbcType=VARCHAR}, #{workRemark,jdbcType=VARCHAR}, #{workTime,jdbcType=TIMESTAMP}, 
+      #{workNum,jdbcType=INTEGER}, #{infoAccessory,jdbcType=LONGVARCHAR}, #{vipAccessory,jdbcType=LONGVARCHAR}, 
+      #{emailAccessory,jdbcType=LONGVARCHAR}, #{mobileAccessory,jdbcType=LONGVARCHAR}, 
+      #{creditAccessory,jdbcType=LONGVARCHAR}, #{companyAccessory,jdbcType=LONGVARCHAR}, 
+      #{realNameAccessory,jdbcType=LONGVARCHAR}, #{idCardAccessory,jdbcType=LONGVARCHAR}, 
+      #{workAccessory,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.member.MemberAuthWithBLOBs" >
+    insert into t_member_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="infoName != null" >
+        info_name,
+      </if>
+      <if test="infoAuth != null" >
+        info_auth,
+      </if>
+      <if test="infoAuditor != null" >
+        info_auditor,
+      </if>
+      <if test="infoRemark != null" >
+        info_remark,
+      </if>
+      <if test="infoTime != null" >
+        info_time,
+      </if>
+      <if test="infoNum != null" >
+        info_num,
+      </if>
+      <if test="vipName != null" >
+        vip_name,
+      </if>
+      <if test="vipAuth != null" >
+        vip_auth,
+      </if>
+      <if test="vipAuditor != null" >
+        vip_auditor,
+      </if>
+      <if test="vipRemark != null" >
+        vip_remark,
+      </if>
+      <if test="vipTime != null" >
+        vip_time,
+      </if>
+      <if test="vipNum != null" >
+        vip_num,
+      </if>
+      <if test="emailName != null" >
+        email_name,
+      </if>
+      <if test="emailAuth != null" >
+        email_auth,
+      </if>
+      <if test="emailAuditor != null" >
+        email_auditor,
+      </if>
+      <if test="emailRemark != null" >
+        email_remark,
+      </if>
+      <if test="emailTime != null" >
+        email_time,
+      </if>
+      <if test="emailNum != null" >
+        email_num,
+      </if>
+      <if test="mobileName != null" >
+        mobile_name,
+      </if>
+      <if test="mobileAuth != null" >
+        mobile_auth,
+      </if>
+      <if test="mobileAuditor != null" >
+        mobile_auditor,
+      </if>
+      <if test="mobileRemark != null" >
+        mobile_remark,
+      </if>
+      <if test="mobileTime != null" >
+        mobile_time,
+      </if>
+      <if test="mobileNum != null" >
+        mobile_num,
+      </if>
+      <if test="creditName != null" >
+        credit_name,
+      </if>
+      <if test="creditAuth != null" >
+        credit_auth,
+      </if>
+      <if test="creditAuditor != null" >
+        credit_auditor,
+      </if>
+      <if test="creditRemark != null" >
+        credit_remark,
+      </if>
+      <if test="creditTime != null" >
+        credit_time,
+      </if>
+      <if test="creditNum != null" >
+        credit_num,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyAuth != null" >
+        company_auth,
+      </if>
+      <if test="companyAuditor != null" >
+        company_auditor,
+      </if>
+      <if test="companyRemark != null" >
+        company_remark,
+      </if>
+      <if test="companyTime != null" >
+        company_time,
+      </if>
+      <if test="companyNum != null" >
+        company_num,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="realNameAuth != null" >
+        real_name_auth,
+      </if>
+      <if test="realNameAuditor != null" >
+        real_name_auditor,
+      </if>
+      <if test="realNameRemark != null" >
+        real_name_remark,
+      </if>
+      <if test="realNameTime != null" >
+        real_name_time,
+      </if>
+      <if test="realNameNum != null" >
+        real_name_num,
+      </if>
+      <if test="idCardName != null" >
+        id_card_name,
+      </if>
+      <if test="idCardAuth != null" >
+        id_card_auth,
+      </if>
+      <if test="idCardAuditor != null" >
+        id_card_auditor,
+      </if>
+      <if test="idCardRemark != null" >
+        id_card_remark,
+      </if>
+      <if test="idCardTime != null" >
+        id_card_time,
+      </if>
+      <if test="idCardNum != null" >
+        id_card_num,
+      </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
+      <if test="workAuth != null" >
+        work_auth,
+      </if>
+      <if test="workAuditor != null" >
+        work_auditor,
+      </if>
+      <if test="workRemark != null" >
+        work_remark,
+      </if>
+      <if test="workTime != null" >
+        work_time,
+      </if>
+      <if test="workNum != null" >
+        work_num,
+      </if>
+      <if test="infoAccessory != null" >
+        info_accessory,
+      </if>
+      <if test="vipAccessory != null" >
+        vip_accessory,
+      </if>
+      <if test="emailAccessory != null" >
+        email_accessory,
+      </if>
+      <if test="mobileAccessory != null" >
+        mobile_accessory,
+      </if>
+      <if test="creditAccessory != null" >
+        credit_accessory,
+      </if>
+      <if test="companyAccessory != null" >
+        company_accessory,
+      </if>
+      <if test="realNameAccessory != null" >
+        real_name_accessory,
+      </if>
+      <if test="idCardAccessory != null" >
+        id_card_accessory,
+      </if>
+      <if test="workAccessory != null" >
+        work_accessory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="infoName != null" >
+        #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="infoAuth != null" >
+        #{infoAuth,jdbcType=CHAR},
+      </if>
+      <if test="infoAuditor != null" >
+        #{infoAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="infoRemark != null" >
+        #{infoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTime != null" >
+        #{infoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoNum != null" >
+        #{infoNum,jdbcType=INTEGER},
+      </if>
+      <if test="vipName != null" >
+        #{vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="vipAuth != null" >
+        #{vipAuth,jdbcType=CHAR},
+      </if>
+      <if test="vipAuditor != null" >
+        #{vipAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="vipRemark != null" >
+        #{vipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="vipTime != null" >
+        #{vipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipNum != null" >
+        #{vipNum,jdbcType=INTEGER},
+      </if>
+      <if test="emailName != null" >
+        #{emailName,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAuth != null" >
+        #{emailAuth,jdbcType=CHAR},
+      </if>
+      <if test="emailAuditor != null" >
+        #{emailAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="emailRemark != null" >
+        #{emailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="emailTime != null" >
+        #{emailTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailNum != null" >
+        #{emailNum,jdbcType=INTEGER},
+      </if>
+      <if test="mobileName != null" >
+        #{mobileName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileAuth != null" >
+        #{mobileAuth,jdbcType=CHAR},
+      </if>
+      <if test="mobileAuditor != null" >
+        #{mobileAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRemark != null" >
+        #{mobileRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileTime != null" >
+        #{mobileTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobileNum != null" >
+        #{mobileNum,jdbcType=INTEGER},
+      </if>
+      <if test="creditName != null" >
+        #{creditName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAuth != null" >
+        #{creditAuth,jdbcType=CHAR},
+      </if>
+      <if test="creditAuditor != null" >
+        #{creditAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRemark != null" >
+        #{creditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null" >
+        #{creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditNum != null" >
+        #{creditNum,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAuth != null" >
+        #{companyAuth,jdbcType=CHAR},
+      </if>
+      <if test="companyAuditor != null" >
+        #{companyAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRemark != null" >
+        #{companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTime != null" >
+        #{companyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyNum != null" >
+        #{companyNum,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="realNameAuth != null" >
+        #{realNameAuth,jdbcType=CHAR},
+      </if>
+      <if test="realNameAuditor != null" >
+        #{realNameAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="realNameRemark != null" >
+        #{realNameRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="realNameTime != null" >
+        #{realNameTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realNameNum != null" >
+        #{realNameNum,jdbcType=INTEGER},
+      </if>
+      <if test="idCardName != null" >
+        #{idCardName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardAuth != null" >
+        #{idCardAuth,jdbcType=CHAR},
+      </if>
+      <if test="idCardAuditor != null" >
+        #{idCardAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardRemark != null" >
+        #{idCardRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardTime != null" >
+        #{idCardTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCardNum != null" >
+        #{idCardNum,jdbcType=INTEGER},
+      </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAuth != null" >
+        #{workAuth,jdbcType=CHAR},
+      </if>
+      <if test="workAuditor != null" >
+        #{workAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="workRemark != null" >
+        #{workRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null" >
+        #{workTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workNum != null" >
+        #{workNum,jdbcType=INTEGER},
+      </if>
+      <if test="infoAccessory != null" >
+        #{infoAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vipAccessory != null" >
+        #{vipAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="emailAccessory != null" >
+        #{emailAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mobileAccessory != null" >
+        #{mobileAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="creditAccessory != null" >
+        #{creditAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyAccessory != null" >
+        #{companyAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="realNameAccessory != null" >
+        #{realNameAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="idCardAccessory != null" >
+        #{idCardAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workAccessory != null" >
+        #{workAccessory,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.member.MemberAuthExample" resultType="java.lang.Integer" >
+    select count(*) from t_member_auth temp_member_auth
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_member_auth temp_member_auth
+    <set >
+      <if test="record.memberId != null" >
+        temp_member_auth.member_id = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoName != null" >
+        temp_member_auth.info_name = #{record.infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoAuth != null" >
+        temp_member_auth.info_auth = #{record.infoAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.infoAuditor != null" >
+        temp_member_auth.info_auditor = #{record.infoAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoRemark != null" >
+        temp_member_auth.info_remark = #{record.infoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoTime != null" >
+        temp_member_auth.info_time = #{record.infoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.infoNum != null" >
+        temp_member_auth.info_num = #{record.infoNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.vipName != null" >
+        temp_member_auth.vip_name = #{record.vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipAuth != null" >
+        temp_member_auth.vip_auth = #{record.vipAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.vipAuditor != null" >
+        temp_member_auth.vip_auditor = #{record.vipAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipRemark != null" >
+        temp_member_auth.vip_remark = #{record.vipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipTime != null" >
+        temp_member_auth.vip_time = #{record.vipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vipNum != null" >
+        temp_member_auth.vip_num = #{record.vipNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.emailName != null" >
+        temp_member_auth.email_name = #{record.emailName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailAuth != null" >
+        temp_member_auth.email_auth = #{record.emailAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.emailAuditor != null" >
+        temp_member_auth.email_auditor = #{record.emailAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailRemark != null" >
+        temp_member_auth.email_remark = #{record.emailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailTime != null" >
+        temp_member_auth.email_time = #{record.emailTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.emailNum != null" >
+        temp_member_auth.email_num = #{record.emailNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobileName != null" >
+        temp_member_auth.mobile_name = #{record.mobileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileAuth != null" >
+        temp_member_auth.mobile_auth = #{record.mobileAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.mobileAuditor != null" >
+        temp_member_auth.mobile_auditor = #{record.mobileAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileRemark != null" >
+        temp_member_auth.mobile_remark = #{record.mobileRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileTime != null" >
+        temp_member_auth.mobile_time = #{record.mobileTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mobileNum != null" >
+        temp_member_auth.mobile_num = #{record.mobileNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditName != null" >
+        temp_member_auth.credit_name = #{record.creditName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditAuth != null" >
+        temp_member_auth.credit_auth = #{record.creditAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.creditAuditor != null" >
+        temp_member_auth.credit_auditor = #{record.creditAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditRemark != null" >
+        temp_member_auth.credit_remark = #{record.creditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditTime != null" >
+        temp_member_auth.credit_time = #{record.creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creditNum != null" >
+        temp_member_auth.credit_num = #{record.creditNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyName != null" >
+        temp_member_auth.company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAuth != null" >
+        temp_member_auth.company_auth = #{record.companyAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.companyAuditor != null" >
+        temp_member_auth.company_auditor = #{record.companyAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyRemark != null" >
+        temp_member_auth.company_remark = #{record.companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyTime != null" >
+        temp_member_auth.company_time = #{record.companyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyNum != null" >
+        temp_member_auth.company_num = #{record.companyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.realName != null" >
+        temp_member_auth.real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realNameAuth != null" >
+        temp_member_auth.real_name_auth = #{record.realNameAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.realNameAuditor != null" >
+        temp_member_auth.real_name_auditor = #{record.realNameAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realNameRemark != null" >
+        temp_member_auth.real_name_remark = #{record.realNameRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realNameTime != null" >
+        temp_member_auth.real_name_time = #{record.realNameTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.realNameNum != null" >
+        temp_member_auth.real_name_num = #{record.realNameNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.idCardName != null" >
+        temp_member_auth.id_card_name = #{record.idCardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardAuth != null" >
+        temp_member_auth.id_card_auth = #{record.idCardAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.idCardAuditor != null" >
+        temp_member_auth.id_card_auditor = #{record.idCardAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardRemark != null" >
+        temp_member_auth.id_card_remark = #{record.idCardRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCardTime != null" >
+        temp_member_auth.id_card_time = #{record.idCardTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.idCardNum != null" >
+        temp_member_auth.id_card_num = #{record.idCardNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.workName != null" >
+        temp_member_auth.work_name = #{record.workName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAuth != null" >
+        temp_member_auth.work_auth = #{record.workAuth,jdbcType=CHAR},
+      </if>
+      <if test="record.workAuditor != null" >
+        temp_member_auth.work_auditor = #{record.workAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workRemark != null" >
+        temp_member_auth.work_remark = #{record.workRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTime != null" >
+        temp_member_auth.work_time = #{record.workTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.workNum != null" >
+        temp_member_auth.work_num = #{record.workNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.infoAccessory != null" >
+        temp_member_auth.info_accessory = #{record.infoAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.vipAccessory != null" >
+        temp_member_auth.vip_accessory = #{record.vipAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.emailAccessory != null" >
+        temp_member_auth.email_accessory = #{record.emailAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.mobileAccessory != null" >
+        temp_member_auth.mobile_accessory = #{record.mobileAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.creditAccessory != null" >
+        temp_member_auth.credit_accessory = #{record.creditAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.companyAccessory != null" >
+        temp_member_auth.company_accessory = #{record.companyAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.realNameAccessory != null" >
+        temp_member_auth.real_name_accessory = #{record.realNameAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.idCardAccessory != null" >
+        temp_member_auth.id_card_accessory = #{record.idCardAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.workAccessory != null" >
+        temp_member_auth.work_accessory = #{record.workAccessory,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_member_auth temp_member_auth
+    set temp_member_auth.member_id = #{record.memberId,jdbcType=VARCHAR},
+      temp_member_auth.info_name = #{record.infoName,jdbcType=VARCHAR},
+      temp_member_auth.info_auth = #{record.infoAuth,jdbcType=CHAR},
+      temp_member_auth.info_auditor = #{record.infoAuditor,jdbcType=VARCHAR},
+      temp_member_auth.info_remark = #{record.infoRemark,jdbcType=VARCHAR},
+      temp_member_auth.info_time = #{record.infoTime,jdbcType=TIMESTAMP},
+      temp_member_auth.info_num = #{record.infoNum,jdbcType=INTEGER},
+      temp_member_auth.vip_name = #{record.vipName,jdbcType=VARCHAR},
+      temp_member_auth.vip_auth = #{record.vipAuth,jdbcType=CHAR},
+      temp_member_auth.vip_auditor = #{record.vipAuditor,jdbcType=VARCHAR},
+      temp_member_auth.vip_remark = #{record.vipRemark,jdbcType=VARCHAR},
+      temp_member_auth.vip_time = #{record.vipTime,jdbcType=TIMESTAMP},
+      temp_member_auth.vip_num = #{record.vipNum,jdbcType=INTEGER},
+      temp_member_auth.email_name = #{record.emailName,jdbcType=VARCHAR},
+      temp_member_auth.email_auth = #{record.emailAuth,jdbcType=CHAR},
+      temp_member_auth.email_auditor = #{record.emailAuditor,jdbcType=VARCHAR},
+      temp_member_auth.email_remark = #{record.emailRemark,jdbcType=VARCHAR},
+      temp_member_auth.email_time = #{record.emailTime,jdbcType=TIMESTAMP},
+      temp_member_auth.email_num = #{record.emailNum,jdbcType=INTEGER},
+      temp_member_auth.mobile_name = #{record.mobileName,jdbcType=VARCHAR},
+      temp_member_auth.mobile_auth = #{record.mobileAuth,jdbcType=CHAR},
+      temp_member_auth.mobile_auditor = #{record.mobileAuditor,jdbcType=VARCHAR},
+      temp_member_auth.mobile_remark = #{record.mobileRemark,jdbcType=VARCHAR},
+      temp_member_auth.mobile_time = #{record.mobileTime,jdbcType=TIMESTAMP},
+      temp_member_auth.mobile_num = #{record.mobileNum,jdbcType=INTEGER},
+      temp_member_auth.credit_name = #{record.creditName,jdbcType=VARCHAR},
+      temp_member_auth.credit_auth = #{record.creditAuth,jdbcType=CHAR},
+      temp_member_auth.credit_auditor = #{record.creditAuditor,jdbcType=VARCHAR},
+      temp_member_auth.credit_remark = #{record.creditRemark,jdbcType=VARCHAR},
+      temp_member_auth.credit_time = #{record.creditTime,jdbcType=TIMESTAMP},
+      temp_member_auth.credit_num = #{record.creditNum,jdbcType=INTEGER},
+      temp_member_auth.company_name = #{record.companyName,jdbcType=VARCHAR},
+      temp_member_auth.company_auth = #{record.companyAuth,jdbcType=CHAR},
+      temp_member_auth.company_auditor = #{record.companyAuditor,jdbcType=VARCHAR},
+      temp_member_auth.company_remark = #{record.companyRemark,jdbcType=VARCHAR},
+      temp_member_auth.company_time = #{record.companyTime,jdbcType=TIMESTAMP},
+      temp_member_auth.company_num = #{record.companyNum,jdbcType=INTEGER},
+      temp_member_auth.real_name = #{record.realName,jdbcType=VARCHAR},
+      temp_member_auth.real_name_auth = #{record.realNameAuth,jdbcType=CHAR},
+      temp_member_auth.real_name_auditor = #{record.realNameAuditor,jdbcType=VARCHAR},
+      temp_member_auth.real_name_remark = #{record.realNameRemark,jdbcType=VARCHAR},
+      temp_member_auth.real_name_time = #{record.realNameTime,jdbcType=TIMESTAMP},
+      temp_member_auth.real_name_num = #{record.realNameNum,jdbcType=INTEGER},
+      temp_member_auth.id_card_name = #{record.idCardName,jdbcType=VARCHAR},
+      temp_member_auth.id_card_auth = #{record.idCardAuth,jdbcType=CHAR},
+      temp_member_auth.id_card_auditor = #{record.idCardAuditor,jdbcType=VARCHAR},
+      temp_member_auth.id_card_remark = #{record.idCardRemark,jdbcType=VARCHAR},
+      temp_member_auth.id_card_time = #{record.idCardTime,jdbcType=TIMESTAMP},
+      temp_member_auth.id_card_num = #{record.idCardNum,jdbcType=INTEGER},
+      temp_member_auth.work_name = #{record.workName,jdbcType=VARCHAR},
+      temp_member_auth.work_auth = #{record.workAuth,jdbcType=CHAR},
+      temp_member_auth.work_auditor = #{record.workAuditor,jdbcType=VARCHAR},
+      temp_member_auth.work_remark = #{record.workRemark,jdbcType=VARCHAR},
+      temp_member_auth.work_time = #{record.workTime,jdbcType=TIMESTAMP},
+      temp_member_auth.work_num = #{record.workNum,jdbcType=INTEGER},
+      temp_member_auth.info_accessory = #{record.infoAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.vip_accessory = #{record.vipAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.email_accessory = #{record.emailAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.mobile_accessory = #{record.mobileAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.credit_accessory = #{record.creditAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.company_accessory = #{record.companyAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.real_name_accessory = #{record.realNameAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.id_card_accessory = #{record.idCardAccessory,jdbcType=LONGVARCHAR},
+      temp_member_auth.work_accessory = #{record.workAccessory,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_member_auth temp_member_auth
+    set temp_member_auth.member_id = #{record.memberId,jdbcType=VARCHAR},
+      temp_member_auth.info_name = #{record.infoName,jdbcType=VARCHAR},
+      temp_member_auth.info_auth = #{record.infoAuth,jdbcType=CHAR},
+      temp_member_auth.info_auditor = #{record.infoAuditor,jdbcType=VARCHAR},
+      temp_member_auth.info_remark = #{record.infoRemark,jdbcType=VARCHAR},
+      temp_member_auth.info_time = #{record.infoTime,jdbcType=TIMESTAMP},
+      temp_member_auth.info_num = #{record.infoNum,jdbcType=INTEGER},
+      temp_member_auth.vip_name = #{record.vipName,jdbcType=VARCHAR},
+      temp_member_auth.vip_auth = #{record.vipAuth,jdbcType=CHAR},
+      temp_member_auth.vip_auditor = #{record.vipAuditor,jdbcType=VARCHAR},
+      temp_member_auth.vip_remark = #{record.vipRemark,jdbcType=VARCHAR},
+      temp_member_auth.vip_time = #{record.vipTime,jdbcType=TIMESTAMP},
+      temp_member_auth.vip_num = #{record.vipNum,jdbcType=INTEGER},
+      temp_member_auth.email_name = #{record.emailName,jdbcType=VARCHAR},
+      temp_member_auth.email_auth = #{record.emailAuth,jdbcType=CHAR},
+      temp_member_auth.email_auditor = #{record.emailAuditor,jdbcType=VARCHAR},
+      temp_member_auth.email_remark = #{record.emailRemark,jdbcType=VARCHAR},
+      temp_member_auth.email_time = #{record.emailTime,jdbcType=TIMESTAMP},
+      temp_member_auth.email_num = #{record.emailNum,jdbcType=INTEGER},
+      temp_member_auth.mobile_name = #{record.mobileName,jdbcType=VARCHAR},
+      temp_member_auth.mobile_auth = #{record.mobileAuth,jdbcType=CHAR},
+      temp_member_auth.mobile_auditor = #{record.mobileAuditor,jdbcType=VARCHAR},
+      temp_member_auth.mobile_remark = #{record.mobileRemark,jdbcType=VARCHAR},
+      temp_member_auth.mobile_time = #{record.mobileTime,jdbcType=TIMESTAMP},
+      temp_member_auth.mobile_num = #{record.mobileNum,jdbcType=INTEGER},
+      temp_member_auth.credit_name = #{record.creditName,jdbcType=VARCHAR},
+      temp_member_auth.credit_auth = #{record.creditAuth,jdbcType=CHAR},
+      temp_member_auth.credit_auditor = #{record.creditAuditor,jdbcType=VARCHAR},
+      temp_member_auth.credit_remark = #{record.creditRemark,jdbcType=VARCHAR},
+      temp_member_auth.credit_time = #{record.creditTime,jdbcType=TIMESTAMP},
+      temp_member_auth.credit_num = #{record.creditNum,jdbcType=INTEGER},
+      temp_member_auth.company_name = #{record.companyName,jdbcType=VARCHAR},
+      temp_member_auth.company_auth = #{record.companyAuth,jdbcType=CHAR},
+      temp_member_auth.company_auditor = #{record.companyAuditor,jdbcType=VARCHAR},
+      temp_member_auth.company_remark = #{record.companyRemark,jdbcType=VARCHAR},
+      temp_member_auth.company_time = #{record.companyTime,jdbcType=TIMESTAMP},
+      temp_member_auth.company_num = #{record.companyNum,jdbcType=INTEGER},
+      temp_member_auth.real_name = #{record.realName,jdbcType=VARCHAR},
+      temp_member_auth.real_name_auth = #{record.realNameAuth,jdbcType=CHAR},
+      temp_member_auth.real_name_auditor = #{record.realNameAuditor,jdbcType=VARCHAR},
+      temp_member_auth.real_name_remark = #{record.realNameRemark,jdbcType=VARCHAR},
+      temp_member_auth.real_name_time = #{record.realNameTime,jdbcType=TIMESTAMP},
+      temp_member_auth.real_name_num = #{record.realNameNum,jdbcType=INTEGER},
+      temp_member_auth.id_card_name = #{record.idCardName,jdbcType=VARCHAR},
+      temp_member_auth.id_card_auth = #{record.idCardAuth,jdbcType=CHAR},
+      temp_member_auth.id_card_auditor = #{record.idCardAuditor,jdbcType=VARCHAR},
+      temp_member_auth.id_card_remark = #{record.idCardRemark,jdbcType=VARCHAR},
+      temp_member_auth.id_card_time = #{record.idCardTime,jdbcType=TIMESTAMP},
+      temp_member_auth.id_card_num = #{record.idCardNum,jdbcType=INTEGER},
+      temp_member_auth.work_name = #{record.workName,jdbcType=VARCHAR},
+      temp_member_auth.work_auth = #{record.workAuth,jdbcType=CHAR},
+      temp_member_auth.work_auditor = #{record.workAuditor,jdbcType=VARCHAR},
+      temp_member_auth.work_remark = #{record.workRemark,jdbcType=VARCHAR},
+      temp_member_auth.work_time = #{record.workTime,jdbcType=TIMESTAMP},
+      temp_member_auth.work_num = #{record.workNum,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.member.MemberAuthWithBLOBs" >
+    update t_member_auth
+    <set >
+      <if test="infoName != null" >
+        info_name = #{infoName,jdbcType=VARCHAR},
+      </if>
+      <!-- <if test="infoAuth != null && (!infoAuth.equals(''))" > -->
+       <if test="infoAuth != null" >
+        <if test="!infoAuth.equals('')" > 
+        info_auth = #{infoAuth,jdbcType=CHAR},
+        </if>
+      </if>
+      <if test="infoAuditor != null" >
+        info_auditor = #{infoAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="infoRemark != null" >
+        info_remark = #{infoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="infoTime != null" >
+        info_time = #{infoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoNum != null" >
+        info_num = #{infoNum,jdbcType=INTEGER},
+      </if>
+      <if test="vipName != null" >
+        vip_name = #{vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="vipAuth != null" >
+      <if test="!vipAuth.equals('')" >
+<!--       <if test="vipAuth != null && vipAuth.equals('')" > -->
+        vip_auth = #{vipAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="vipAuditor != null" >
+        vip_auditor = #{vipAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="vipRemark != null" >
+        vip_remark = #{vipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="vipTime != null" >
+        vip_time = #{vipTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipNum != null" >
+        vip_num = #{vipNum,jdbcType=INTEGER},
+      </if>
+      <if test="emailName != null" >
+        email_name = #{emailName,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAuth != null" >
+      <if test="!emailAuth.equals('')" >
+<!--       <if test="emailAuth != null && emailAuth.equals('')" > -->
+        email_auth = #{emailAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="emailAuditor != null" >
+        email_auditor = #{emailAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="emailRemark != null" >
+        email_remark = #{emailRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="emailTime != null" >
+        email_time = #{emailTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emailNum != null" >
+        email_num = #{emailNum,jdbcType=INTEGER},
+      </if>
+      <if test="mobileName != null" >
+        mobile_name = #{mobileName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileAuth != null" >
+      <if test="!mobileAuth.equals('')" >
+<!--       <if test="mobileAuth != null && mobileAuth.equals('')" > -->
+        mobile_auth = #{mobileAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="mobileAuditor != null" >
+        mobile_auditor = #{mobileAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileRemark != null" >
+        mobile_remark = #{mobileRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileTime != null" >
+        mobile_time = #{mobileTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobileNum != null" >
+        mobile_num = #{mobileNum,jdbcType=INTEGER},
+      </if>
+      <if test="creditName != null" >
+        credit_name = #{creditName,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAuth != null" >
+      <if test="!creditAuth.equals('')" >
+<!--       <if test="creditAuth != null && creditAuth.equals('')" > -->
+        credit_auth = #{creditAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="creditAuditor != null" >
+        credit_auditor = #{creditAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="creditRemark != null" >
+        credit_remark = #{creditRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTime != null" >
+        credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creditNum != null" >
+        credit_num = #{creditNum,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAuth != null" >
+      <if test="!companyAuth.equals('')" >
+<!--       <if test="companyAuth != null && companyAuth.equals('')" > -->
+        company_auth = #{companyAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="companyAuditor != null" >
+        company_auditor = #{companyAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRemark != null" >
+        company_remark = #{companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTime != null" >
+        company_time = #{companyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyNum != null" >
+        company_num = #{companyNum,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="realNameAuth != null" >
+      <if test="!realNameAuth.equals('')" >
+<!--       <if test="realNameAuth != null && realNameAuth.equals('')" > -->
+        real_name_auth = #{realNameAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="realNameAuditor != null" >
+        real_name_auditor = #{realNameAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="realNameRemark != null" >
+        real_name_remark = #{realNameRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="realNameTime != null" >
+        real_name_time = #{realNameTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realNameNum != null" >
+        real_name_num = #{realNameNum,jdbcType=INTEGER},
+      </if>
+      <if test="idCardName != null" >
+        id_card_name = #{idCardName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardAuth != null" >
+      <if test="!idCardAuth.equals('')" >
+<!--       <if test="idCardAuth != null && idCardAuth.equals('')" > -->
+        id_card_auth = #{idCardAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="idCardAuditor != null" >
+        id_card_auditor = #{idCardAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardRemark != null" >
+        id_card_remark = #{idCardRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardTime != null" >
+        id_card_time = #{idCardTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idCardNum != null" >
+        id_card_num = #{idCardNum,jdbcType=INTEGER},
+      </if>
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAuth != null" >
+      <if test="!workAuth.equals('')" >
+<!--       <if test="workAuth != null && workAuth.equals('')" > -->
+        work_auth = #{workAuth,jdbcType=CHAR},
+      </if>
+      </if>
+      <if test="workAuditor != null" >
+        work_auditor = #{workAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="workRemark != null" >
+        work_remark = #{workRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null" >
+        work_time = #{workTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workNum != null" >
+        work_num = #{workNum,jdbcType=INTEGER},
+      </if>
+      <if test="infoAccessory != null" >
+        info_accessory = #{infoAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vipAccessory != null" >
+        vip_accessory = #{vipAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="emailAccessory != null" >
+        email_accessory = #{emailAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mobileAccessory != null" >
+        mobile_accessory = #{mobileAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="creditAccessory != null" >
+        credit_accessory = #{creditAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyAccessory != null" >
+        company_accessory = #{companyAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="realNameAccessory != null" >
+        real_name_accessory = #{realNameAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="idCardAccessory != null" >
+        id_card_accessory = #{idCardAccessory,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="workAccessory != null" >
+        work_accessory = #{workAccessory,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.glacier.frame.entity.member.MemberAuthWithBLOBs" >
+    update t_member_auth
+    set info_name = #{infoName,jdbcType=VARCHAR},
+      info_auth = #{infoAuth,jdbcType=CHAR},
+      info_auditor = #{infoAuditor,jdbcType=VARCHAR},
+      info_remark = #{infoRemark,jdbcType=VARCHAR},
+      info_time = #{infoTime,jdbcType=TIMESTAMP},
+      info_num = #{infoNum,jdbcType=INTEGER},
+      vip_name = #{vipName,jdbcType=VARCHAR},
+      vip_auth = #{vipAuth,jdbcType=CHAR},
+      vip_auditor = #{vipAuditor,jdbcType=VARCHAR},
+      vip_remark = #{vipRemark,jdbcType=VARCHAR},
+      vip_time = #{vipTime,jdbcType=TIMESTAMP},
+      vip_num = #{vipNum,jdbcType=INTEGER},
+      email_name = #{emailName,jdbcType=VARCHAR},
+      email_auth = #{emailAuth,jdbcType=CHAR},
+      email_auditor = #{emailAuditor,jdbcType=VARCHAR},
+      email_remark = #{emailRemark,jdbcType=VARCHAR},
+      email_time = #{emailTime,jdbcType=TIMESTAMP},
+      email_num = #{emailNum,jdbcType=INTEGER},
+      mobile_name = #{mobileName,jdbcType=VARCHAR},
+      mobile_auth = #{mobileAuth,jdbcType=CHAR},
+      mobile_auditor = #{mobileAuditor,jdbcType=VARCHAR},
+      mobile_remark = #{mobileRemark,jdbcType=VARCHAR},
+      mobile_time = #{mobileTime,jdbcType=TIMESTAMP},
+      mobile_num = #{mobileNum,jdbcType=INTEGER},
+      credit_name = #{creditName,jdbcType=VARCHAR},
+      credit_auth = #{creditAuth,jdbcType=CHAR},
+      credit_auditor = #{creditAuditor,jdbcType=VARCHAR},
+      credit_remark = #{creditRemark,jdbcType=VARCHAR},
+      credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      credit_num = #{creditNum,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_auth = #{companyAuth,jdbcType=CHAR},
+      company_auditor = #{companyAuditor,jdbcType=VARCHAR},
+      company_remark = #{companyRemark,jdbcType=VARCHAR},
+      company_time = #{companyTime,jdbcType=TIMESTAMP},
+      company_num = #{companyNum,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      real_name_auth = #{realNameAuth,jdbcType=CHAR},
+      real_name_auditor = #{realNameAuditor,jdbcType=VARCHAR},
+      real_name_remark = #{realNameRemark,jdbcType=VARCHAR},
+      real_name_time = #{realNameTime,jdbcType=TIMESTAMP},
+      real_name_num = #{realNameNum,jdbcType=INTEGER},
+      id_card_name = #{idCardName,jdbcType=VARCHAR},
+      id_card_auth = #{idCardAuth,jdbcType=CHAR},
+      id_card_auditor = #{idCardAuditor,jdbcType=VARCHAR},
+      id_card_remark = #{idCardRemark,jdbcType=VARCHAR},
+      id_card_time = #{idCardTime,jdbcType=TIMESTAMP},
+      id_card_num = #{idCardNum,jdbcType=INTEGER},
+      work_name = #{workName,jdbcType=VARCHAR},
+      work_auth = #{workAuth,jdbcType=CHAR},
+      work_auditor = #{workAuditor,jdbcType=VARCHAR},
+      work_remark = #{workRemark,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=TIMESTAMP},
+      work_num = #{workNum,jdbcType=INTEGER},
+      info_accessory = #{infoAccessory,jdbcType=LONGVARCHAR},
+      vip_accessory = #{vipAccessory,jdbcType=LONGVARCHAR},
+      email_accessory = #{emailAccessory,jdbcType=LONGVARCHAR},
+      mobile_accessory = #{mobileAccessory,jdbcType=LONGVARCHAR},
+      credit_accessory = #{creditAccessory,jdbcType=LONGVARCHAR},
+      company_accessory = #{companyAccessory,jdbcType=LONGVARCHAR},
+      real_name_accessory = #{realNameAccessory,jdbcType=LONGVARCHAR},
+      id_card_accessory = #{idCardAccessory,jdbcType=LONGVARCHAR},
+      work_accessory = #{workAccessory,jdbcType=LONGVARCHAR}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.member.MemberAuth" >
+    update t_member_auth
+    set info_name = #{infoName,jdbcType=VARCHAR},
+      info_auth = #{infoAuth,jdbcType=CHAR},
+      info_auditor = #{infoAuditor,jdbcType=VARCHAR},
+      info_remark = #{infoRemark,jdbcType=VARCHAR},
+      info_time = #{infoTime,jdbcType=TIMESTAMP},
+      info_num = #{infoNum,jdbcType=INTEGER},
+      vip_name = #{vipName,jdbcType=VARCHAR},
+      vip_auth = #{vipAuth,jdbcType=CHAR},
+      vip_auditor = #{vipAuditor,jdbcType=VARCHAR},
+      vip_remark = #{vipRemark,jdbcType=VARCHAR},
+      vip_time = #{vipTime,jdbcType=TIMESTAMP},
+      vip_num = #{vipNum,jdbcType=INTEGER},
+      email_name = #{emailName,jdbcType=VARCHAR},
+      email_auth = #{emailAuth,jdbcType=CHAR},
+      email_auditor = #{emailAuditor,jdbcType=VARCHAR},
+      email_remark = #{emailRemark,jdbcType=VARCHAR},
+      email_time = #{emailTime,jdbcType=TIMESTAMP},
+      email_num = #{emailNum,jdbcType=INTEGER},
+      mobile_name = #{mobileName,jdbcType=VARCHAR},
+      mobile_auth = #{mobileAuth,jdbcType=CHAR},
+      mobile_auditor = #{mobileAuditor,jdbcType=VARCHAR},
+      mobile_remark = #{mobileRemark,jdbcType=VARCHAR},
+      mobile_time = #{mobileTime,jdbcType=TIMESTAMP},
+      mobile_num = #{mobileNum,jdbcType=INTEGER},
+      credit_name = #{creditName,jdbcType=VARCHAR},
+      credit_auth = #{creditAuth,jdbcType=CHAR},
+      credit_auditor = #{creditAuditor,jdbcType=VARCHAR},
+      credit_remark = #{creditRemark,jdbcType=VARCHAR},
+      credit_time = #{creditTime,jdbcType=TIMESTAMP},
+      credit_num = #{creditNum,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_auth = #{companyAuth,jdbcType=CHAR},
+      company_auditor = #{companyAuditor,jdbcType=VARCHAR},
+      company_remark = #{companyRemark,jdbcType=VARCHAR},
+      company_time = #{companyTime,jdbcType=TIMESTAMP},
+      company_num = #{companyNum,jdbcType=INTEGER},
+      real_name = #{realName,jdbcType=VARCHAR},
+      real_name_auth = #{realNameAuth,jdbcType=CHAR},
+      real_name_auditor = #{realNameAuditor,jdbcType=VARCHAR},
+      real_name_remark = #{realNameRemark,jdbcType=VARCHAR},
+      real_name_time = #{realNameTime,jdbcType=TIMESTAMP},
+      real_name_num = #{realNameNum,jdbcType=INTEGER},
+      id_card_name = #{idCardName,jdbcType=VARCHAR},
+      id_card_auth = #{idCardAuth,jdbcType=CHAR},
+      id_card_auditor = #{idCardAuditor,jdbcType=VARCHAR},
+      id_card_remark = #{idCardRemark,jdbcType=VARCHAR},
+      id_card_time = #{idCardTime,jdbcType=TIMESTAMP},
+      id_card_num = #{idCardNum,jdbcType=INTEGER},
+      work_name = #{workName,jdbcType=VARCHAR},
+      work_auth = #{workAuth,jdbcType=CHAR},
+      work_auditor = #{workAuditor,jdbcType=VARCHAR},
+      work_remark = #{workRemark,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=TIMESTAMP},
+      work_num = #{workNum,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=VARCHAR}
+  </update>
+</mapper>

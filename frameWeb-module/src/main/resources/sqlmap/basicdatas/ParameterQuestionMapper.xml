@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.basicdatas.ParameterQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.basicdatas.ParameterQuestion" >
+    <id column="temp_parameter_question_question_id" property="questionId" jdbcType="VARCHAR" />
+    <result column="temp_parameter_question_question_des" property="questionDes" jdbcType="VARCHAR" />
+    <result column="temp_parameter_question_question_num" property="questionNum" jdbcType="INTEGER" />
+    <result column="temp_parameter_question_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_parameter_question_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_question_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_question_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_question_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_question_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_parameter_question_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_parameter_question.question_id as temp_parameter_question_question_id, temp_parameter_question.question_des as temp_parameter_question_question_des, 
+    temp_parameter_question.question_num as temp_parameter_question_question_num, temp_parameter_question.remark as temp_parameter_question_remark, 
+    temp_parameter_question.creater as temp_parameter_question_creater, temp_parameter_question.create_time as temp_parameter_question_create_time, 
+    temp_parameter_question.updater as temp_parameter_question_updater, temp_parameter_question.update_time as temp_parameter_question_update_time
+     <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_parameter_question_creater_display
+    ,temp_updater.user_cn_name as temp_parameter_question_updater_display
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_parameter_question.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_parameter_question.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_parameter_question temp_parameter_question
+    <include refid="Base_extend" /><!-- 扩展 -->
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_parameter_question temp_parameter_question
+    <include refid="Base_extend" /><!-- 扩展 -->
+    where temp_parameter_question.question_id = #{questionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_parameter_question
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestionExample" >
+    delete temp_parameter_question from t_parameter_question temp_parameter_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestion" >
+    insert into t_parameter_question (question_id, question_des, question_num, 
+      remark, creater, create_time, 
+      updater, update_time)
+    values (#{questionId,jdbcType=VARCHAR}, #{questionDes,jdbcType=VARCHAR}, #{questionNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestion" >
+    insert into t_parameter_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="questionDes != null" >
+        question_des,
+      </if>
+      <if test="questionNum != null" >
+        question_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        #{questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="questionDes != null" >
+        #{questionDes,jdbcType=VARCHAR},
+      </if>
+      <if test="questionNum != null" >
+        #{questionNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from t_parameter_question temp_parameter_question
+    <include refid="Base_extend" /><!-- 扩展 -->
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_parameter_question temp_parameter_question
+    <set >
+      <if test="record.questionId != null" >
+        temp_parameter_question.question_id = #{record.questionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionDes != null" >
+        temp_parameter_question.question_des = #{record.questionDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.questionNum != null" >
+        temp_parameter_question.question_num = #{record.questionNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_parameter_question.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_parameter_question.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_parameter_question.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_parameter_question.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_parameter_question.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_parameter_question temp_parameter_question
+    set temp_parameter_question.question_id = #{record.questionId,jdbcType=VARCHAR},
+      temp_parameter_question.question_des = #{record.questionDes,jdbcType=VARCHAR},
+      temp_parameter_question.question_num = #{record.questionNum,jdbcType=INTEGER},
+      temp_parameter_question.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_parameter_question.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_parameter_question.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_parameter_question.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_parameter_question.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestion" >
+    update t_parameter_question
+    <set >
+      <if test="questionDes != null" >
+        question_des = #{questionDes,jdbcType=VARCHAR},
+      </if>
+      <if test="questionNum != null" >
+        question_num = #{questionNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.basicdatas.ParameterQuestion" >
+    update t_parameter_question
+    set question_des = #{questionDes,jdbcType=VARCHAR},
+      question_num = #{questionNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where question_id = #{questionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

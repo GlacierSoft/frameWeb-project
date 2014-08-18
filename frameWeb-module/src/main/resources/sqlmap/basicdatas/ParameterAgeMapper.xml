@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.basicdatas.ParameterAgeMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.basicdatas.ParameterAge" >
+    <id column="temp_parameter_age_age_id" property="ageId" jdbcType="VARCHAR" />
+    <result column="temp_parameter_age_age_name" property="ageName" jdbcType="VARCHAR" />
+    <result column="temp_parameter_age_age_begin" property="ageBegin" jdbcType="INTEGER" />
+    <result column="temp_parameter_age_age_end" property="ageEnd" jdbcType="INTEGER" />
+    <result column="temp_parameter_age_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_parameter_age_age_num" property="ageNum" jdbcType="INTEGER" />
+    <result column="temp_parameter_age_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_parameter_age_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_age_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_age_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_parameter_age_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_parameter_age_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_parameter_age_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_parameter_age.age_id as temp_parameter_age_age_id, temp_parameter_age.age_name as temp_parameter_age_age_name, 
+    temp_parameter_age.age_begin as temp_parameter_age_age_begin, temp_parameter_age.age_end as temp_parameter_age_age_end, 
+    temp_parameter_age.accessory as temp_parameter_age_accessory, temp_parameter_age.age_num as temp_parameter_age_age_num, 
+    temp_parameter_age.remark as temp_parameter_age_remark, temp_parameter_age.creater as temp_parameter_age_creater, 
+    temp_parameter_age.create_time as temp_parameter_age_create_time, temp_parameter_age.updater as temp_parameter_age_updater, 
+    temp_parameter_age.update_time as temp_parameter_age_update_time
+    <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_parameter_age_creater_display
+    ,temp_updater.user_cn_name as temp_parameter_age_updater_display
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_parameter_age.creater =  temp_creater.user_id<!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_parameter_age.updater =  temp_updater.user_id<!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.basicdatas.ParameterAgeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_parameter_age temp_parameter_age
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_parameter_age temp_parameter_age
+    <include refid="Base_extend"/>
+    where temp_parameter_age.age_id = #{ageId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_parameter_age
+    where age_id = #{ageId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterAgeExample" >
+    delete temp_parameter_age from t_parameter_age temp_parameter_age
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.basicdatas.ParameterAge" >
+    insert into t_parameter_age (age_id, age_name, age_begin, 
+      age_end, accessory, age_num, 
+      remark, creater, create_time, 
+      updater, update_time)
+    values (#{ageId,jdbcType=VARCHAR}, #{ageName,jdbcType=VARCHAR}, #{ageBegin,jdbcType=INTEGER}, 
+      #{ageEnd,jdbcType=INTEGER}, #{accessory,jdbcType=VARCHAR}, #{ageNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterAge" >
+    insert into t_parameter_age
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ageId != null" >
+        age_id,
+      </if>
+      <if test="ageName != null" >
+        age_name,
+      </if>
+      <if test="ageBegin != null" >
+        age_begin,
+      </if>
+      <if test="ageEnd != null" >
+        age_end,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="ageNum != null" >
+        age_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ageId != null" >
+        #{ageId,jdbcType=VARCHAR},
+      </if>
+      <if test="ageName != null" >
+        #{ageName,jdbcType=VARCHAR},
+      </if>
+      <if test="ageBegin != null" >
+        #{ageBegin,jdbcType=INTEGER},
+      </if>
+      <if test="ageEnd != null" >
+        #{ageEnd,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="ageNum != null" >
+        #{ageNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.basicdatas.ParameterAgeExample" resultType="java.lang.Integer" >
+    select count(*) from t_parameter_age temp_parameter_age
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_parameter_age temp_parameter_age
+    <set >
+      <if test="record.ageId != null" >
+        temp_parameter_age.age_id = #{record.ageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageName != null" >
+        temp_parameter_age.age_name = #{record.ageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageBegin != null" >
+        temp_parameter_age.age_begin = #{record.ageBegin,jdbcType=INTEGER},
+      </if>
+      <if test="record.ageEnd != null" >
+        temp_parameter_age.age_end = #{record.ageEnd,jdbcType=INTEGER},
+      </if>
+      <if test="record.accessory != null" >
+        temp_parameter_age.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageNum != null" >
+        temp_parameter_age.age_num = #{record.ageNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_parameter_age.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_parameter_age.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_parameter_age.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_parameter_age.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_parameter_age.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_parameter_age temp_parameter_age
+    set temp_parameter_age.age_id = #{record.ageId,jdbcType=VARCHAR},
+      temp_parameter_age.age_name = #{record.ageName,jdbcType=VARCHAR},
+      temp_parameter_age.age_begin = #{record.ageBegin,jdbcType=INTEGER},
+      temp_parameter_age.age_end = #{record.ageEnd,jdbcType=INTEGER},
+      temp_parameter_age.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_parameter_age.age_num = #{record.ageNum,jdbcType=INTEGER},
+      temp_parameter_age.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_parameter_age.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_parameter_age.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_parameter_age.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_parameter_age.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.basicdatas.ParameterAge" >
+    update t_parameter_age
+    <set >
+      <if test="ageName != null" >
+        age_name = #{ageName,jdbcType=VARCHAR},
+      </if>
+      <if test="ageBegin != null" >
+        age_begin = #{ageBegin,jdbcType=INTEGER},
+      </if>
+      <if test="ageEnd != null" >
+        age_end = #{ageEnd,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="ageNum != null" >
+        age_num = #{ageNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where age_id = #{ageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.basicdatas.ParameterAge" >
+    update t_parameter_age
+    set age_name = #{ageName,jdbcType=VARCHAR},
+      age_begin = #{ageBegin,jdbcType=INTEGER},
+      age_end = #{ageEnd,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      age_num = #{ageNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where age_id = #{ageId,jdbcType=VARCHAR}
+  </update>
+</mapper>
