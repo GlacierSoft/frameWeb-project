@@ -11,7 +11,7 @@
 	<tag> 
 		<description>生成easyUI的toolbar</description> 
 		<name>toolbar</name> 
-		<tag-class>com.glacier.netloan.web.tag.EasyUIToolbarTag</tag-class> 
+		<tag-class>com.glacier.frame.web.tag.EasyUIToolbarTag</tag-class> 
 		<body-content>empty</body-content> 
 		<attribute> 
 			<name>toolbarId</name> 
