@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>frameWeb-project</artifactId>
+    <groupId>com.glacier.project.frameWeb</groupId>
+    <version>0.0.1</version>
+  </parent>
+  <groupId>com.glacier.project.frameWeb</groupId>
+  <artifactId>frameWeb-website</artifactId>
+  <version>0.0.1</version>
+  <packaging>war</packaging>
+  <name>frameWeb-website Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+	
+	<properties>
+		<jsonObject.version>8.0.249</jsonObject.version>
+	</properties>
+	
+	<dependencies>
+		<!-- unit begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+		<!-- unit end -->
+
+		<!-- compent begin -->
+		<dependency>
+			<groupId>com.google.code.kaptcha</groupId>
+			<artifactId>kaptcha</artifactId>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<!-- compent end -->
+
+		<dependency>
+			<groupId>com.glacier.project.frameWeb</groupId>
+			<artifactId>frameWeb-module</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+	</dependencies>
+  <build>
+    <finalName>frameWeb-website</finalName>
+  </build>
+</project>
