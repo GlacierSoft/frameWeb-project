@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteNews" >
+    <id column="temp_website_news_web_news_id" property="webNewsId" jdbcType="VARCHAR" />
+    <result column="temp_website_news_web_news_theme" property="webNewsTheme" jdbcType="VARCHAR" />
+    <result column="temp_website_news_web_news_status" property="webNewsStatus" jdbcType="CHAR" />
+    <result column="temp_website_news_web_news_num" property="webNewsNum" jdbcType="INTEGER" />
+    <result column="temp_website_news_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_website_news_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_news_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_news_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_news_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_news_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_news_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_news_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.glacier.frame.entity.website.WebsiteNews" extends="BaseResultMap" >
+    <result column="temp_website_news_web_news_content" property="webNewsContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_news.web_news_id as temp_website_news_web_news_id, temp_website_news.web_news_theme as temp_website_news_web_news_theme, 
+    temp_website_news.web_news_status as temp_website_news_web_news_status, temp_website_news.web_news_num as temp_website_news_web_news_num, 
+    temp_website_news.accessory as temp_website_news_accessory, temp_website_news.remark as temp_website_news_remark, 
+    temp_website_news.creater as temp_website_news_creater, temp_website_news.create_time as temp_website_news_create_time, 
+    temp_website_news.updater as temp_website_news_updater, temp_website_news.update_time as temp_website_news_update_time
+    <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_website_news_creater_display
+    ,temp_updater.user_cn_name as temp_website_news_updater_display
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_website_news.creater =  temp_creater.user_id<!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_website_news.updater =  temp_updater.user_id<!-- 扩展 -->
+  </sql>
+  <sql id="Blob_Column_List" >
+    temp_website_news.web_news_content as temp_website_news_web_news_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_news temp_website_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_news temp_website_news
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_news temp_website_news
+    <include refid="Base_extend"/>
+    where temp_website_news.web_news_id = #{webNewsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_news
+    where web_news_id = #{webNewsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteNewsExample" >
+    delete temp_website_news from t_website_news temp_website_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteNews" >
+    insert into t_website_news (web_news_id, web_news_theme, web_news_status, 
+      web_news_num, accessory, remark, 
+      creater, create_time, updater, 
+      update_time, web_news_content)
+    values (#{webNewsId,jdbcType=VARCHAR}, #{webNewsTheme,jdbcType=VARCHAR}, #{webNewsStatus,jdbcType=CHAR}, 
+      #{webNewsNum,jdbcType=INTEGER}, #{accessory,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{webNewsContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteNews" >
+    insert into t_website_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webNewsId != null" >
+        web_news_id,
+      </if>
+      <if test="webNewsTheme != null" >
+        web_news_theme,
+      </if>
+      <if test="webNewsStatus != null" >
+        web_news_status,
+      </if>
+      <if test="webNewsNum != null" >
+        web_news_num,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="webNewsContent != null" >
+        web_news_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webNewsId != null" >
+        #{webNewsId,jdbcType=VARCHAR},
+      </if>
+      <if test="webNewsTheme != null" >
+        #{webNewsTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webNewsStatus != null" >
+        #{webNewsStatus,jdbcType=CHAR},
+      </if>
+      <if test="webNewsNum != null" >
+        #{webNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webNewsContent != null" >
+        #{webNewsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteNewsExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_news temp_website_news
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_news temp_website_news
+    <set >
+      <if test="record.webNewsId != null" >
+        temp_website_news.web_news_id = #{record.webNewsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webNewsTheme != null" >
+        temp_website_news.web_news_theme = #{record.webNewsTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webNewsStatus != null" >
+        temp_website_news.web_news_status = #{record.webNewsStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.webNewsNum != null" >
+        temp_website_news.web_news_num = #{record.webNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.accessory != null" >
+        temp_website_news.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_news.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_news.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_news.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_news.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_news.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.webNewsContent != null" >
+        temp_website_news.web_news_content = #{record.webNewsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_website_news temp_website_news
+    set temp_website_news.web_news_id = #{record.webNewsId,jdbcType=VARCHAR},
+      temp_website_news.web_news_theme = #{record.webNewsTheme,jdbcType=VARCHAR},
+      temp_website_news.web_news_status = #{record.webNewsStatus,jdbcType=CHAR},
+      temp_website_news.web_news_num = #{record.webNewsNum,jdbcType=INTEGER},
+      temp_website_news.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_news.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_news.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_news.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_news.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_news.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      temp_website_news.web_news_content = #{record.webNewsContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_news temp_website_news
+    set temp_website_news.web_news_id = #{record.webNewsId,jdbcType=VARCHAR},
+      temp_website_news.web_news_theme = #{record.webNewsTheme,jdbcType=VARCHAR},
+      temp_website_news.web_news_status = #{record.webNewsStatus,jdbcType=CHAR},
+      temp_website_news.web_news_num = #{record.webNewsNum,jdbcType=INTEGER},
+      temp_website_news.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_news.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_news.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_news.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_news.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_news.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteNews" >
+    update t_website_news
+    <set >
+      <if test="webNewsTheme != null" >
+        web_news_theme = #{webNewsTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webNewsStatus != null" >
+        web_news_status = #{webNewsStatus,jdbcType=CHAR},
+      </if>
+      <if test="webNewsNum != null" >
+        web_news_num = #{webNewsNum,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webNewsContent != null" >
+        web_news_content = #{webNewsContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where web_news_id = #{webNewsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteNews" >
+    update t_website_news
+    set web_news_theme = #{webNewsTheme,jdbcType=VARCHAR},
+      web_news_status = #{webNewsStatus,jdbcType=CHAR},
+      web_news_num = #{webNewsNum,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      web_news_content = #{webNewsContent,jdbcType=LONGVARCHAR}
+    where web_news_id = #{webNewsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteNews" >
+    update t_website_news
+    set web_news_theme = #{webNewsTheme,jdbcType=VARCHAR},
+      web_news_status = #{webNewsStatus,jdbcType=CHAR},
+      web_news_num = #{webNewsNum,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_news_id = #{webNewsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

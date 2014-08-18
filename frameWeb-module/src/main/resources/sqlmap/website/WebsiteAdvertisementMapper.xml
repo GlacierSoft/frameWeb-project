@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteAdvertisementMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteAdvertisement" >
+    <id column="temp_website_advertisement_web_adv_id" property="webAdvId" jdbcType="VARCHAR" />
+    <result column="temp_website_advertisement_web_adv_theme" property="webAdvTheme" jdbcType="VARCHAR" />
+    <result column="temp_website_advertisement_web_adv_status" property="webAdvStatus" jdbcType="CHAR" />
+    <result column="temp_website_advertisement_clicks" property="clicks" jdbcType="INTEGER" />
+    <result column="temp_website_advertisement_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_website_advertisement_web_adv_num" property="webAdvNum" jdbcType="INTEGER" />
+    <result column="temp_website_advertisement_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_advertisement_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_advertisement_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_advertisement_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_advertisement_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_advertisement_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_advertisement_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.glacier.frame.entity.website.WebsiteAdvertisement" extends="BaseResultMap" >
+    <result column="temp_website_advertisement_web_adv_content" property="webAdvContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_advertisement.web_adv_id as temp_website_advertisement_web_adv_id, temp_website_advertisement.web_adv_theme as temp_website_advertisement_web_adv_theme, 
+    temp_website_advertisement.web_adv_status as temp_website_advertisement_web_adv_status, 
+    temp_website_advertisement.clicks as temp_website_advertisement_clicks, temp_website_advertisement.accessory as temp_website_advertisement_accessory, 
+    temp_website_advertisement.web_adv_num as temp_website_advertisement_web_adv_num, 
+    temp_website_advertisement.remark as temp_website_advertisement_remark, temp_website_advertisement.creater as temp_website_advertisement_creater, 
+    temp_website_advertisement.create_time as temp_website_advertisement_create_time, 
+    temp_website_advertisement.updater as temp_website_advertisement_updater, temp_website_advertisement.update_time as temp_website_advertisement_update_time
+    <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_website_advertisement_creater_display
+    ,temp_updater.user_cn_name as temp_website_advertisement_updater_display
+  </sql>
+  <sql id="Blob_Column_List" >
+    temp_website_advertisement.web_adv_content as temp_website_advertisement_web_adv_content
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_website_advertisement.creater =  temp_creater.user_id<!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_website_advertisement.updater =  temp_updater.user_id<!-- 扩展 -->
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_advertisement temp_website_advertisement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_advertisement temp_website_advertisement
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_advertisement temp_website_advertisement
+    <include refid="Base_extend"/>
+    where temp_website_advertisement.web_adv_id = #{webAdvId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_advertisement
+    where web_adv_id = #{webAdvId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisementExample" >
+    delete temp_website_advertisement from t_website_advertisement temp_website_advertisement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisement" >
+    insert into t_website_advertisement (web_adv_id, web_adv_theme, web_adv_status, 
+      clicks, accessory, web_adv_num, 
+      remark, creater, create_time, 
+      updater, update_time, web_adv_content
+      )
+    values (#{webAdvId,jdbcType=VARCHAR}, #{webAdvTheme,jdbcType=VARCHAR}, #{webAdvStatus,jdbcType=CHAR}, 
+      #{clicks,jdbcType=INTEGER}, #{accessory,jdbcType=VARCHAR}, #{webAdvNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{webAdvContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisement" >
+    insert into t_website_advertisement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webAdvId != null" >
+        web_adv_id,
+      </if>
+      <if test="webAdvTheme != null" >
+        web_adv_theme,
+      </if>
+      <if test="webAdvStatus != null" >
+        web_adv_status,
+      </if>
+      <if test="clicks != null" >
+        clicks,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="webAdvNum != null" >
+        web_adv_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="webAdvContent != null" >
+        web_adv_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webAdvId != null" >
+        #{webAdvId,jdbcType=VARCHAR},
+      </if>
+      <if test="webAdvTheme != null" >
+        #{webAdvTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webAdvStatus != null" >
+        #{webAdvStatus,jdbcType=CHAR},
+      </if>
+      <if test="clicks != null" >
+        #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webAdvNum != null" >
+        #{webAdvNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webAdvContent != null" >
+        #{webAdvContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisementExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_advertisement temp_website_advertisement
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_advertisement temp_website_advertisement
+    <set >
+      <if test="record.webAdvId != null" >
+        temp_website_advertisement.web_adv_id = #{record.webAdvId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webAdvTheme != null" >
+        temp_website_advertisement.web_adv_theme = #{record.webAdvTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webAdvStatus != null" >
+        temp_website_advertisement.web_adv_status = #{record.webAdvStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.clicks != null" >
+        temp_website_advertisement.clicks = #{record.clicks,jdbcType=INTEGER},
+      </if>
+      <if test="record.accessory != null" >
+        temp_website_advertisement.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webAdvNum != null" >
+        temp_website_advertisement.web_adv_num = #{record.webAdvNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_advertisement.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_advertisement.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_advertisement.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_advertisement.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_advertisement.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.webAdvContent != null" >
+        temp_website_advertisement.web_adv_content = #{record.webAdvContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_website_advertisement temp_website_advertisement
+    set temp_website_advertisement.web_adv_id = #{record.webAdvId,jdbcType=VARCHAR},
+      temp_website_advertisement.web_adv_theme = #{record.webAdvTheme,jdbcType=VARCHAR},
+      temp_website_advertisement.web_adv_status = #{record.webAdvStatus,jdbcType=CHAR},
+      temp_website_advertisement.clicks = #{record.clicks,jdbcType=INTEGER},
+      temp_website_advertisement.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_advertisement.web_adv_num = #{record.webAdvNum,jdbcType=INTEGER},
+      temp_website_advertisement.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_advertisement.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_advertisement.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_advertisement.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_advertisement.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      temp_website_advertisement.web_adv_content = #{record.webAdvContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_advertisement temp_website_advertisement
+    set temp_website_advertisement.web_adv_id = #{record.webAdvId,jdbcType=VARCHAR},
+      temp_website_advertisement.web_adv_theme = #{record.webAdvTheme,jdbcType=VARCHAR},
+      temp_website_advertisement.web_adv_status = #{record.webAdvStatus,jdbcType=CHAR},
+      temp_website_advertisement.clicks = #{record.clicks,jdbcType=INTEGER},
+      temp_website_advertisement.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_advertisement.web_adv_num = #{record.webAdvNum,jdbcType=INTEGER},
+      temp_website_advertisement.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_advertisement.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_advertisement.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_advertisement.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_advertisement.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisement" >
+    update t_website_advertisement
+    <set >
+      <if test="webAdvTheme != null" >
+        web_adv_theme = #{webAdvTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webAdvStatus != null" >
+        web_adv_status = #{webAdvStatus,jdbcType=CHAR},
+      </if>
+      <if test="clicks != null" >
+        clicks = #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webAdvNum != null" >
+        web_adv_num = #{webAdvNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webAdvContent != null" >
+        web_adv_content = #{webAdvContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where web_adv_id = #{webAdvId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisement" >
+    update t_website_advertisement
+    set web_adv_theme = #{webAdvTheme,jdbcType=VARCHAR},
+      web_adv_status = #{webAdvStatus,jdbcType=CHAR},
+      clicks = #{clicks,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_adv_num = #{webAdvNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      web_adv_content = #{webAdvContent,jdbcType=LONGVARCHAR}
+    where web_adv_id = #{webAdvId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteAdvertisement" >
+    update t_website_advertisement
+    set web_adv_theme = #{webAdvTheme,jdbcType=VARCHAR},
+      web_adv_status = #{webAdvStatus,jdbcType=CHAR},
+      clicks = #{clicks,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_adv_num = #{webAdvNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_adv_id = #{webAdvId,jdbcType=VARCHAR}
+  </update>
+</mapper>

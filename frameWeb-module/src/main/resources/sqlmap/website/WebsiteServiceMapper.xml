@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteServiceMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteService" >
+    <id column="temp_website_service_web_service_id" property="webServiceId" jdbcType="VARCHAR" />
+    <result column="temp_website_service_web_service_name" property="webServiceName" jdbcType="VARCHAR" />
+    <result column="temp_website_service_web_service_qq" property="webServiceQq" jdbcType="VARCHAR" />
+    <result column="temp_website_service_web_service_photo" property="webServicePhoto" jdbcType="VARCHAR" />
+    <result column="temp_website_service_web_service_status" property="webServiceStatus" jdbcType="CHAR" />
+    <result column="temp_website_service_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_website_service_web_service_num" property="webServiceNum" jdbcType="INTEGER" />
+    <result column="temp_website_service_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_service_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_service_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_service_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_service_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_service_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_service_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_service.web_service_id as temp_website_service_web_service_id, temp_website_service.web_service_name as temp_website_service_web_service_name, 
+    temp_website_service.web_service_qq as temp_website_service_web_service_qq, temp_website_service.web_service_photo as temp_website_service_web_service_photo, 
+    temp_website_service.web_service_status as temp_website_service_web_service_status, 
+    temp_website_service.accessory as temp_website_service_accessory, temp_website_service.web_service_num as temp_website_service_web_service_num, 
+    temp_website_service.remark as temp_website_service_remark, temp_website_service.creater as temp_website_service_creater, 
+    temp_website_service.create_time as temp_website_service_create_time, temp_website_service.updater as temp_website_service_updater, 
+    temp_website_service.update_time as temp_website_service_update_time
+        <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_website_service_creater_display
+    ,temp_updater.user_cn_name as temp_website_service_updater_display
+  </sql>
+   <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_website_service.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_website_service.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteServiceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_service temp_website_service
+	<include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_website_service temp_website_service
+ 	<include refid="Base_extend" />
+    where temp_website_service.web_service_id = #{webServiceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_service
+    where web_service_id = #{webServiceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteServiceExample" >
+    delete temp_website_service from t_website_service temp_website_service
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteService" >
+    insert into t_website_service (web_service_id, web_service_name, web_service_qq, 
+      web_service_photo, web_service_status, accessory, 
+      web_service_num, remark, creater, 
+      create_time, updater, update_time
+      )
+    values (#{webServiceId,jdbcType=VARCHAR}, #{webServiceName,jdbcType=VARCHAR}, #{webServiceQq,jdbcType=VARCHAR}, 
+      #{webServicePhoto,jdbcType=VARCHAR}, #{webServiceStatus,jdbcType=CHAR}, #{accessory,jdbcType=VARCHAR}, 
+      #{webServiceNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteService" >
+    insert into t_website_service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webServiceId != null" >
+        web_service_id,
+      </if>
+      <if test="webServiceName != null" >
+        web_service_name,
+      </if>
+      <if test="webServiceQq != null" >
+        web_service_qq,
+      </if>
+      <if test="webServicePhoto != null" >
+        web_service_photo,
+      </if>
+      <if test="webServiceStatus != null" >
+        web_service_status,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="webServiceNum != null" >
+        web_service_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webServiceId != null" >
+        #{webServiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceName != null" >
+        #{webServiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceQq != null" >
+        #{webServiceQq,jdbcType=VARCHAR},
+      </if>
+      <if test="webServicePhoto != null" >
+        #{webServicePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceStatus != null" >
+        #{webServiceStatus,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceNum != null" >
+        #{webServiceNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteServiceExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_service temp_website_service
+     <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_service temp_website_service
+    <set >
+      <if test="record.webServiceId != null" >
+        temp_website_service.web_service_id = #{record.webServiceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webServiceName != null" >
+        temp_website_service.web_service_name = #{record.webServiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webServiceQq != null" >
+        temp_website_service.web_service_qq = #{record.webServiceQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webServicePhoto != null" >
+        temp_website_service.web_service_photo = #{record.webServicePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webServiceStatus != null" >
+        temp_website_service.web_service_status = #{record.webServiceStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.accessory != null" >
+        temp_website_service.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webServiceNum != null" >
+        temp_website_service.web_service_num = #{record.webServiceNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_service.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_service.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_service.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_service.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_service.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_service temp_website_service
+    set temp_website_service.web_service_id = #{record.webServiceId,jdbcType=VARCHAR},
+      temp_website_service.web_service_name = #{record.webServiceName,jdbcType=VARCHAR},
+      temp_website_service.web_service_qq = #{record.webServiceQq,jdbcType=VARCHAR},
+      temp_website_service.web_service_photo = #{record.webServicePhoto,jdbcType=VARCHAR},
+      temp_website_service.web_service_status = #{record.webServiceStatus,jdbcType=CHAR},
+      temp_website_service.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_service.web_service_num = #{record.webServiceNum,jdbcType=INTEGER},
+      temp_website_service.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_service.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_service.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_service.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_service.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteService" >
+    update t_website_service
+    <set >
+      <if test="webServiceName != null" >
+        web_service_name = #{webServiceName,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceQq != null" >
+        web_service_qq = #{webServiceQq,jdbcType=VARCHAR},
+      </if>
+      <if test="webServicePhoto != null" >
+        web_service_photo = #{webServicePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceStatus != null" >
+        web_service_status = #{webServiceStatus,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webServiceNum != null" >
+        web_service_num = #{webServiceNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where web_service_id = #{webServiceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteService" >
+    update t_website_service
+    set web_service_name = #{webServiceName,jdbcType=VARCHAR},
+      web_service_qq = #{webServiceQq,jdbcType=VARCHAR},
+      web_service_photo = #{webServicePhoto,jdbcType=VARCHAR},
+      web_service_status = #{webServiceStatus,jdbcType=CHAR},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_service_num = #{webServiceNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_service_id = #{webServiceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

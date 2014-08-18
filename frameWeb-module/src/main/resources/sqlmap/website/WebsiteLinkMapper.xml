@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteLinkMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteLink" >
+    <id column="temp_website_link_web_link_id" property="webLinkId" jdbcType="VARCHAR" />
+    <result column="temp_website_link_web_link_name" property="webLinkName" jdbcType="VARCHAR" />
+    <result column="temp_website_link_web_link_url" property="webLinkUrl" jdbcType="VARCHAR" />
+    <result column="temp_website_link_web_link_photo" property="webLinkPhoto" jdbcType="VARCHAR" />
+    <result column="temp_website_link_web_link_status" property="webLinkStatus" jdbcType="CHAR" />
+    <result column="temp_website_link_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_website_link_web_link_num" property="webLinkNum" jdbcType="INTEGER" />
+    <result column="temp_website_link_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_link_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_link_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_link_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_link_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_link_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_link_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_link.web_link_id as temp_website_link_web_link_id, temp_website_link.web_link_name as temp_website_link_web_link_name, 
+    temp_website_link.web_link_url as temp_website_link_web_link_url, temp_website_link.web_link_photo as temp_website_link_web_link_photo, 
+    temp_website_link.web_link_status as temp_website_link_web_link_status, temp_website_link.accessory as temp_website_link_accessory, 
+    temp_website_link.web_link_num as temp_website_link_web_link_num, temp_website_link.remark as temp_website_link_remark, 
+    temp_website_link.creater as temp_website_link_creater, temp_website_link.create_time as temp_website_link_create_time, 
+    temp_website_link.updater as temp_website_link_updater, temp_website_link.update_time as temp_website_link_update_time
+    <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_website_link_creater_display
+    ,temp_updater.user_cn_name as temp_website_link_updater_display
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_website_link.creater =  temp_creater.user_id<!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_website_link.updater =  temp_updater.user_id<!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteLinkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_link temp_website_link
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_website_link temp_website_link
+    <include refid="Base_extend"/>
+    where temp_website_link.web_link_id = #{webLinkId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_link
+    where web_link_id = #{webLinkId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteLinkExample" >
+    delete temp_website_link from t_website_link temp_website_link
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteLink" >
+    insert into t_website_link (web_link_id, web_link_name, web_link_url, 
+      web_link_photo, web_link_status, accessory, 
+      web_link_num, remark, creater, 
+      create_time, updater, update_time
+      )
+    values (#{webLinkId,jdbcType=VARCHAR}, #{webLinkName,jdbcType=VARCHAR}, #{webLinkUrl,jdbcType=VARCHAR}, 
+      #{webLinkPhoto,jdbcType=VARCHAR}, #{webLinkStatus,jdbcType=CHAR}, #{accessory,jdbcType=VARCHAR}, 
+      #{webLinkNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteLink" >
+    insert into t_website_link
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webLinkId != null" >
+        web_link_id,
+      </if>
+      <if test="webLinkName != null" >
+        web_link_name,
+      </if>
+      <if test="webLinkUrl != null" >
+        web_link_url,
+      </if>
+      <if test="webLinkPhoto != null" >
+        web_link_photo,
+      </if>
+      <if test="webLinkStatus != null" >
+        web_link_status,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="webLinkNum != null" >
+        web_link_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webLinkId != null" >
+        #{webLinkId,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkName != null" >
+        #{webLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkUrl != null" >
+        #{webLinkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkPhoto != null" >
+        #{webLinkPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkStatus != null" >
+        #{webLinkStatus,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkNum != null" >
+        #{webLinkNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteLinkExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_link temp_website_link
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_link temp_website_link
+    <set >
+      <if test="record.webLinkId != null" >
+        temp_website_link.web_link_id = #{record.webLinkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLinkName != null" >
+        temp_website_link.web_link_name = #{record.webLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLinkUrl != null" >
+        temp_website_link.web_link_url = #{record.webLinkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLinkPhoto != null" >
+        temp_website_link.web_link_photo = #{record.webLinkPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLinkStatus != null" >
+        temp_website_link.web_link_status = #{record.webLinkStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.accessory != null" >
+        temp_website_link.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webLinkNum != null" >
+        temp_website_link.web_link_num = #{record.webLinkNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_link.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_link.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_link.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_link.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_link.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_link temp_website_link
+    set temp_website_link.web_link_id = #{record.webLinkId,jdbcType=VARCHAR},
+      temp_website_link.web_link_name = #{record.webLinkName,jdbcType=VARCHAR},
+      temp_website_link.web_link_url = #{record.webLinkUrl,jdbcType=VARCHAR},
+      temp_website_link.web_link_photo = #{record.webLinkPhoto,jdbcType=VARCHAR},
+      temp_website_link.web_link_status = #{record.webLinkStatus,jdbcType=CHAR},
+      temp_website_link.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_link.web_link_num = #{record.webLinkNum,jdbcType=INTEGER},
+      temp_website_link.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_link.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_link.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_link.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_link.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteLink" >
+    update t_website_link
+    <set >
+      <if test="webLinkName != null" >
+        web_link_name = #{webLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkUrl != null" >
+        web_link_url = #{webLinkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkPhoto != null" >
+        web_link_photo = #{webLinkPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkStatus != null" >
+        web_link_status = #{webLinkStatus,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webLinkNum != null" >
+        web_link_num = #{webLinkNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where web_link_id = #{webLinkId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteLink" >
+    update t_website_link
+    set web_link_name = #{webLinkName,jdbcType=VARCHAR},
+      web_link_url = #{webLinkUrl,jdbcType=VARCHAR},
+      web_link_photo = #{webLinkPhoto,jdbcType=VARCHAR},
+      web_link_status = #{webLinkStatus,jdbcType=CHAR},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_link_num = #{webLinkNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_link_id = #{webLinkId,jdbcType=VARCHAR}
+  </update>
+</mapper>

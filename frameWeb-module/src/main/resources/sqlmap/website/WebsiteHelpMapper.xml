@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteHelpMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteHelp" >
+    <id column="temp_website_help_web_help_id" property="webHelpId" jdbcType="VARCHAR" />
+    <result column="temp_website_help_web_help_theme" property="webHelpTheme" jdbcType="VARCHAR" />
+    <result column="temp_website_help_web_help_type" property="webHelpType" jdbcType="CHAR" />
+    <result column="temp_website_help_web_help_status" property="webHelpStatus" jdbcType="CHAR" />
+    <result column="temp_website_help_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_website_help_web_cla_num" property="webClaNum" jdbcType="INTEGER" />
+    <result column="temp_website_help_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_help_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_help_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_help_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_help_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_help_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_help_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.glacier.frame.entity.website.WebsiteHelp" extends="BaseResultMap" >
+    <result column="temp_website_help_web_help_content" property="webHelpContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_help.web_help_id as temp_website_help_web_help_id, temp_website_help.web_help_theme as temp_website_help_web_help_theme, 
+    temp_website_help.web_help_type as temp_website_help_web_help_type, temp_website_help.web_help_status as temp_website_help_web_help_status, 
+    temp_website_help.accessory as temp_website_help_accessory, temp_website_help.web_cla_num as temp_website_help_web_cla_num, 
+    temp_website_help.remark as temp_website_help_remark, temp_website_help.creater as temp_website_help_creater, 
+    temp_website_help.create_time as temp_website_help_create_time, temp_website_help.updater as temp_website_help_updater, 
+    temp_website_help.update_time as temp_website_help_update_time
+     <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_website_help_creater_display
+    ,temp_updater.user_cn_name as temp_website_help_updater_display
+  </sql>
+  <sql id="Blob_Column_List" >
+    temp_website_help.web_help_content as temp_website_help_web_help_content
+  </sql>
+  <sql id="Base_extend">
+  	LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_website_help.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_website_help.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteHelpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_help temp_website_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteHelpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_help temp_website_help
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_help temp_website_help
+    <include refid="Base_extend" />
+    where temp_website_help.web_help_id = #{webHelpId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_help
+    where web_help_id = #{webHelpId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteHelpExample" >
+    delete temp_website_help from t_website_help temp_website_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteHelp" >
+    insert into t_website_help (web_help_id, web_help_theme, web_help_type, 
+      web_help_status, accessory, web_cla_num, 
+      remark, creater, create_time, 
+      updater, update_time, web_help_content
+      )
+    values (#{webHelpId,jdbcType=VARCHAR}, #{webHelpTheme,jdbcType=VARCHAR}, #{webHelpType,jdbcType=CHAR}, 
+      #{webHelpStatus,jdbcType=CHAR}, #{accessory,jdbcType=VARCHAR}, #{webClaNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{webHelpContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteHelp" >
+    insert into t_website_help
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webHelpId != null" >
+        web_help_id,
+      </if>
+      <if test="webHelpTheme != null" >
+        web_help_theme,
+      </if>
+      <if test="webHelpType != null" >
+        web_help_type,
+      </if>
+      <if test="webHelpStatus != null" >
+        web_help_status,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="webClaNum != null" >
+        web_cla_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="webHelpContent != null" >
+        web_help_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webHelpId != null" >
+        #{webHelpId,jdbcType=VARCHAR},
+      </if>
+      <if test="webHelpTheme != null" >
+        #{webHelpTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webHelpType != null" >
+        #{webHelpType,jdbcType=CHAR},
+      </if>
+      <if test="webHelpStatus != null" >
+        #{webHelpStatus,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webClaNum != null" >
+        #{webClaNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webHelpContent != null" >
+        #{webHelpContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteHelpExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_help temp_website_help
+   	<include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_help temp_website_help
+    <set >
+      <if test="record.webHelpId != null" >
+        temp_website_help.web_help_id = #{record.webHelpId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webHelpTheme != null" >
+        temp_website_help.web_help_theme = #{record.webHelpTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webHelpType != null" >
+        temp_website_help.web_help_type = #{record.webHelpType,jdbcType=CHAR},
+      </if>
+      <if test="record.webHelpStatus != null" >
+        temp_website_help.web_help_status = #{record.webHelpStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.accessory != null" >
+        temp_website_help.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webClaNum != null" >
+        temp_website_help.web_cla_num = #{record.webClaNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_help.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_help.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_help.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_help.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_help.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.webHelpContent != null" >
+        temp_website_help.web_help_content = #{record.webHelpContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_website_help temp_website_help
+    set temp_website_help.web_help_id = #{record.webHelpId,jdbcType=VARCHAR},
+      temp_website_help.web_help_theme = #{record.webHelpTheme,jdbcType=VARCHAR},
+      temp_website_help.web_help_type = #{record.webHelpType,jdbcType=CHAR},
+      temp_website_help.web_help_status = #{record.webHelpStatus,jdbcType=CHAR},
+      temp_website_help.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_help.web_cla_num = #{record.webClaNum,jdbcType=INTEGER},
+      temp_website_help.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_help.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_help.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_help.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_help.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      temp_website_help.web_help_content = #{record.webHelpContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_help temp_website_help
+    set temp_website_help.web_help_id = #{record.webHelpId,jdbcType=VARCHAR},
+      temp_website_help.web_help_theme = #{record.webHelpTheme,jdbcType=VARCHAR},
+      temp_website_help.web_help_type = #{record.webHelpType,jdbcType=CHAR},
+      temp_website_help.web_help_status = #{record.webHelpStatus,jdbcType=CHAR},
+      temp_website_help.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_help.web_cla_num = #{record.webClaNum,jdbcType=INTEGER},
+      temp_website_help.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_help.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_help.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_help.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_help.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteHelp" >
+    update t_website_help
+    <set >
+      <if test="webHelpTheme != null" >
+        web_help_theme = #{webHelpTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webHelpType != null" >
+        web_help_type = #{webHelpType,jdbcType=CHAR},
+      </if>
+      <if test="webHelpStatus != null" >
+        web_help_status = #{webHelpStatus,jdbcType=CHAR},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webClaNum != null" >
+        web_cla_num = #{webClaNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webHelpContent != null" >
+        web_help_content = #{webHelpContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where web_help_id = #{webHelpId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteHelp" >
+    update t_website_help
+    set web_help_theme = #{webHelpTheme,jdbcType=VARCHAR},
+      web_help_type = #{webHelpType,jdbcType=CHAR},
+      web_help_status = #{webHelpStatus,jdbcType=CHAR},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_cla_num = #{webClaNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      web_help_content = #{webHelpContent,jdbcType=LONGVARCHAR}
+    where web_help_id = #{webHelpId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteHelp" >
+    update t_website_help
+    set web_help_theme = #{webHelpTheme,jdbcType=VARCHAR},
+      web_help_type = #{webHelpType,jdbcType=CHAR},
+      web_help_status = #{webHelpStatus,jdbcType=CHAR},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_cla_num = #{webClaNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_help_id = #{webHelpId,jdbcType=VARCHAR}
+  </update>
+</mapper>

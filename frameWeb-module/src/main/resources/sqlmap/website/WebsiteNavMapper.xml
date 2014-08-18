@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteNavMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteNav" >
+    <id column="temp_website_nav_web_nav_id" property="webNavId" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_web_nav_pid" property="webNavPid" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_web_nav_name" property="webNavName" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_web_nav_url" property="webNavUrl" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_web_nav_status" property="webNavStatus" jdbcType="CHAR" />
+    <result column="temp_website_nav_web_nav_num" property="webNavNum" jdbcType="INTEGER" />
+    <result column="temp_website_nav_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_nav_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_nav_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_nav_webNavPname" property="webNavPname" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_nav_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_nav_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_nav.web_nav_id as temp_website_nav_web_nav_id, temp_website_nav.web_nav_pid as temp_website_nav_web_nav_pid, 
+    temp_website_nav.web_nav_name as temp_website_nav_web_nav_name, temp_website_nav.web_nav_url as temp_website_nav_web_nav_url, 
+    temp_website_nav.web_nav_status as temp_website_nav_web_nav_status, temp_website_nav.web_nav_num as temp_website_nav_web_nav_num, 
+    temp_website_nav.remark as temp_website_nav_remark, temp_website_nav.creater as temp_website_nav_creater, 
+    temp_website_nav.create_time as temp_website_nav_create_time, temp_website_nav.updater as temp_website_nav_updater, 
+    temp_website_nav.update_time as temp_website_nav_update_time
+            <!-- 以下字段属于扩展 -->
+    ,temp_website_pnav.web_nav_name as temp_website_nav_webNavPname 
+    ,temp_creater.user_cn_name as temp_website_nav_creater_display
+    ,temp_updater.user_cn_name as temp_website_nav_updater_display
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_website_nav temp_website_pnav ON temp_website_pnav.web_nav_id = temp_website_nav.web_nav_pid <!-- 扩展 -->
+    LEFT JOIN t_user temp_creater ON temp_creater.user_id = temp_website_nav.creater <!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_updater.user_id = temp_website_nav.updater <!-- 扩展 -->
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteNavExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_nav temp_website_nav
+	<include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_website_nav temp_website_nav
+	<include refid="Base_extend" />
+    where temp_website_nav.web_nav_id = #{webNavId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_nav
+    where web_nav_id = #{webNavId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteNavExample" >
+    delete temp_website_nav from t_website_nav temp_website_nav
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteNav" >
+    insert into t_website_nav (web_nav_id, web_nav_pid, web_nav_name, 
+      web_nav_url, web_nav_status, web_nav_num, 
+      remark, creater, create_time, 
+      updater, update_time)
+    values (#{webNavId,jdbcType=VARCHAR}, #{webNavPid,jdbcType=VARCHAR}, #{webNavName,jdbcType=VARCHAR}, 
+      #{webNavUrl,jdbcType=VARCHAR}, #{webNavStatus,jdbcType=CHAR}, #{webNavNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteNav" >
+    insert into t_website_nav
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webNavId != null" >
+        web_nav_id,
+      </if>
+      <if test="webNavPid != null" >
+        web_nav_pid,
+      </if>
+      <if test="webNavName != null" >
+        web_nav_name,
+      </if>
+      <if test="webNavUrl != null" >
+        web_nav_url,
+      </if>
+      <if test="webNavStatus != null" >
+        web_nav_status,
+      </if>
+      <if test="webNavNum != null" >
+        web_nav_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webNavId != null" >
+        #{webNavId,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavPid != null" >
+        #{webNavPid,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavName != null" >
+        #{webNavName,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavUrl != null" >
+        #{webNavUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavStatus != null" >
+        #{webNavStatus,jdbcType=CHAR},
+      </if>
+      <if test="webNavNum != null" >
+        #{webNavNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteNavExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_nav temp_website_nav
+    <include refid="Base_extend" />
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_nav temp_website_nav
+    <set >
+      <if test="record.webNavId != null" >
+        temp_website_nav.web_nav_id = #{record.webNavId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webNavPid != null" >
+        temp_website_nav.web_nav_pid = #{record.webNavPid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webNavName != null" >
+        temp_website_nav.web_nav_name = #{record.webNavName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webNavUrl != null" >
+        temp_website_nav.web_nav_url = #{record.webNavUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webNavStatus != null" >
+        temp_website_nav.web_nav_status = #{record.webNavStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.webNavNum != null" >
+        temp_website_nav.web_nav_num = #{record.webNavNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_nav.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_nav.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_nav.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_nav.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_nav.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_nav temp_website_nav
+    set temp_website_nav.web_nav_id = #{record.webNavId,jdbcType=VARCHAR},
+      temp_website_nav.web_nav_pid = #{record.webNavPid,jdbcType=VARCHAR},
+      temp_website_nav.web_nav_name = #{record.webNavName,jdbcType=VARCHAR},
+      temp_website_nav.web_nav_url = #{record.webNavUrl,jdbcType=VARCHAR},
+      temp_website_nav.web_nav_status = #{record.webNavStatus,jdbcType=CHAR},
+      temp_website_nav.web_nav_num = #{record.webNavNum,jdbcType=INTEGER},
+      temp_website_nav.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_nav.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_nav.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_nav.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_nav.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteNav" >
+    update t_website_nav
+    <set >
+      <if test="webNavPid != null" >
+        web_nav_pid = #{webNavPid,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavName != null" >
+        web_nav_name = #{webNavName,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavUrl != null" >
+        web_nav_url = #{webNavUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="webNavStatus != null" >
+        web_nav_status = #{webNavStatus,jdbcType=CHAR},
+      </if>
+      <if test="webNavNum != null" >
+        web_nav_num = #{webNavNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where web_nav_id = #{webNavId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteNav" >
+    update t_website_nav
+    set web_nav_pid = #{webNavPid,jdbcType=VARCHAR},
+      web_nav_name = #{webNavName,jdbcType=VARCHAR},
+      web_nav_url = #{webNavUrl,jdbcType=VARCHAR},
+      web_nav_status = #{webNavStatus,jdbcType=CHAR},
+      web_nav_num = #{webNavNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_nav_id = #{webNavId,jdbcType=VARCHAR}
+  </update>
+</mapper>

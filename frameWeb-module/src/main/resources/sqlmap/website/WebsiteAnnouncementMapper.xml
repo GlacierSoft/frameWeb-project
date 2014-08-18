@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.frame.dao.website.WebsiteAnnouncementMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.frame.entity.website.WebsiteAnnouncement" >
+    <id column="temp_website_announcement_web_ann_id" property="webAnnId" jdbcType="VARCHAR" />
+    <result column="temp_website_announcement_web_ann_theme" property="webAnnTheme" jdbcType="VARCHAR" />
+    <result column="temp_website_announcement_web_ann_status" property="webAnnStatus" jdbcType="CHAR" />
+    <result column="temp_website_announcement_clicks" property="clicks" jdbcType="INTEGER" />
+    <result column="temp_website_announcement_accessory" property="accessory" jdbcType="VARCHAR" />
+    <result column="temp_website_announcement_web_ann_num" property="webAnnNum" jdbcType="INTEGER" />
+    <result column="temp_website_announcement_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="temp_website_announcement_creater" property="creater" jdbcType="VARCHAR" />
+    <result column="temp_website_announcement_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_announcement_updater" property="updater" jdbcType="VARCHAR" />
+    <result column="temp_website_announcement_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="temp_website_announcement_creater_display" property="createrDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+    <result column="temp_website_announcement_updater_display" property="updaterDisplay" jdbcType="VARCHAR"/> <!-- 自定义扩展字段 -->
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.glacier.frame.entity.website.WebsiteAnnouncement" extends="BaseResultMap" >
+    <result column="temp_website_announcement_web_ann_content" property="webAnnContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_website_announcement.web_ann_id as temp_website_announcement_web_ann_id, temp_website_announcement.web_ann_theme as temp_website_announcement_web_ann_theme, 
+    temp_website_announcement.web_ann_status as temp_website_announcement_web_ann_status, 
+    temp_website_announcement.clicks as temp_website_announcement_clicks, temp_website_announcement.accessory as temp_website_announcement_accessory, 
+    temp_website_announcement.web_ann_num as temp_website_announcement_web_ann_num, temp_website_announcement.remark as temp_website_announcement_remark, 
+    temp_website_announcement.creater as temp_website_announcement_creater, temp_website_announcement.create_time as temp_website_announcement_create_time, 
+    temp_website_announcement.updater as temp_website_announcement_updater, temp_website_announcement.update_time as temp_website_announcement_update_time
+    <!-- 以下字段属于扩展 -->
+    ,temp_creater.user_cn_name as temp_website_announcement_creater_display
+    ,temp_updater.user_cn_name as temp_website_announcement_updater_display
+  </sql>
+  <sql id="Blob_Column_List" >
+    temp_website_announcement.web_ann_content as temp_website_announcement_web_ann_content
+  </sql>
+  <sql id="Base_extend">
+    LEFT JOIN t_user temp_creater ON temp_website_announcement.creater =  temp_creater.user_id<!-- 扩展 -->
+    LEFT JOIN t_user temp_updater ON temp_website_announcement.updater =  temp_updater.user_id<!-- 扩展 -->
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_announcement temp_website_announcement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_website_announcement temp_website_announcement
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_website_announcement temp_website_announcement
+    <include refid="Base_extend"/>
+    where temp_website_announcement.web_ann_id = #{webAnnId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_website_announcement
+    where web_ann_id = #{webAnnId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncementExample" >
+    delete temp_website_announcement from t_website_announcement temp_website_announcement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncement" >
+    insert into t_website_announcement (web_ann_id, web_ann_theme, web_ann_status, 
+      clicks, accessory, web_ann_num, 
+      remark, creater, create_time, 
+      updater, update_time, web_ann_content
+      )
+    values (#{webAnnId,jdbcType=VARCHAR}, #{webAnnTheme,jdbcType=VARCHAR}, #{webAnnStatus,jdbcType=CHAR}, 
+      #{clicks,jdbcType=INTEGER}, #{accessory,jdbcType=VARCHAR}, #{webAnnNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{webAnnContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncement" >
+    insert into t_website_announcement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="webAnnId != null" >
+        web_ann_id,
+      </if>
+      <if test="webAnnTheme != null" >
+        web_ann_theme,
+      </if>
+      <if test="webAnnStatus != null" >
+        web_ann_status,
+      </if>
+      <if test="clicks != null" >
+        clicks,
+      </if>
+      <if test="accessory != null" >
+        accessory,
+      </if>
+      <if test="webAnnNum != null" >
+        web_ann_num,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updater != null" >
+        updater,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="webAnnContent != null" >
+        web_ann_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="webAnnId != null" >
+        #{webAnnId,jdbcType=VARCHAR},
+      </if>
+      <if test="webAnnTheme != null" >
+        #{webAnnTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webAnnStatus != null" >
+        #{webAnnStatus,jdbcType=CHAR},
+      </if>
+      <if test="clicks != null" >
+        #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webAnnNum != null" >
+        #{webAnnNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webAnnContent != null" >
+        #{webAnnContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncementExample" resultType="java.lang.Integer" >
+    select count(*) from t_website_announcement temp_website_announcement
+    <include refid="Base_extend"/>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_website_announcement temp_website_announcement
+    <set >
+      <if test="record.webAnnId != null" >
+        temp_website_announcement.web_ann_id = #{record.webAnnId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webAnnTheme != null" >
+        temp_website_announcement.web_ann_theme = #{record.webAnnTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webAnnStatus != null" >
+        temp_website_announcement.web_ann_status = #{record.webAnnStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.clicks != null" >
+        temp_website_announcement.clicks = #{record.clicks,jdbcType=INTEGER},
+      </if>
+      <if test="record.accessory != null" >
+        temp_website_announcement.accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.webAnnNum != null" >
+        temp_website_announcement.web_ann_num = #{record.webAnnNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_website_announcement.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        temp_website_announcement.creater = #{record.creater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        temp_website_announcement.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updater != null" >
+        temp_website_announcement.updater = #{record.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        temp_website_announcement.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.webAnnContent != null" >
+        temp_website_announcement.web_ann_content = #{record.webAnnContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_website_announcement temp_website_announcement
+    set temp_website_announcement.web_ann_id = #{record.webAnnId,jdbcType=VARCHAR},
+      temp_website_announcement.web_ann_theme = #{record.webAnnTheme,jdbcType=VARCHAR},
+      temp_website_announcement.web_ann_status = #{record.webAnnStatus,jdbcType=CHAR},
+      temp_website_announcement.clicks = #{record.clicks,jdbcType=INTEGER},
+      temp_website_announcement.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_announcement.web_ann_num = #{record.webAnnNum,jdbcType=INTEGER},
+      temp_website_announcement.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_announcement.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_announcement.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_announcement.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_announcement.update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      temp_website_announcement.web_ann_content = #{record.webAnnContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_website_announcement temp_website_announcement
+    set temp_website_announcement.web_ann_id = #{record.webAnnId,jdbcType=VARCHAR},
+      temp_website_announcement.web_ann_theme = #{record.webAnnTheme,jdbcType=VARCHAR},
+      temp_website_announcement.web_ann_status = #{record.webAnnStatus,jdbcType=CHAR},
+      temp_website_announcement.clicks = #{record.clicks,jdbcType=INTEGER},
+      temp_website_announcement.accessory = #{record.accessory,jdbcType=VARCHAR},
+      temp_website_announcement.web_ann_num = #{record.webAnnNum,jdbcType=INTEGER},
+      temp_website_announcement.remark = #{record.remark,jdbcType=VARCHAR},
+      temp_website_announcement.creater = #{record.creater,jdbcType=VARCHAR},
+      temp_website_announcement.create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      temp_website_announcement.updater = #{record.updater,jdbcType=VARCHAR},
+      temp_website_announcement.update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncement" >
+    update t_website_announcement
+    <set >
+      <if test="webAnnTheme != null" >
+        web_ann_theme = #{webAnnTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="webAnnStatus != null" >
+        web_ann_status = #{webAnnStatus,jdbcType=CHAR},
+      </if>
+      <if test="clicks != null" >
+        clicks = #{clicks,jdbcType=INTEGER},
+      </if>
+      <if test="accessory != null" >
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="webAnnNum != null" >
+        web_ann_num = #{webAnnNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null" >
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="webAnnContent != null" >
+        web_ann_content = #{webAnnContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where web_ann_id = #{webAnnId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncement" >
+    update t_website_announcement
+    set web_ann_theme = #{webAnnTheme,jdbcType=VARCHAR},
+      web_ann_status = #{webAnnStatus,jdbcType=CHAR},
+      clicks = #{clicks,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_ann_num = #{webAnnNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      web_ann_content = #{webAnnContent,jdbcType=LONGVARCHAR}
+    where web_ann_id = #{webAnnId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.frame.entity.website.WebsiteAnnouncement" >
+    update t_website_announcement
+    set web_ann_theme = #{webAnnTheme,jdbcType=VARCHAR},
+      web_ann_status = #{webAnnStatus,jdbcType=CHAR},
+      clicks = #{clicks,jdbcType=INTEGER},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      web_ann_num = #{webAnnNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater = #{updater,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where web_ann_id = #{webAnnId,jdbcType=VARCHAR}
+  </update>
+</mapper>
