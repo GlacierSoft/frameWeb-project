@@ -1,8 +1,3 @@
-/*
- * @(#)RoleController.java
- * @author zhenfei.zhang 
- * Copyright (c) 2012 Glacier SoftWare Company Limited. All Rights Reserved.
- */
 package com.glacier.frame.web.controller.system;
 
 import java.util.List;
@@ -23,12 +18,12 @@ import com.glacier.frame.entity.system.Role;
 import com.glacier.frame.service.system.MenuService;
 import com.glacier.frame.service.system.RoleService;
 
-/**
- * @ClassName: RoleController
+/***
+ * @ClassName:  RoleController
  * @Description: TODO(角色Controller)
- * @author zhenfei.zhang
- * @email zhangzhenfei_email@163.com
- * @date 2013-10-2 下午12:15:48
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:05:40
  */
 @Controller
 @RequestMapping(value = "/role")

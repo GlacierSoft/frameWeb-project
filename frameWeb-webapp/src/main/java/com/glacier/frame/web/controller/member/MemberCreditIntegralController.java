@@ -1,8 +1,3 @@
-/*
- * @(#)memberCreditIntegralController.java
- * @author xichao.dong
- * Copyright (c) 2013 Glacier SoftWare Company Limited. All Rights Reserved.
- */
 package com.glacier.frame.web.controller.member;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,13 +12,13 @@ import com.glacier.core.controller.AbstractController;
 import com.glacier.jqueryui.util.JqPager;
 import com.glacier.frame.dto.query.member.MemberCreditIntegralQueryDTO;
 import com.glacier.frame.service.member.MemberCreditIntegralService;
-
-/** 
- * @ClassName: memberCreditIntegralController 
- * @Description: TODO(会员信用积分的控制器) 
- * @author xichao.dong
- * @email 406592176@QQ.com
- * @date 2014-1-21 下午2:39:20  
+ 
+/*** 
+ * @ClassName:  MemberCreditIntegralController
+ * @Description: TODO(会员信用积分的控制器)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:08:39
  */
 @Controller
 @RequestMapping(value = "/creditIntegral")

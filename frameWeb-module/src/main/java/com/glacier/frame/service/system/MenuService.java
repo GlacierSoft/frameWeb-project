@@ -3,14 +3,14 @@
  * @Package com.glacier.permissions.service 
  * @author zhenfei.zhang   
  * @email 289556866@qq.com
- * @date 2013-12-10 下午4:00:46 
+ * @date 2014-08-17 下午4:00:46 
  * @company (开发公司)    珠海市冰川软件有限公司
  * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
  * @version V1.0
  * @modify (修改) 
  *          <p>
                 第一次修改：
-                时间：2013-12-10
+                时间：2014-08-17
                 修改人：zhenfei.zhang 
                 修改内容简介 ：新建面板业务类
             </p>              
@@ -50,7 +50,7 @@ import com.glacier.frame.util.MethodLog;
  * @Description: TODO(菜单业务类：为控制器提供服务)
  * @author zhenfei.zhang
  * @email 289556866@qq.com
- * @date 2013-12-10 下午4:00:46
+ * @date 2014-08-17 下午4:00:46
  */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)

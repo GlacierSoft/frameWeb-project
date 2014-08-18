@@ -1,7 +1,21 @@
-/*
- * @(#)MemberIntegralService.java
+/**
+ * @Title: MemberIntegralService.java 
+ * @Package com.glacier.frame.service.member 
  * @author xichao.dong
- * Copyright (c) 2013 Glacier SoftWare Company Limited. All Rights Reserved.
+ * @email 406592176@QQ.com
+ * @date 2014-08-17  下午2:22:22  
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-08-17 
+				修改人：xichao.dong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：xichao.dong
+ * 
  */
 package com.glacier.frame.service.member;
 
@@ -36,7 +50,7 @@ import com.glacier.frame.util.MethodLog;
  * @Description: TODO(会员积分记录业务类) 
  * @author xichao.dong
  * @email 406592176@QQ.com
- * @date 2014-1-21 下午2:22:22  
+ * @date 2014-08-17  下午2:22:22  
  */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -57,14 +71,14 @@ public class MemberIntegralService {
     	MemberIntegral memberIntegral = integralMapper.selectByPrimaryKey(memberIntegralId);
         return memberIntegral;
     }
+    
     /**
      * @Description: TODO(前台会员积分显示列表) 
      * @param  @param pager
      * @param  @param p
      * @param  @return设定文件
      * @return Object  返回类型
-     * @throws 
-     *
+     * @throws  
      */
     public Object listAsWebsite(JqPager pager, int p) {
         
@@ -94,14 +108,20 @@ public class MemberIntegralService {
         integralMap.put("returnResult", returnResult);
         integralMap.put("totalIntegral", totalIntegral());
         return integralMap;// 返回ExtGrid表
-    }
-    //获取会员总积分
+    } 
+    
+    /*** 
+     * @Title: totalIntegral  
+     * @Description: TODO(获取会员总积分)  
+     * @param @return    设定文件  
+     * @return int    返回类型  
+     * @throws
+     */
     public int totalIntegral(){
-    	MemberIntegralExample memberIntegralExampleAll = new MemberIntegralExample();
     	
+    	MemberIntegralExample memberIntegralExampleAll = new MemberIntegralExample(); 
     	Subject pricipalSubject = SecurityUtils.getSubject();
-    	Member pricipalMember = (Member) pricipalSubject.getPrincipal();
-    	
+    	Member pricipalMember = (Member) pricipalSubject.getPrincipal(); 
     	memberIntegralExampleAll.createCriteria().andMemberIdEqualTo(pricipalMember.getMemberId());
     	List<MemberIntegral>  memberIntegralAll = integralMapper.selectByExample(memberIntegralExampleAll); // 查询所有公告列表
         int totalIntegral = 0;
@@ -115,6 +135,7 @@ public class MemberIntegralService {
         }
         return totalIntegral;
     }
+    
     /**
      * @Title: listAsGrid 
      * @Description: TODO(获取所有会员积分记录信息) 
@@ -126,12 +147,9 @@ public class MemberIntegralService {
     public Object listAsGrid(MemberIntegralQueryDTO  memberIntegralQueryDTO, JqPager pintegralr) {
         
         JqGridReturn returnResult = new JqGridReturn();
-        MemberIntegralExample memberIntegralExample = new MemberIntegralExample();
-
+        MemberIntegralExample memberIntegralExample = new MemberIntegralExample(); 
         Criteria queryCriteria = memberIntegralExample.createCriteria();
-        memberIntegralQueryDTO.setQueryCondition(queryCriteria);
-        
-        
+        memberIntegralQueryDTO.setQueryCondition(queryCriteria); 
         if (null != pintegralr.getPage() && null != pintegralr.getRows()) {// 设置排序信息
         	memberIntegralExample.setLimitStart((pintegralr.getPage() - 1) * pintegralr.getRows());
         	memberIntegralExample.setLimitEnd(pintegralr.getRows());
@@ -159,8 +177,7 @@ public class MemberIntegralService {
     public Object addIntegral(MemberIntegral integral) {
     	
         Subject pricipalSubject = SecurityUtils.getSubject();
-        User pricipalUser = (User) pricipalSubject.getPrincipal();
-        
+        User pricipalUser = (User) pricipalSubject.getPrincipal(); 
         JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
         int count = 0;
         integral.setMemberIntegralId(RandomGUID.getRandomGUID());

@@ -1,3 +1,22 @@
+/**
+ * @Title: MemberMessageNoticeService.java 
+ * @Package com.glacier.frame.service.member 
+ * @author songjundong   
+ * @email 985776597@qq.com
+ * @date 2014-8-18  下午5:24:55
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-8-18
+				修改人：songjundong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：songjundong
+ * 
+ */
 package com.glacier.frame.service.member;
 
 import java.util.Date;
@@ -24,12 +43,12 @@ import com.glacier.frame.entity.member.MemberMessageNoticeExample.Criteria;
 import com.glacier.frame.entity.system.User;
 import com.glacier.frame.util.MethodLog;
 
-/**
- * @ClassName: MemberMessageNoticeService 
- * @Description: TODO(消息通知service层) 
- * @author yuzexu
- * @email 804346249@QQ.com
- * @date 2014-4-9上午11:05:21
+/*** 
+ * @ClassName:  MemberMessageNoticeService
+ * @Description: TODO(消息通知管理)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:24:55
  */
 @Service
 @Transactional(readOnly = true , propagation = Propagation.REQUIRED)
@@ -50,6 +69,7 @@ public class MemberMessageNoticeService {
     	MemberMessageNotice memberMessageNotice = memberMessageNoticeMapper.selectByPrimaryKey(messageNoticeId);
         return memberMessageNotice;
     }
+    
     /**
      * @Title: listAsGrid 
      * @Description: TODO(获取所有消息通知信息) 
@@ -82,6 +102,7 @@ public class MemberMessageNoticeService {
         returnResult.setP(p);
         return returnResult;// 返回ExtGrid表
     }
+    
     /**
      * @Title: listAsGrid 
      * @Description: TODO(获取所有消息通知信息) 
@@ -111,6 +132,7 @@ public class MemberMessageNoticeService {
         returnResult.setTotal(total);
         return returnResult;// 返回ExtGrid表
     }
+    
     /**
      * @Title: editMemberMessageNotice 
      * @Description: TODO(修改消息通知) 
@@ -136,6 +158,7 @@ public class MemberMessageNoticeService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: addMemberMessageNotice 
      * @Description: TODO(新增消息通知) 
@@ -149,8 +172,7 @@ public class MemberMessageNoticeService {
     public Object addMemberMessageNotice(MemberMessageNotice memberMessageNotice) {
     	
         Subject pricipalSubject = SecurityUtils.getSubject();
-        User pricipalUser = (User) pricipalSubject.getPrincipal();
-        
+        User pricipalUser = (User) pricipalSubject.getPrincipal(); 
         JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
         int count = 0;
         memberMessageNotice.setMessageNoticeId(RandomGUID.getRandomGUID());
@@ -226,6 +248,7 @@ public class MemberMessageNoticeService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: delMemberMessageNotice 
      * @Description: TODO(删除消息通知) 

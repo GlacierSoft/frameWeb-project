@@ -1,22 +1,3 @@
-/**
- * @Title: AuthorityController.java 
- * @Package com.glacier.frame.web.controller.system 
- * @author zhenfei.zhang   
- * @email 289556866@qq.com
- * @date 2014-1-21 上午10:45:58 
- * @company (开发公司)    珠海市冰川软件有限公司
- * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
- * @version V1.0
- * @modify (修改) 
- *        	<p>
-				第一次修改：
-				时间：2014-1-21
-				修改人：zhenfei.zhang 
-				修改内容简介 ：
-			</p>              
- * @Review (审核人) ：zhenfei.zhang
- * 
- */
 package com.glacier.frame.web.controller.system;
 
 import java.util.Set;
@@ -31,9 +12,9 @@ import com.glacier.frame.service.system.AuthorityService;
 /**
  * @ClassName: AuthorityController
  * @Description: TODO(权限控制器，处理所有权限相关请求、权限资源获取)
- * @author zhenfei.zhang
- * @email 289556866@qq.com
- * @date 2014-1-21 上午10:45:58
+ * @author songjundong
+ * @email 985776597@qq.com
+ * @date 2014-08-18 上午10:45:58
  */
 
 @Controller

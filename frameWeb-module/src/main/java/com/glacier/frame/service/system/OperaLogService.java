@@ -1,20 +1,20 @@
 /**
  * @Title: OperaLogService.java 
  * @Package com.glacier.frame.service.system 
- * @author zhenfei.zhang   
- * @email 289556866@qq.com
- * @date 2014-2-10 下午3:18:37 
+ * @author songjundong  
+ * @email 985776597@qq.com
+ * @date 2014-8-18 下午3:18:37 
  * @company (开发公司)    珠海市冰川软件有限公司
  * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
  * @version V1.0
  * @modify (修改) 
  *        	<p>
 				第一次修改：
-				时间：2014-2-10
-				修改人：zhenfei.zhang 
+				时间：2014-8-18
+				修改人：songjundong 
 				修改内容简介 ：
 			</p>              
- * @Review (审核人) ：zhenfei.zhang
+ * @Review (审核人) ：songjundong
  * 
  */
 package com.glacier.frame.service.system;
@@ -39,9 +39,9 @@ import com.glacier.frame.util.MethodLog;
 /**
  * @ClassName: OperaLogService
  * @Description: TODO(操作日志业务类)
- * @author zhenfei.zhang
- * @email 289556866@qq.com
- * @date 2014-2-10 下午3:18:37
+ * @author songjundong
+ * @email 985776597@qq.com
+ * @date 2014-8-18 下午3:18:37
  */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)

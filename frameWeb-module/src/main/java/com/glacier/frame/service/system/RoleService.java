@@ -1,3 +1,22 @@
+/**
+ * @Title: RoleService.java 
+ * @Package com.glacier.frame.service.system 
+ * @author songjundong   
+ * @email 985776597@qq.com
+ * @date 2014-8-18  下午4:57:34
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-8-18
+				修改人：songjundong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：songjundong
+ * 
+ */
 package com.glacier.frame.service.system;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +46,14 @@ import com.glacier.frame.entity.system.RoleExample.Criteria;
 import com.glacier.frame.entity.system.User;
 import com.glacier.frame.util.MethodLog;
 
+/***
+ * 
+ * @ClassName:  RoleService
+ * @Description: TODO(角色管理)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午4:57:34
+ */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class RoleService {
@@ -146,7 +173,7 @@ public class RoleService {
 
     /**
      * @Title: editRole
-     * @Description: TODO(这里用一句话描述这个方法的作用)
+     * @Description: TODO(修改角色)
      * @param @param role
      * @param @return
      * @throws 备注

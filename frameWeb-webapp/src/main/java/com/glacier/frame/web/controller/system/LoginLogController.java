@@ -13,6 +13,13 @@ import com.glacier.jqueryui.util.JqPager;
 import com.glacier.frame.dto.query.system.LoginlogQueryDTO;
 import com.glacier.frame.service.system.LoginLogService;
 
+/*** 
+ * @ClassName:  LoginLogController
+ * @Description: TODO(登录日志)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:01:28
+ */
 @Controller
 @RequestMapping(value = "/loginlog")
 public class LoginLogController {

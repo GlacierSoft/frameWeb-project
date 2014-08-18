@@ -1,3 +1,22 @@
+/**
+ * @Title: MemberService.java 
+ * @Package com.glacier.frame.service.system 
+ * @author songjundong   
+ * @email 985776597@qq.com
+ * @date 2014-8-18 下午5:11:53
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-8-18
+				修改人：songjundong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：songjundong
+ * 
+ */
 package com.glacier.frame.service.member;
 
 import java.net.InetAddress;
@@ -53,12 +72,12 @@ import com.glacier.jqueryui.util.JqReturnJson;
 import com.glacier.security.util.Digests;
 import com.glacier.security.util.Encodes;
 
-/**
- * @ClassName: MemberService 
- * @Description: TODO(会员表业务类) 
- * @author yuzexu
- * @email 804346249@QQ.com
- * @date 2014-2-20下午5:23:09
+/*** 
+ * @ClassName:  MemberService
+ * @Description: TODO(会员表业务类)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:11:53
  */
 @Service
 @Transactional(readOnly = true ,propagation = Propagation.REQUIRED)
@@ -97,9 +116,15 @@ public class MemberService {
 	@Autowired
 	private MemberIntegralMapper memberIntegralMapper;
 	
-	/**
-	 * 判断用用户的信息是否完善
+	/*** 
+	 * @Title: checkMemberDatum  
+	 * @Description: TODO(判断用用户的信息是否完善)  
+	 * @param @param memberId
+	 * @param @return    设定文件  
+	 * @return Object    返回类型  
+	 * @throws
 	 */
+	
 	public Object checkMemberDatum(String memberId){
 		JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
 		MemberExample memberExample = new MemberExample();
@@ -172,6 +197,7 @@ public class MemberService {
         	}
         return member;
     }
+    
     /**
 	 * @Title: getMemberWork 
 	 * @Description: TODO(根据会员Id获取会员工作信息) 
@@ -211,6 +237,7 @@ public class MemberService {
         returnResult.setTotal(total);
         return returnResult;// 返回ExtGrid表
     }
+    
     /**
      * @Title: isUsernameRepeat 
      * @Description: TODO(判断会员名是否重复) 
@@ -218,7 +245,6 @@ public class MemberService {
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     public Object isUsernameRepeat(Member member){
     	  JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
@@ -243,7 +269,7 @@ public class MemberService {
      *
      */
     public Object isEmailRepeat(Member member){
-  	  JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
+  	   JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
         MemberExample memberExample = new MemberExample();
         // 防止邮箱重复
         memberExample.createCriteria().andEmailEqualTo(member.getEmail());
@@ -268,6 +294,7 @@ public class MemberService {
         byte[] hashPassword = Digests.sha1(memberToken.getTratersPassword().getBytes(), salt, HASH_INTERATIONS);
         memberToken.setTratersPassword(Encodes.encodeHex(hashPassword));
     }
+    
     /**
      * @Title: isequalsPassword 
      * @Description: TODO(会员密码修改) 
@@ -277,7 +304,6 @@ public class MemberService {
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     @Transactional(readOnly = false)
     public Object isequalsPassword(Member member,String oldPassword,String memberPassword){
@@ -314,7 +340,6 @@ public class MemberService {
         return returnResult;
     }
      
-
     /**
      * @Title: isequalsbusinessPassword 
      * @Description: TODO(会员交易密码修改) 
@@ -324,7 +349,6 @@ public class MemberService {
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     @Transactional(readOnly = false)
     public Object isequalsbusinessPassword(Member member,String oldPassword,String memberPassword){
@@ -361,7 +385,6 @@ public class MemberService {
         return returnResult;
     }
     
-    
     /**
      * @Title: addMemberReception 
      * @Description: TODO(前台注册会员，同时生成工作表和认证表) 
@@ -369,7 +392,6 @@ public class MemberService {
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     @Transactional(readOnly = false)
     public Object addMemberReception(Member member){  
@@ -402,7 +424,6 @@ public class MemberService {
         parameterCreditTypeExample.createCriteria().andCreditTypeEqualTo("emailAuth");
 		List<ParameterCreditType>  parameterCreditTypes = creditTypeMapper.selectByExample(parameterCreditTypeExample); // 查询所有信用积分类型列表
 		parameterCreditType = parameterCreditTypes.get(0);
-        
         //增加会员信息 
         member.setMemberId(memberId);
         member.setMemberPassword(memberToken.getPassword()); 
@@ -487,8 +508,6 @@ public class MemberService {
         memberMessageNotice.setUpdater(getuserId());
         memberMessageNotice.setUpdateTime(new Date());
         MessageNoticeCount = memberMessageNoticeMapper.insert(memberMessageNotice); 
-
-        
         if (count == 1 && countWork == 1 && countToken == 1 && creditCount == 1 && MessageNoticeCount == 1) {
             returnResult.setSuccess(true);
             returnResult.setMsg("[" + member.getMemberName() + "] 会员信息已保存");
@@ -498,6 +517,7 @@ public class MemberService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: applicationVIP 
      * @Description: TODO(会员前台申请vip审核) 
@@ -505,7 +525,6 @@ public class MemberService {
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     @Transactional(readOnly = false)
     public Object applicationVIP(String memberId){
@@ -523,13 +542,13 @@ public class MemberService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: editMemberReception 
      * @Description: TODO(前台个人信息的修改) 
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     @Transactional(readOnly = false)
     public Object editMemberReception(Member member,MemberWork memberWork,String postAuth){
@@ -559,6 +578,7 @@ public class MemberService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: editMemberPhotoReception 
      * @Description: TODO(上传个人头像) 
@@ -566,7 +586,6 @@ public class MemberService {
      * @param  @return设定文件
      * @return Object  返回类型
      * @throws 
-     *
      */
     @Transactional(readOnly = false)
     public Object editMemberPhotoReception(Member member){
@@ -584,6 +603,7 @@ public class MemberService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: addMemberandWorkandAuth 
      * @Description: TODO(新增会员,工作，认证) 
@@ -730,7 +750,6 @@ public class MemberService {
         int countWork = 0;
         int countAuth = 0;
         if (memberIds.size() > 0) {
-        	
             //工作表的删除
             MemberWorkExample memberWorkExample = new MemberWorkExample();
             memberWorkExample.createCriteria().andMemberIdIn(memberIds);
@@ -745,7 +764,6 @@ public class MemberService {
         	MemberExample memberExample = new MemberExample();
         	memberExample.createCriteria().andMemberIdIn(memberIds);
             count = memberMapper.deleteByExample(memberExample);
-            
             if (count > 0 && countWork >0 && countAuth > 0) {
                 returnResult.setSuccess(true);
                 returnResult.setMsg("成功删除了[ " + CollectionsUtil.convertToString(memberNames, ",") + " ]操作");
@@ -755,7 +773,6 @@ public class MemberService {
         }
         return returnResult;
     }
-  
     
     /**
      * @Title: retrieveEmail 
@@ -775,7 +792,6 @@ public class MemberService {
         return memberlist.size()==0?null:memberlist.get(0);
     }
      
-    
     /**
      * @Title: retrieveName 
      * @Description: TODO(判断该会员名称是否存在) 
@@ -813,9 +829,9 @@ public class MemberService {
         Member member=list.get(0);
         int countMT=0;
         int count=0;
-       if(member==null||newPassword.equals("")){ 
+        if(member==null||newPassword.equals("")){ 
     	   returnResult.setMsg("会话失效，请重新发邮件找回密码"); 
-       }else{ 
+        }else{ 
     	    returnResult.setSuccess(true); 
     	    MemberToken mt = memberTokenMapper.selectByPrimaryKey(member.getMemberId());//通过memberId获取memberToken
     	    //将前台传来的密码进行加密，
@@ -831,11 +847,10 @@ public class MemberService {
             }else{
             	returnResult.setMsg("密码修改失败！");
             } 
-       }
-    	return returnResult;
+         }
+    	 return returnResult;
     }
-    
-    
+     
     /**
      * @Title: updateIntegra 
      * @Description: TODO(会员登录，如果是当天第一次登陆就新增登录积分，同时修改会员的积分) 
@@ -887,10 +902,14 @@ public class MemberService {
       memberMapper.updateByPrimaryKeySelective(member);//更新会员信息
       } 
    } 
-     
-    
-     
-       //获取管理员id
+      
+      /*** 
+       * @Title: getuserId  
+       * @Description: TODO(获取管理员id)  
+       * @param @return    设定文件  
+       * @return String    返回类型  
+       * @throws
+       */
       public String getuserId(){ 
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUsernameEqualTo("admin");

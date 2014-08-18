@@ -1,20 +1,20 @@
 /**
  * @Title: UserService.java 
  * @Package com.glacier.frame.service.system 
- * @author zhenfei.zhang   
- * @email 289556866@qq.com
- * @date 2014-1-8 下午2:51:30 
+ * @author songjundong   
+ * @email 985776597@qq.com
+ * @date 2014-8-18 下午2:51:30 
  * @company (开发公司)    珠海市冰川软件有限公司
  * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
  * @version V1.0
  * @modify (修改) 
  *        	<p>
 				第一次修改：
-				时间：2014-1-8
-				修改人：zhenfei.zhang 
+				时间：2014-8-18
+				修改人：songjundong 
 				修改内容简介 ：
 			</p>              
- * @Review (审核人) ：zhenfei.zhang
+ * @Review (审核人) ：songjundong
  * 
  */
 package com.glacier.frame.service.system;
@@ -53,9 +53,9 @@ import com.glacier.security.util.Encodes;
 /**
  * @ClassName: UserService
  * @Description: TODO(管理员业务实现)
- * @author zhenfei.zhang
- * @email 289556866@qq.com
- * @date 2014-1-8 下午2:51:30
+ * @author songjundong
+ * @email 985776597@qq.com
+ * @date 2014-8-18 下午2:51:30
  */
 @Service
 @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -88,9 +88,13 @@ public class UserService {
      * 盐值长度
      */
     public static final int SALT_SIZE = 8;
-
+ 
     /**
-     * 设定盐值和设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
+     * @Title: entryptPassword  
+     * @Description: TODO(设定盐值和设定安全的密码，生成随机的salt并经过1024次 sha-1 hash)  
+     * @param @param user    设定文件  
+     * @return void    返回类型  
+     * @throws
      */
     private void entryptPassword(User user) {
         byte[] salt = Digests.generateSalt(SALT_SIZE);
@@ -98,18 +102,14 @@ public class UserService {
         byte[] hashPassword = Digests.sha1(user.getPassword().getBytes(), salt, HASH_INTERATIONS);
         user.setPassword(Encodes.encodeHex(hashPassword));
     }
-
-    public static void main(String[] args) {
-        User user = new User();
-        user.setUsername("zhangsan");
-        user.setPassword("zhangsan");
-        UserService userService = new UserService();
-        userService.entryptPassword(user);
-        System.out.println(user);
-    }
-    
-    
-    //获取当前用户名
+   
+    /** 
+     * @Title: FineUser  
+     * @Description: TODO(获取当前用户名)  
+     * @param @return    设定文件  
+     * @return Object    返回类型  
+     * @throws
+     */ 
     public Object FineUser(){
     	Subject pricipalSubject = SecurityUtils.getSubject();
         User pricipalUser = (User) pricipalSubject.getPrincipal();
@@ -363,4 +363,15 @@ public class UserService {
 	   }
        return returnResult;
 	}
+    
+    
+    /*       测试代码
+    public static void main(String[] args) {
+        User user = new User();
+        user.setUsername("zhangsan");
+        user.setPassword("zhangsan");
+        UserService userService = new UserService();
+        userService.entryptPassword(user);
+        System.out.println(user);
+    }*/
 }

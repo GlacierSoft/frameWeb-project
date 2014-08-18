@@ -21,6 +21,13 @@ import com.glacier.frame.entity.member.Member;
 import com.glacier.frame.entity.member.MemberWork;
 import com.glacier.frame.service.member.MemberService;
 
+/*** 
+ * @ClassName:  MemberController
+ * @Description: TODO(会员controller)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:09:10
+ */
 @Controller
 @RequestMapping(value = "member")
 public class MemberController extends AbstractController{

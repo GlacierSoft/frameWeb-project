@@ -1,10 +1,4 @@
-/*
- * @(#)memberSecretSecurityController.java
- * @author xichao.dong
- * Copyright (c) 2013 Glacier SoftWare Company Limited. All Rights Reserved.
- */
 package com.glacier.frame.web.controller.member;
-
 
 import java.util.List;
 
@@ -21,13 +15,13 @@ import com.glacier.core.controller.AbstractController;
 import com.glacier.jqueryui.util.JqPager;
 import com.glacier.frame.dto.query.member.MemberSecretQueryDTO;
 import com.glacier.frame.service.member.MemberSecretSecurityService;
-
-/**
- * @ClassName: MemberSecretSecurityController 
- * @Description: TODO(会员密保Controller) 
- * @author yuzexu
- * @email 804346249@QQ.com
- * @date 2014-4-16下午1:20:16
+ 
+/*** 
+ * @ClassName:  MemberSecretSecurityController
+ * @Description: TODO(会员密保Controller)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:06:56
  */
 @Controller
 @RequestMapping(value = "/secretSecurity")
@@ -58,7 +52,7 @@ public class MemberSecretSecurityController extends AbstractController{
     private Object listSecretSecurityAsGridByMenuId(JqPager secretSecurity,MemberSecretQueryDTO  memberSecretQueryDTO) {
         return secretSecurityService.listAsGrid(secretSecurity,memberSecretQueryDTO);
     }
- // 批量删除消息通知
+    // 批量删除消息通知
     @RequestMapping(value = "/del.json", method = RequestMethod.POST)
     @ResponseBody
     public Object delSecretSecurity(@RequestParam List<String> secretSecurityIds,@RequestParam List<String> questionDess) {

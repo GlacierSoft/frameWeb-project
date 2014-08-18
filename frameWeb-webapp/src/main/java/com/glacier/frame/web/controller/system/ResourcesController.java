@@ -1,22 +1,3 @@
-/**
- * @Title: ResourcesController.java 
- * @Package com.glacier.frame.web.controller.system 
- * @author zhenfei.zhang   
- * @email 289556866@qq.com
- * @date 2014-1-16 下午1:46:08 
- * @company (开发公司)    珠海市冰川软件有限公司
- * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
- * @version V1.0
- * @modify (修改) 
- *        	<p>
-				第一次修改：
-				时间：2014-1-16
-				修改人：zhenfei.zhang 
-				修改内容简介 ：
-			</p>              
- * @Review (审核人) ：zhenfei.zhang
- * 
- */
 package com.glacier.frame.web.controller.system;
 
 import java.io.BufferedReader;
@@ -49,13 +30,13 @@ import com.glacier.frame.entity.system.Panel;
 import com.glacier.frame.service.system.ActionService;
 import com.glacier.frame.service.system.MenuService;
 import com.glacier.frame.service.system.PanelService;
-
-/**
- * @ClassName: ResourcesController
+ 
+/*** 
+ * @ClassName:  ResourcesController
  * @Description: TODO(资源控制器，此控制器包含了对三个业务的请求处理：菜单、面板、操作)
- * @author zhenfei.zhang
- * @email 289556866@qq.com
- * @date 2014-1-16 下午1:46:08
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:02:51
  */
 @Controller
 @RequestMapping(value = "/res")

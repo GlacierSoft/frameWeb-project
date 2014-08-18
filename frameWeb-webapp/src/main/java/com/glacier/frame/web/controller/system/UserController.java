@@ -17,6 +17,14 @@ import com.glacier.frame.dto.query.system.UserQueryDTO;
 import com.glacier.frame.entity.system.User;
 import com.glacier.frame.service.system.UserService;
 
+/*** 
+ * @ClassName:  UserController
+ * @Description: TODO(用户controller)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:05:59
+ */
+
 @Controller
 @RequestMapping(value = "/user")
 public class UserController extends AbstractController{

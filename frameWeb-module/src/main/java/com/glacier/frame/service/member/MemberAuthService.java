@@ -1,3 +1,22 @@
+/**
+ * @Title: MemberAuthService.java 
+ * @Package com.glacier.frame.service.member 
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:32:31
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-08-18 
+				修改人：songjundong
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：songjundong
+ * 
+ */
 package com.glacier.frame.service.member;
 
 import java.util.Date;
@@ -33,6 +52,13 @@ import com.glacier.frame.entity.member.MemberCreditIntegralExample;
 import com.glacier.frame.entity.member.MemberMessageNotice;
 import com.glacier.frame.entity.system.User;
 
+/*** 
+ * @ClassName:  MemberAuthService
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:32:31
+ */
 @Service
 @Transactional(readOnly = true , propagation = Propagation.REQUIRED)
 public class MemberAuthService {
@@ -76,8 +102,7 @@ public class MemberAuthService {
    	public Object listAsGrid(MemberAuthQueryDTO memberAuthQueryDTO,JqPager pager) {
         
         JqGridReturn returnResult = new JqGridReturn();
-        MemberAuthExample memberAuthExample = new MemberAuthExample();;
-        
+        MemberAuthExample memberAuthExample = new MemberAuthExample();  
         Criteria queryCriteria = memberAuthExample.createCriteria();
         memberAuthQueryDTO.setQueryCondition(queryCriteria);
 
@@ -101,8 +126,7 @@ public class MemberAuthService {
    	 * @param  @param memberMessageNotice
    	 * @param  @return设定文件
    	 * @return int  返回类型
-   	 * @throws 
-   	 *
+   	 * @throws  
    	 */
    	public int addMessageNotice(MemberMessageNotice memberMessageNotice,String memberId){
    		//获取当前登录用户
@@ -129,8 +153,7 @@ public class MemberAuthService {
    	 * @param  @param memberAuth
    	 * @param  @return设定文件
    	 * @return Object  返回类型
-   	 * @throws 
-   	 *
+   	 * @throws  
    	 */
    	@Transactional(readOnly = false)
 	public Object editMemberAuth(MemberAuthWithBLOBs memberAuthWithBLOBs,String auth) {
@@ -455,8 +478,7 @@ public class MemberAuthService {
    	 * @param  @param parameterCreditType
    	 * @param  @param memberCreditIntegral设定文件
    	 * @return void  返回类型
-   	 * @throws 
-   	 *
+   	 * @throws  
    	 */
    	public void memberCreditSet(ParameterCreditTypeExample parameterCreditTypeExample,ParameterCreditType parameterCreditType,MemberCreditIntegral memberCreditIntegral){
    			List<ParameterCreditType>  parameterCreditTypes = creditTypeMapper.selectByExample(parameterCreditTypeExample); // 查询所有信用积分类型列表
@@ -474,8 +496,7 @@ public class MemberAuthService {
    	 * @param  @param member
    	 * @param  @param ChangeCreditCount设定文件
    	 * @return void  返回类型
-   	 * @throws 
-   	 *
+   	 * @throws  
    	 */
    	public void memberCreditTotleSet(List<MemberCreditIntegral> memberCreditIntegrals,float memberChangeCredit,Member member,int ChangeCreditCount){
    		MemberCreditIntegral memberCreditIntegral2 = memberCreditIntegrals.get(0);
@@ -493,25 +514,17 @@ public class MemberAuthService {
    	 * @param  @param memberAuth
    	 * @param  @return设定文件
    	 * @return Object  返回类型
-   	 * @throws 
-   	 *
+   	 * @throws  
    	 */
    	@Transactional(readOnly = false)
 	public Object editMemberAuthReception(MemberAuthWithBLOBs memberAuthWithBLOBs) {
 		JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
-		int count = 0;
-	  /*  if(memberAuthWithBLOBs.getIdCardAccessory()==""){
-        	returnResult.setMsg("请上传身份证，以便平台认证");
-        	return returnResult;
-        } */
+		int count = 0; 
 		Subject pricipalSubject = SecurityUtils.getSubject();
-        Member pricipalMember = (Member) pricipalSubject.getPrincipal();
-        
+        Member pricipalMember = (Member) pricipalSubject.getPrincipal(); 
         memberAuthWithBLOBs.setInfoTime(new Date());
-        memberAuthWithBLOBs.setInfoAuditor(pricipalMember.getMemberId());
-     
-        count = memberAuthMapper.updateByPrimaryKeySelective(memberAuthWithBLOBs);
-        
+        memberAuthWithBLOBs.setInfoAuditor(pricipalMember.getMemberId()); 
+        count = memberAuthMapper.updateByPrimaryKeySelective(memberAuthWithBLOBs); 
         if (count == 1) {
             returnResult.setSuccess(true);
             returnResult.setObj(memberAuthWithBLOBs);

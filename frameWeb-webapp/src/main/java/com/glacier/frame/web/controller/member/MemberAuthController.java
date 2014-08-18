@@ -18,6 +18,13 @@ import com.glacier.frame.entity.member.MemberAuthWithBLOBs;
 import com.glacier.frame.service.member.MemberAuthService;
 import com.glacier.frame.service.member.MemberService;
 
+/*** 
+ * @ClassName:  MemberAuthController
+ * @Description: TODO(会员认证controler)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:09:52
+ */
 @Controller
 @RequestMapping(value = "memberAuth")
 public class MemberAuthController extends AbstractController{
@@ -55,13 +62,13 @@ public class MemberAuthController extends AbstractController{
         return mav;
     }
     
- // 进入会员认证记录Detail信息页面
+    // 进入会员认证记录Detail信息页面
     @RequestMapping(value = "/intoAuthDetail.htm")
     private Object intoMemberAuthInfoDetailPage(String memberId,String auth) {
         ModelAndView mav = new ModelAndView("member_mgr/memberAuth_mgr/memberAuthDetail_form");
         if(StringUtils.isNotBlank(memberId)){
         	//mav.addObject("memberData", memberService.getMember(memberId));
-           // mav.addObject("memberWorkData", memberService.getMemberWork(memberId));
+            // mav.addObject("memberWorkData", memberService.getMemberWork(memberId));
             mav.addObject("memberAuthData", memberAuthService.getMemberAuth(memberId));
             mav.addObject("auth", auth);
         }
@@ -75,7 +82,7 @@ public class MemberAuthController extends AbstractController{
         return memberAuthService.listAsGrid(memberAuthQueryDTO,pmember);
     }
     
- // 修改会员
+    // 修改会员
     @RequestMapping(value = "/edit.json", method = RequestMethod.POST)
     @ResponseBody
     private Object editMemberAuth(@Valid MemberAuthWithBLOBs memberAuthWithBLOBs,BindingResult bindingResult,String auth) {

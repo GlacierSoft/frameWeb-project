@@ -19,13 +19,13 @@ import com.glacier.jqueryui.util.JqPager;
 import com.glacier.frame.dto.query.member.MemberMessageNoticeQueryDTO;
 import com.glacier.frame.entity.member.MemberMessageNotice;
 import com.glacier.frame.service.member.MemberMessageNoticeService;
-
-/**
- * @ClassName: MemberMessageNoticeController 
- * @Description: TODO(消息通知的Controoler) 
- * @author yuzexu
- * @email 804346249@QQ.com
- * @date 2014-4-9下午1:22:23
+ 
+/*** 
+ * @ClassName:  MemberMessageNoticeController
+ * @Description: TODO(消息通知的Controoler)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:07:35
  */
 @Controller
 @RequestMapping(value = "/messageNotice")

@@ -1,7 +1,21 @@
-/*
- * @(#)MemberCreditIntegralService.java
+/**
+ * @Title: MemberCreditIntegralService.java 
+ * @Package com.glacier.frame.service.member 
  * @author xichao.dong
- * Copyright (c) 2013 Glacier SoftWare Company Limited. All Rights Reserved.
+ * @email 406592176@QQ.com
+ * @date 2014-08-17 下午2:22:22  
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-08-17 
+				修改人：xichao.dong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：xichao.dong
+ * 
  */
 package com.glacier.frame.service.member;
 
@@ -33,7 +47,7 @@ import com.glacier.frame.util.MethodLog;
  * @Description: TODO(会员信用积分业务类) 
  * @author xichao.dong
  * @email 406592176@QQ.com
- * @date 2014-1-21 下午2:22:22  
+ * @date 2014-08-17  下午2:22:22  
  */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
@@ -84,12 +98,22 @@ public class MemberCreditIntegralService {
         returnResult.setTotal(total);
         return returnResult;// 返回ExtGrid表
     }
+    
+    /*** 
+     * @Title: listByMemberId  
+     * @Description: TODO(获取会员信用积分列表)  
+     * @param @param memberId
+     * @param @return    设定文件  
+     * @return Object    返回类型  
+     * @throws
+     */
     public Object listByMemberId(String memberId){
     	MemberCreditIntegralExample memberCreditIntegralExample = new MemberCreditIntegralExample();
     	memberCreditIntegralExample.createCriteria().andMemberIdEqualTo(memberId);
     	List<MemberCreditIntegral>  memberCreditIntegrals = creditIntegralMapper.selectByExample(memberCreditIntegralExample); // 查询所有会员积分列表
     	return memberCreditIntegrals;
     }
+    
     /**
      * @Title: addCreditIntegral 
      * @Description: TODO(新增会员信用积分) 
@@ -103,8 +127,7 @@ public class MemberCreditIntegralService {
     public Object addCreditIntegral(MemberCreditIntegral creditIntegral) {
     	
         Subject pricipalSubject = SecurityUtils.getSubject();
-        User pricipalUser = (User) pricipalSubject.getPrincipal();
-        
+        User pricipalUser = (User) pricipalSubject.getPrincipal(); 
         JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
         int count = 0;
         creditIntegral.setCreditIntegralId(RandomGUID.getRandomGUID());

@@ -1,22 +1,3 @@
-/**
- * @Title: OperaLogController.java 
- * @Package com.glacier.frame.web.controller.system 
- * @author zhenfei.zhang   
- * @email 289556866@qq.com
- * @date 2014-2-10 下午3:27:17 
- * @company (开发公司)    珠海市冰川软件有限公司
- * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
- * @version V1.0
- * @modify (修改) 
- *        	<p>
-				第一次修改：
-				时间：2014-2-10
-				修改人：zhenfei.zhang 
-				修改内容简介 ：
-			</p>              
- * @Review (审核人) ：zhenfei.zhang
- * 
- */
 package com.glacier.frame.web.controller.system;
 
 import java.util.List;
@@ -31,13 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.glacier.jqueryui.util.JqPager;
 import com.glacier.frame.dto.query.system.OperalogQueryDTO;
 import com.glacier.frame.service.system.OperaLogService;
-
-/**
- * @ClassName: OperaLogController
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @author zhenfei.zhang
- * @email 289556866@qq.com
- * @date 2014-2-10 下午3:27:17
+ 
+/***
+ * @ClassName:  OperaLogController
+ * @Description: TODO(操作日志)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午5:01:53
  */
 @Controller
 @RequestMapping(value = "/operalog")

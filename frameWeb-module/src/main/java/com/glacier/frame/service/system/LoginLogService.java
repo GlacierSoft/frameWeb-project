@@ -1,3 +1,22 @@
+/**
+ * @Title: LoginLogService.java 
+ * @Package com.glacier.frame.service.system 
+ * @author songjundong   
+ * @email 985776597@qq.com
+ * @date  2014-8-18  下午4:47:36
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-8-18
+				修改人：songjundong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：songjundong
+ * 
+ */
 package com.glacier.frame.service.system;
 
 import java.util.List;
@@ -17,6 +36,13 @@ import com.glacier.frame.entity.system.LoginLogExample;
 import com.glacier.frame.entity.system.LoginLogExample.Criteria;
 import com.glacier.frame.util.MethodLog;
 
+/***
+ * @ClassName:  LoginLogService
+ * @Description: TODO(登录日志)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-18  下午4:47:36
+ */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class LoginLogService {

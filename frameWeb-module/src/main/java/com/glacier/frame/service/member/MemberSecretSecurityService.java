@@ -1,7 +1,21 @@
-/*
- * @(#)MemberSecretSecurityService.java
- * @author xichao.dong
- * Copyright (c) 2013 Glacier SoftWare Company Limited. All Rights Reserved.
+/**
+ * @Title: MemberSecretSecurityService.java 
+ * @Package com.glacier.frame.service.member 
+ * @author songjundong   
+ * @email 985776597@qq.com
+ * @date 2014-8-18  下午5:18:11
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) 
+ *        	<p>
+				第一次修改：
+				时间：2014-8-18
+				修改人：songjundong 
+				修改内容简介 ：
+			</p>              
+ * @Review (审核人) ：songjundong
+ * 
  */
 package com.glacier.frame.service.member;
 
@@ -28,19 +42,20 @@ import com.glacier.frame.entity.member.MemberSecretSecurityExample;
 import com.glacier.frame.entity.member.MemberSecretSecurityExample.Criteria;
 import com.glacier.frame.util.MethodLog;
 
-/** 
- * @ClassName: MemberSecretSecurityService 
- * @Description: TODO(密保业务类) 
- * @author xichao.dong
- * @email 406592176@QQ.com
- * @date 2014-1-21 下午2:22:22  
- */
+ /*** 
+  * @ClassName:  MemberSecretSecurityService
+  * @Description: TODO(会员密保管理)
+  * @author songjundong
+  * @email 985776597@QQ.com
+  * @date 2014-8-18  下午5:18:11
+  */
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class MemberSecretSecurityService {
 
 	@Autowired
     private MemberSecretSecurityMapper secretSecurityMapper;
+	
 	@Autowired
 	private UserMapper userMapper;
 	
@@ -73,11 +88,8 @@ public class MemberSecretSecurityService {
         
         JqGridReturn returnResult = new JqGridReturn();
         MemberSecretSecurityExample memberSecretSecurityExample = new MemberSecretSecurityExample();
-  
-        
         Criteria queryCriteria = memberSecretSecurityExample.createCriteria();
         memberSecretQueryDTO.setQueryCondition(queryCriteria);
-
         if (null != secretSecurity.getPage() && null != secretSecurity.getRows()) {// 设置排序信息
         	memberSecretSecurityExample.setLimitStart((secretSecurity.getPage() - 1) * secretSecurity.getRows());
         	memberSecretSecurityExample.setLimitEnd(secretSecurity.getRows());
@@ -91,6 +103,7 @@ public class MemberSecretSecurityService {
         returnResult.setTotal(total);
         return returnResult;// 返回ExtGrid表
     }
+    
     /**
      * @Title: listAsGrid 
      * @Description: TODO(获取所有密保信息) 
@@ -117,6 +130,7 @@ public class MemberSecretSecurityService {
         returnResult.setTotal(total);
         return returnResult;// 返回ExtGrid表
     }
+    
     /**
      * @Title: addSecretSecurity 
      * @Description: TODO(新增密保) 
@@ -130,7 +144,6 @@ public class MemberSecretSecurityService {
     	
         //Subject pricipalSubject = SecurityUtils.getSubject();
         //User pricipalUser = (User) pricipalSubject.getPrincipal();
-        
         JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
         int count = 0;
         secretSecurity.setSecretSecurityId(RandomGUID.getRandomGUID());
@@ -147,6 +160,7 @@ public class MemberSecretSecurityService {
         }
         return returnResult;
     }
+    
     /**
      * @Title: delAge 
      * @Description: TODO(删除密保问题信息) 
@@ -173,6 +187,7 @@ public class MemberSecretSecurityService {
     	}
 		return returnResult;
      }
+    
     /**
      * @Title: delAge 
      * @Description: TODO(删除密保问题信息) 
