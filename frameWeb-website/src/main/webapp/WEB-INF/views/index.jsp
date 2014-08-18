@@ -80,59 +80,6 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
-	  <h3>投资列表</h3>
-      <div class="row featurette">
-        <div class="col-md-12">
-          <table class="table table-bordered" id="tabsTemp">
-	        <thead>
-	          <tr>
-	            <th>借款标题</th>
-	            <th>信用等级</th>
-	            <th>借款类型</th>
-	            <th>年利率</th>
-	            <th>借款金额</th>
-	            <th>借款期限</th>
-	            <th>借款状态</th>
-	            <th>投标进度</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-          		<c:forEach items="${borrowingDatas.rows}" var="borrowingLoan" varStatus="status">
-		          <tr>
-		            <td><a href="${ctx}/investment/investmentdetail.htm?loanId=${borrowingLoan.loanId }&memberId=${borrowingLoan.memberId }&p=1">
-			        	${borrowingLoan.loanTitle }
-			        	</a>
-			        </td>
-		            <td><img id="creditPhotoDivImg" src="${borrowingLoan.creditPhoto}" style="width: 34px;height: 24px ;" /></td>
-		            <td>${borrowingLoan.loanTenderDisplay}</td>
-	    			<td><fmt:formatNumber value='${borrowingLoan.loanApr*100}' pattern='#0'/>%</td>
-		            <td><fmt:formatNumber value='${borrowingLoan.loanTotal}' pattern='#,#00.00'/>&nbsp;元</td>
-		            <td>${borrowingLoan.waitBidDeadlines}个月</td>
-					<td>
-		            	<span id="borrowingLoan_loanState2${status.index}"></span>
-		        		<script type="text/javascript">
-				       		$('#borrowingLoan_loanState2'+${status.index}).html(renderGridValue('${borrowingLoan.loanState }',fields.loanState));
-				    	</script>
-	    			</td>
-	    			<td align="center">
-	    				<div style="position:absolute; padding-left: 45px;">
-	    					<span id="alrTenderPro${status.index}" ><fmt:formatNumber value='${borrowingLoan.alrTenderPro*100}' pattern='#0.00'/></span>%</div>
-		            	<div class="progress" style="border: 1px solid #DDDDDD;">
-			        		<div id="progressBar${status.index}" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="${borrowingLoan.alrTenderPro*100}" aria-valuemin="0" aria-valuemax="100" style="width: ${borrowingLoan.alrTenderPro*100}%"></div>
-						</div>
-					</td>
-		          </tr>
-	      		</c:forEach>
-	      	</tbody>
-	      	<tfoot>
-	          <tr>
-	            <th colspan="8"><h4 align="center"><a  href="${ctx}/investment/index.htm?&p=1" >查看更多投资理财项目 >></a></h4></th>
-	          </tr>
-	        </tfoot>
-	      </table>
-        </div>
-      </div>
-
  	  <h3>最新公告</h3>
       <div class="row featurette">
         <div class="col-md-12">

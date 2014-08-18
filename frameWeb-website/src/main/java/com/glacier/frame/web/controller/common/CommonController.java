@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.glacier.frame.entity.member.Member;
+import com.glacier.frame.service.website.WebsiteAnnouncementService;
+import com.glacier.frame.service.website.WebsiteNewsService;
+import com.glacier.jqueryui.util.JqPager;
 
 /**
  * @ClassName: CommonController
@@ -43,6 +47,12 @@ import com.glacier.frame.entity.member.Member;
 @Controller
 public class CommonController {
 
+	@Autowired
+	private WebsiteAnnouncementService announcementService;//注入公告业务类
+	
+	@Autowired
+	private WebsiteNewsService newsService;//注入新闻业务类
+	
     /**
      * 
      * @Title: index
@@ -54,9 +64,12 @@ public class CommonController {
      *             <p>
      */
     @RequestMapping(value = "/")
-    private Object index() {
+    private Object index(JqPager pager) {
         ModelAndView mav = new ModelAndView("index");
         // 进入首页初始化导航信息
+        int p = 1;
+        mav.addObject("announcementDatas", announcementService.listAsWebsite(pager, 1));//主页加载公告信息
+        mav.addObject("newsDatas", newsService.listAsWebsite(pager, 1));//主页加载新闻信息
         return mav;
     }
 
@@ -71,9 +84,11 @@ public class CommonController {
      *             <p>
      */
     @RequestMapping(value = "/index.htm")
-    private Object mappingIndexPage() {
+    private Object mappingIndexPage(JqPager pager) {
         ModelAndView mav = new ModelAndView("index");
         // 进入首页初始化导航信息
+        mav.addObject("announcementDatas", announcementService.listAsWebsite(pager, 1));//主页加载公告信息
+        mav.addObject("newsDatas", newsService.listAsWebsite(pager, 1));//主页加载新闻信息
         return mav;
     }
     /**
