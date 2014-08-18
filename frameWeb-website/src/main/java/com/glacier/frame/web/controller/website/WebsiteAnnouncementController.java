@@ -46,7 +46,6 @@ public class WebsiteAnnouncementController extends AbstractController{
   		return mav;
   	}
   	 
-    
     // 获取表格结构的所有公告数据
     @RequestMapping(value = "/list.json", method = RequestMethod.POST)
     @ResponseBody

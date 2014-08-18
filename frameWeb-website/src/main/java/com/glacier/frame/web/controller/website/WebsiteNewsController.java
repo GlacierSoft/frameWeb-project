@@ -46,15 +46,14 @@ public class WebsiteNewsController extends AbstractController{
   		return mav;
   	}
   	
-    // 进入新闻列表展示页面
+  	//进入新闻列表展示页面
     @RequestMapping(value = "/index.htm")
     private Object intoIndexPnews() {
         ModelAndView mav = new ModelAndView("website_mgr/news_mgr/news");
         return mav;
     }
      
-    
-    // 获取表格结构的所有新闻数据
+    //获取表格结构的所有新闻数据
     @RequestMapping(value = "/list.json", method = RequestMethod.POST)
     @ResponseBody
     private Object listNewsAsGridByMenuId(JqPager pnewsr) {

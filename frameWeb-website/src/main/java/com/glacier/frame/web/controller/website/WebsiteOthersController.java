@@ -8,21 +8,20 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
-/**
- *  IP地址查询 
- *  电话号码归属地查询
- * **/
-
+/** 
+ * @ClassName: WebsiteOthersController
+ * @Description: TODO(其他业务的控制器) 
+ * @author xichao.dong
+ * @email 406592176@QQ.com
+ * @date 2014-1-21 下午2:39:20  
+ */
 
 @Controller
 @RequestMapping(value="others")
@@ -57,9 +56,7 @@ public class WebsiteOthersController {
 		mav.addObject("str", "IPNumber");
 		String resout = "";
 		try {
-			String str = getJsonContent("http://ip.taobao.com/service/getIpInfo.php?ip="
-					+ IP);
-			System.out.println(str);
+			String str = getJsonContent("http://ip.taobao.com/service/getIpInfo.php?ip="+ IP);
 			try {
 				JSONObject obj = JSONObject.fromObject(str);
 				JSONObject obj2 = (JSONObject) obj.get("data");
@@ -77,19 +74,15 @@ public class WebsiteOthersController {
 			e.printStackTrace();
 			resout = "获取IP地址异常";
 		}
-
-		System.out.println("最终显示的地址为:" + resout);
 		mav.addObject("Resout", resout);
 		mav.addObject("ResoutIP", IP);
 		return mav;
 	}
 		 
 	public static String getJsonContent(String urlStr) {
-
 		try {// 获取HttpURLConnection连接对象
 			URL url = new URL(urlStr);
-			HttpURLConnection httpConn = (HttpURLConnection) url
-					.openConnection();
+			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 			// 设置连接属性
 			httpConn.setConnectTimeout(3000);
 			httpConn.setDoInput(true);
@@ -104,11 +97,10 @@ public class WebsiteOthersController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "";
-
+		return null;
 	}
-		  
-		  
+	
+	//把得到的字符流转为JSON格式
 	private static String ConvertStream2Json(InputStream inputStream) {
 		String jsonStr = "";
 		// ByteArrayOutputStream相当于内存输出流
@@ -120,16 +112,13 @@ public class WebsiteOthersController {
 			while ((len = inputStream.read(buffer, 0, buffer.length)) != -1) {
 				out.write(buffer, 0, len);
 			}
-
 			// 将内存流转换为字符串
 			jsonStr = new String(out.toByteArray());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return jsonStr;
 	}
-		   
 		   
 	@RequestMapping(value = "FindTellAddress_two")
 	public Object calcMobileCity(String mobileNumber)
@@ -146,7 +135,6 @@ public class WebsiteOthersController {
 		BufferedReader buffer;
 		String PhoneNumberAddress = null;
 		URL url = new URL(urlString);
-
 		try {
 			InputStream in = url.openStream();
 			// 解决乱码问题
@@ -165,7 +153,6 @@ public class WebsiteOthersController {
 			String jsonString2 = jsonString + "]";
 			// 把STRING转化为json对象
 			array = JSONArray.fromObject(jsonString2);
-
 			// 获取JSONArray的JSONObject对象，便于读取array里的键值对
 			try {
 				jsonObject = array.getJSONObject(0);
@@ -194,8 +181,7 @@ public class WebsiteOthersController {
 			InputStream in = url.openStream();
 			StringBuffer sb = new StringBuffer();
 			// 解决乱码问题
-			BufferedReader buffer = new BufferedReader(new InputStreamReader(
-					in, "gb2312"));
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(in, "gb2312"));
 			String line = null;
 			while ((line = buffer.readLine()) != null) {
 				sb.append(line);
@@ -203,13 +189,9 @@ public class WebsiteOthersController {
 			in.close();
 			buffer.close();
 			String jsonString_two = sb.toString();
-			System.out.println(jsonString_two);
 			int numb_one = jsonString_two.indexOf("||");
 			int numb_two = jsonString_two.indexOf("||", numb_one + 2);
-			String jsonString = jsonString_two
-					.substring(numb_one + 2, numb_two);
-			System.out.println("numb_one=" + numb_one + "  numb_two="
-					+ numb_two + " words=" + jsonString);
+			String jsonString = jsonString_two.substring(numb_one + 2, numb_two);
 			mav.addObject("PhoneNumberAddress", jsonString);
 		} catch (StringIndexOutOfBoundsException e) {
 			String jsonString = "手机号码格式输入错误!!!";
@@ -218,7 +200,7 @@ public class WebsiteOthersController {
 		return mav;
 	}
 		    
-		    
+	//手机号码查询功能
 	@RequestMapping(value = "FindTellAddress_three")
 	public Object findPhonenNumber(String mobileNumber) throws Exception {
 		String str = getJsonContent("http://api.k780.com:88/?app=phone.get&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json&phone="
@@ -226,7 +208,6 @@ public class WebsiteOthersController {
 		ModelAndView mav = new ModelAndView("about_mgr/others");
 		mav.addObject("str", "TellNumber");
 		mav.addObject("mobileNumber", mobileNumber);
-		//System.out.println(str);
 		try {
 			JSONObject obj = JSONObject.fromObject(str);
 			JSONObject obj2 = (JSONObject) obj.get("result");
@@ -243,6 +224,4 @@ public class WebsiteOthersController {
 		}
 		return mav;
 	}
-		    
-		  
 }
