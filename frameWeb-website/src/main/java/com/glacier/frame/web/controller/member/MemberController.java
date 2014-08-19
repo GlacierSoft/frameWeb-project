@@ -204,11 +204,7 @@ public class MemberController extends AbstractController{
 		session.setAttribute("currentMember",loginMember);//将新获取的member对象放在session中
     	return updatebusinessPassword;
     }
-    
-    
-    
-    
-    
+     
     //进行会员平台认证页面
     /**
      * @Title: intoMemberAuth 
@@ -340,9 +336,5 @@ public class MemberController extends AbstractController{
     	request.setAttribute("memberAuthWithBLOBs", memberAuthWithBLOBs);
     	jqReturnJson.setObj(memberAuthWithBLOBs);
 		return jqReturnJson;
-	}
-	
-	
-
-    
+	} 
 }
