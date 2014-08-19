@@ -31,20 +31,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
 					        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-					      	   信息中心
+					      	  Titles Name
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="collapseOne" class="panel-collapse collapse in">
 					      <div class="panel-body">
 					        <div class="btn-group-vertical">
-					          <a href="${ctx}/member/index.htm" class="btn btn-default" role="button">我的主页</a>
-					          <a href="#" onclick="checkRechargeWithdraw('${currentMember.memberId}','${ctx}/financeMember/rechargeWithdraw.htm?p=1');" class="btn btn-default" role="button">充值提现</a>
-					          <a href="#" onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberAuth.htm?&p=0');" class="btn btn-default" role="button">平台认证</a>
-					          <a href="#" onclick="checksMember('${currentMember.memberId}','${ctx}/messageNotice/intoMessageNotice.htm?&p=1');" class="btn btn-default" role="button">站内信</a>
-							  <a href="${ctx}/member/memberDetail.htm" class="btn btn-default" role="button">个人设置</a>
-							  <a href="#" onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberPhotoInto.htm');" class="btn btn-info" role="button">头像上传</a>
-							  <a href="${ctx}/member/memberEmail.htm" class="btn btn-default" role="button">邮箱设置</a>
+					          <a href="${ctx}/member/index.htm" class="btn btn-default" role="button">Content1</a>
+					          <a href="#" <%-- onclick="checkRechargeWithdraw('${currentMember.memberId}','${ctx}/financeMember/rechargeWithdraw.htm?p=1');" --%> class="btn btn-default" role="button">Content2</a>
+					          <a href="${ctx}/member/memberAuth.htm?&p=0" <%-- onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberAuth.htm?&p=0');" --%> class="btn btn-default" role="button">Content3</a>
+					          <a href="${ctx}/messageNotice/intoMessageNotice.htm?&p=1" <%-- onclick="checksMember('${currentMember.memberId}','${ctx}/messageNotice/intoMessageNotice.htm?&p=1');" --%> class="btn btn-default" role="button">Content4</a>
+							  <a href="${ctx}/member/memberDetail.htm" class="btn btn-default" role="button">Content5</a>
+							  <a href="${ctx}/member/memberPhotoInto.htm" <%-- onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberPhotoInto.htm');" --%> class="btn btn-info" role="button">Content6</a>
+							  <a href="${ctx}/member/memberEmail.htm" class="btn btn-default" role="button">Content7</a>
 							</div>
 					      </div>
 					    </div>
@@ -53,16 +53,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
 					        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-					         	 借款管理
+					         	Titles Name Two
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="collapseTwo" class="panel-collapse collapse">
 					      <div class="panel-body">
 					        <div class="btn-group-vertical">
-							  <a href="#" onclick="doClick('borrowingLoan/memberBorrow.htm?&p=1&loanState=firstAudit','${currentMember.memberId}');"  class="btn btn-default" role="button">已发布的借款</a>
-							  <a href="#" onclick="doClick('borrowingLoan/memberBorrow.htm?&p=1&loanState=repaymenting','${currentMember.memberId}');" class="btn btn-default" role="button">还款管理</a>
-							  <a href="#" onclick="doClick('borrowingLoan/memberStatistics.htm','${currentMember.memberId}');" class="btn btn-default" role="button">贷款统计</a>
+							  <a href="#" class="btn btn-default" role="button">Content1</a>
+							  <a href="#" class="btn btn-default" role="button">Content2</a>
+							  <a href="#" class="btn btn-default" role="button">Content3</a>
 							</div>
 					      </div>
 					    </div>
@@ -71,16 +71,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
 					        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-					    	      投资管理
+					    	     Titles Name Three
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="collapseThree" class="panel-collapse collapse">
 					      <div class="panel-body">
 					      	<div class="btn-group-vertical">
-					      	  <a href="#" onclick="doClick('investment/memberTenderNotes.htm?&p=1&loanStates=sucessBorrow','${currentMember.memberId}')" class="btn btn-default" role="button">我的投标</a>
-	   						  <a href="#" onclick="doClick('attentionBorrowing/memberAttentionBorrowing.htm?&p=1','${currentMember.memberId}')" class="btn btn-default" role="button">我关注的借款</a>
-	   						  <a href="#" onclick="doClick('bankingStatistics/memberBankingStatistics.htm','${currentMember.memberId}')" class="btn btn-default" role="button">投资统计</a>
+					      	  <a href="#" class="btn btn-default" role="button">Content1</a>
+					      	  <a href="#" class="btn btn-default" role="button">Content2</a>
+					      	  <a href="#" class="btn btn-default" role="button">Content3</a>
 					      </div>
 					    </div>
 					  </div>
