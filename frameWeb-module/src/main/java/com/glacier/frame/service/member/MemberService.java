@@ -126,6 +126,7 @@ public class MemberService {
 	 */
 	
 	public Object checkMemberDatum(String memberId){
+		System.out.println("ID名称:"+memberId);
 		JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
 		MemberExample memberExample = new MemberExample();
 		memberExample.createCriteria().andMemberIdEqualTo(memberId);

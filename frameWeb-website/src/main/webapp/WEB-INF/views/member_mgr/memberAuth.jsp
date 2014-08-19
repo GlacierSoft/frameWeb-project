@@ -31,20 +31,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
 					        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-					      	   信息中心
+					      	  Titles Name
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="collapseOne" class="panel-collapse collapse in">
 					      <div class="panel-body">
 					        <div class="btn-group-vertical">
-					    <a href="${ctx}/member/index.htm" class="btn btn-default" role="button">我的主页</a>
-					          <a href="#" onclick="checkRechargeWithdraw('${currentMember.memberId}','${ctx}/financeMember/rechargeWithdraw.htm?p=1');" class="btn btn-default" role="button">充值提现</a>
-					          <a href="#" onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberAuth.htm?&p=0');" class="btn btn-info" role="button">平台认证</a>
-				 	          <a href="#" onclick="checksMember('${currentMember.memberId}','${ctx}/messageNotice/intoMessageNotice.htm?&p=1');" class="btn btn-default" role="button">站内信</a>
-							  <a href="${ctx}/member/memberDetail.htm" class="btn btn-default" role="button">个人设置</a>
-							  <a href="#" onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberPhotoInto.htm');" class="btn btn-default" role="button">头像上传</a>
-							  <a href="${ctx}/member/memberEmail.htm" class="btn btn-default" role="button">邮箱设置</a>
+					          <a href="${ctx}/member/index.htm" class="btn btn-info" role="button">Content1</a>
+					          <a href="#" <%-- onclick="checkRechargeWithdraw('${currentMember.memberId}','${ctx}/financeMember/rechargeWithdraw.htm?p=1');" --%> class="btn btn-default" role="button">Content2</a>
+					          <a href="${ctx}/member/memberAuth.htm?&p=0" <%-- onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberAuth.htm?&p=0');" --%> class="btn btn-default" role="button">Content3</a>
+					          <a href="${ctx}/messageNotice/intoMessageNotice.htm?&p=1" <%-- onclick="checksMember('${currentMember.memberId}','${ctx}/messageNotice/intoMessageNotice.htm?&p=1');" --%> class="btn btn-default" role="button">Content4</a>
+							  <a href="${ctx}/member/memberDetail.htm" class="btn btn-default" role="button">Content5</a>
+							  <a href="${ctx}/member/memberPhotoInto.htm" <%-- onclick="checksMember('${currentMember.memberId}','${ctx}/member/memberPhotoInto.htm');" --%> class="btn btn-default" role="button">Content6</a>
+							  <a href="${ctx}/member/memberEmail.htm" class="btn btn-default" role="button">Content7</a>
 							</div>
 					      </div>
 					    </div>
@@ -53,16 +53,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
 					        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-					         	 借款管理
+					         	Titles Name Two
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="collapseTwo" class="panel-collapse collapse">
 					      <div class="panel-body">
 					        <div class="btn-group-vertical">
-							  <a href="#" onclick="doClick('borrowingLoan/memberBorrow.htm?&p=1&loanState=firstAudit','${currentMember.memberId}');"  class="btn btn-default" role="button">已发布的借款</a>
-							  <a  href="#" onclick="doClick('borrowingLoan/memberBorrow.htm?&p=1&loanState=repaymenting','${currentMember.memberId}');" class="btn btn-default" role="button">还款管理</a>
-							  <a href="#" onclick="doClick('borrowingLoan/memberStatistics.htm','${currentMember.memberId}');" class="btn btn-default" role="button">贷款统计</a>
+							  <a href="#" class="btn btn-default" role="button">Content1</a>
+							  <a href="#" class="btn btn-default" role="button">Content2</a>
+							  <a href="#" class="btn btn-default" role="button">Content3</a>
 							</div>
 					      </div>
 					    </div>
@@ -71,16 +71,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
 					        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-					    	      投资管理
+					    	     Titles Name Three
 					        </a>
 					      </h4>
 					    </div>
 					    <div id="collapseThree" class="panel-collapse collapse">
 					      <div class="panel-body">
 					      	<div class="btn-group-vertical">
-					      	  <a href="#" onclick="doClick('investment/memberTenderNotes.htm?&p=1&loanStates=sucessBorrow','${currentMember.memberId}')" class="btn btn-default" role="button">我的投标</a>
-							  <a href="#" onclick="doClick('attentionBorrowing/memberAttentionBorrowing.htm?&p=1','${currentMember.memberId}')" class="btn btn-default" role="button">我关注的借款</a>
-			                  <a href="#" onclick="doClick('bankingStatistics/memberBankingStatistics.htm','${currentMember.memberId}')" class="btn btn-default" role="button">投资统计</a>
+					      	  <a href="#" class="btn btn-default" role="button">Content1</a>
+					      	  <a href="#" class="btn btn-default" role="button">Content2</a>
+					      	  <a href="#" class="btn btn-default" role="button">Content3</a>
 					      </div>
 					    </div>
 					  </div>
@@ -100,21 +100,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			         		 <li class="active"><a href="#netLoanAuth" data-toggle="tab" class="btn " role="button">冰川网贷认证</a></li>
 						     <li><a href="#uploasdData" data-toggle="tab">资料上传</a></li>
 						     <li><a href="#applicationMemberVIP" data-toggle="tab">申请会员VIP</a></li>
-						     <li><a href="#applyCreditAmount" data-toggle="tab">额度申请</a></li>
 						     <li><a href="#memberIntegral" data-toggle="tab">会员积分记录</a></li>
 					   </c:when>
 					   <c:when test="${memberIntegraldo == 'memberIntegraldo' && empty memberApplyAmountpage}">  
 			         		 <li><a href="#netLoanAuth" data-toggle="tab">冰川网贷认证</a></li>
 						     <li><a href="#uploasdData" data-toggle="tab">资料上传</a></li>
 						      <li><a href="#applicationMemberVIP" data-toggle="tab">申请会员VIP</a></li>
-						     <li><a href="#applyCreditAmount" data-toggle="tab">额度申请</a></li>
 						     <li class="active"><a href="#memberIntegral" data-toggle="tab"  class="btn " role="button">会员积分记录</a></li>
 					   </c:when>
 					   <c:when test="${empty memberIntegraldo && memberApplyAmountpage == 'memberApplyAmountpage'}">  
 			         		 <li><a href="#netLoanAuth" data-toggle="tab">冰川网贷认证</a></li>
 						     <li><a href="#uploasdData" data-toggle="tab">资料上传</a></li>
 						     <li><a href="#applicationMemberVIP" data-toggle="tab">申请会员VIP</a></li>
-						     <li class="active"><a href="#applyCreditAmount"  data-toggle="tab" class="btn " role="button">额度申请</a></li>
 						     <li><a href="#memberIntegral" data-toggle="tab">会员积分记录</a></li>
 					   </c:when>
 					</c:choose>
@@ -597,112 +594,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   							<div class="col-md-3"></div>
 				        </div>
 				       </div>
-						 <c:choose>
-						   <c:when test="${empty memberIntegraldo && empty memberApplyAmountpage}">  
-			         		  <div class="tab-pane fade" id="applyCreditAmount">
-						   </c:when>
-						   <c:when test="${memberIntegraldo == 'memberIntegraldo' && empty memberApplyAmountpage}">  
-				         		  <div class="tab-pane fade" id="applyCreditAmount">
-						   </c:when>
-						   <c:when test="${empty memberIntegraldo && memberApplyAmountpage == 'memberApplyAmountpage'}">  
-				         		 <div class="tab-pane fade in active" id="applyCreditAmount">
-						   </c:when>
-						</c:choose>
-					   	<blockquote>
-						  <span class="text-muted"><strong>当前信用额度：<span class="text-danger">￥<fmt:formatNumber value='${currentMember.creditamount}' pattern='#,#00.00'/></span>元 </strong></span>
-						</blockquote>
-						<hr>
-						<form id="member_applyCreditAmountForm"  class=" form-horizontal" role="form"  method="post" >
-						 <div class="form-group">
-						    <label for="memberName" class="col-sm-3 control-label">申请账户:</label>
-						    <div class="col-sm-4"><div style="margin-top: 5px">
-								<span>${currentMember.memberName}</span> </div>					    
-						    </div>
-						 </div>
-						 <div class="form-group">
-						    <label for="applyType" class="col-sm-3 control-label">申请类型:</label>
-						    <div class="col-sm-4"><div style="margin-top: 5px">
-						    	<span>信用额度</span></div>
-						      <input type="hidden" class="form-control" id="applyType" name="applyType" value="internet"  placeholder="" >
-						    </div>
-						 </div>
-						 <div class="form-group">
-						    <label for="applyMoney" class="col-sm-3 control-label">申请额度:</label>
-						    <div class="col-sm-4">
-						      <input type="text" class="form-control" id="applyMoney" name="applyMoney" value=""  placeholder="申请额度" >
-						    </div>
-						 </div>
-						 <div class="form-group">
-						    <label for="applyExplanation" class="col-sm-3 control-label">详细说明:</label>
-						    <div class="col-sm-8">
-						      <textarea class="form-control" rows="3" name="applyExplanation" id="applyExplanation" ></textarea>
-						      <p class="text-warning">温馨提示：额度申请原则上每次最多申请1万。 额度申请后，无论申请是否批准，
-									必须隔一个月后才能再次申请，每个月只能申请一次。如有问题,请与客服联系</p>
-						    </div>
-						 </div>
-						 <div class="form-group">
-						 	<label for="personalDes" class="col-sm-3 control-label"></label>
-						    <div class=" col-sm-9">
-						      <button id="sub" type="submit" class="btn btn-primary btn-lg">确定</button>
-						    </div>
-						 </div>
-				        </form>
-				       
-				      	<blockquote style="margin-top:50px;">
-						       	<h5 class="text-danger"><strong>额度申请列表：</strong></h5>
-						</blockquote>
-				         <table id="memberApplyAmountTable" class="table table-bordered" style="text-align:center;vertical-align: middle;">
-				         	<tbody>
-				            <tr>
-				              <td><strong>序号</strong></td>
-				              <td><strong>申请类型</strong></td>
-				              <td><strong>申请额度</strong></td>
-				              <td><strong>通过额度</strong></td>
-				              <td><strong>状态</strong></td>
-				              <td><strong>申请时间</strong></td>
-				            </tr>
-							<c:if test="${empty memberApplyAmountDatas.rows}">
-								<tr>
-						            <td colspan="11" style="text-align:center;vertical-align: middle;"><strong>暂无信息</strong></td>
-						        </tr>
-							</c:if>	
-							<c:if test="${!empty memberApplyAmountDatas.rows}">	
-				            <c:forEach items="${memberApplyAmountDatas.rows}" var="memberApplyAmount" varStatus="status">
-						      	<tr>
-						      	  <td>${status.index+1}</td>
-					              <td id="applyType${status.index}" class="applyType">
-					              <script type="text/javascript">
-					             $('#applyType'+${status.index}).html(renderGridValue('${memberApplyAmount.applyType}',fields.applyType));
-					              </script>
-					              </td>
-					              <td>￥<fmt:formatNumber value='${memberApplyAmount.applyMoney}' pattern='#,#00.00'/></td>
-					              <td>￥<fmt:formatNumber value='${memberApplyAmount.authorizedAmount}' pattern='#,#00.00'/></td>
-					              <td id="auditState${status.index}" class="auditState">
-					              ${memberApplyAmount.auditState}
-					              <script type="text/javascript">
-					             $('#auditState'+${status.index}).html(renderGridValue('${memberApplyAmount.auditState}',fields.auditState));
-					              </script>
-					              </td>
-					              <td><fmt:formatDate value="${memberApplyAmount.applyDate}" type="both"/></td>
-					            </tr>
-					      	</c:forEach>
-					      	</c:if>
-				            </tbody>
-				            <tfoot>
-					          <tr>
-					            <th colspan="6">
-					            	<div align="right">
-									    <ul id='pagememberApplyAmount'></ul>
-									</div>
-								</th>
-					          </tr>
-					        </tfoot>
-				        </table>
 				       </div>
 				     </div>
 				</div>
 			</div><!-- /example -->
-			
 		</div>
 		</div>		    
 	    
@@ -714,11 +609,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <jsp:include page="../foot.jsp"/>
   </body>
 	<script type="text/javascript">
-	function checkIdCardIsNull(){
-		
-		
-	}
-	
 	//功能判断
     function checksMember(memberId,url){
     	$.ajax({
