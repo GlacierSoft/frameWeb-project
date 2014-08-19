@@ -8,9 +8,7 @@ package com.glacier.frame.web.controller.website;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.glacier.core.controller.AbstractController;
 import com.glacier.jqueryui.util.JqPager;
@@ -45,12 +43,4 @@ public class WebsiteAnnouncementController extends AbstractController{
   		mav.addObject("announcementData", announcementService.getAnnouncement(webAnnId));
   		return mav;
   	}
-  	 
-    // 获取表格结构的所有公告数据
-    @RequestMapping(value = "/list.json", method = RequestMethod.POST)
-    @ResponseBody
-    private Object listAnnouncementAsGridByMenuId(JqPager pager) {
-        return announcementService.listAsGrid(pager);
-    }
- 
 }

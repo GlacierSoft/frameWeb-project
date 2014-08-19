@@ -26,6 +26,7 @@ import sun.misc.BASE64Encoder;
  * @email 406592176@qq.com
  * @date 2014-8-15 上午11:14:04
  */
+@SuppressWarnings("restriction")
 public class DESUtils {
     private static Key key;
 

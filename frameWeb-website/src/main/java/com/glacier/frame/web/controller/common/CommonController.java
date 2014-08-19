@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.glacier.frame.entity.member.Member;
 import com.glacier.frame.service.website.WebsiteAnnouncementService;
 import com.glacier.frame.service.website.WebsiteNewsService;
@@ -67,7 +66,6 @@ public class CommonController {
     private Object index(JqPager pager) {
         ModelAndView mav = new ModelAndView("index");
         // 进入首页初始化导航信息
-        int p = 1;
         mav.addObject("announcementDatas", announcementService.listAsWebsite(pager, 1));//主页加载公告信息
         mav.addObject("newsDatas", newsService.listAsWebsite(pager, 1));//主页加载新闻信息
         return mav;

@@ -1,22 +1,12 @@
 package com.glacier.frame.web.controller.website;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.glacier.core.controller.AbstractController;
 import com.glacier.jqueryui.util.JqPager;
-import com.glacier.frame.entity.website.WebsiteHiring;
 import com.glacier.frame.service.website.WebsiteHiringService;
 
 /**
