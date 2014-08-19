@@ -1104,28 +1104,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    pageUrl: function(type, page, current){
 		    	return "${ctx}/member/memberAuth.htm?"+composeUrlParams1()+"&p="+page;
 		    	}
-		}
-		
-		//额度申请的设置分页的总页数
-		var totalmemberApplyAmount=${memberApplyAmountDatas.total}/5;
-		if(parseInt(totalmemberApplyAmount)==totalmemberApplyAmount){
-			var totalmemberApplyAmount = parseInt(totalmemberApplyAmount);
-		}else {
-			var totalmemberApplyAmount = parseInt(totalmemberApplyAmount)+1;
-		}
-		
-		var memberApplyAmountOptions = {
-		    bootstrapMajorVersion:3,
-		    currentPage: ${memberApplyAmountDatas.p},
-		    numberOfPages: 5,
-		    totalPages:totalmemberApplyAmount,
-		    pageUrl: function(type, page, current){
-		    	return "${ctx}/applyAmount/applyAmountPage.htm?"+composeUrlParams1()+"&p="+page;
-		    	}
-		}
+		} 
 		
 		elementpagememberIntegral.bootstrapPaginator(memberIntegralOptions);
-		elementpagememberApplyAmount.bootstrapPaginator(memberApplyAmountOptions);
-		})
+	 	})
 </script>
 </html>

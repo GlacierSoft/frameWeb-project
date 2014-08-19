@@ -36,7 +36,14 @@ import com.glacier.jqueryui.util.JqGridReturn;
 import com.glacier.jqueryui.util.JqPager;
 import com.glacier.jqueryui.util.JqReturnJson;
 
-
+/***
+ * 
+ * @ClassName:  MemberController
+ * @Description: TODO(个人中心控制器)
+ * @author songjundong
+ * @email 985776597@QQ.com
+ * @date 2014-8-19  下午3:28:45
+ */
 @Controller
 @RequestMapping(value = "member")
 public class MemberController extends AbstractController{

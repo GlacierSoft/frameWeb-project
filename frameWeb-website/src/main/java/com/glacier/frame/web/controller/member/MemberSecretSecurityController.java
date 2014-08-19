@@ -1,22 +1,13 @@
-/*
- * @(#)memberSecretSecurityController.java
- * @author xichao.dong
- * Copyright (c) 2013 Glacier SoftWare Company Limited. All Rights Reserved.
- */
 package com.glacier.frame.web.controller.member;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.glacier.core.controller.AbstractController;
 import com.glacier.jqueryui.util.JqGridReturn;
 import com.glacier.jqueryui.util.JqPager;
@@ -42,24 +33,7 @@ public class MemberSecretSecurityController extends AbstractController{
     
     @Autowired
     private ParameterQuestionService parameterQuestionService;
-    
-    // 进入会员密保列表展示页面
-    @RequestMapping(value = "/index.htm")
-    private Object intoIndexPsecretSecurity() {
-        ModelAndView mav = new ModelAndView("member_mgr/secretSecurity_mgr/secretSecurity");
-        return mav;
-    }
-    
-    // 进入会员密保Detail信息页面
-    @RequestMapping(value = "/intoDetail.htm")
-    private Object intoSecretSecurityDetailPage(String secretSecurityId) {
-        ModelAndView mav = new ModelAndView("member_mgr/secretSecurity_mgr/secretSecurity_detail");
-        if(StringUtils.isNotBlank(secretSecurityId)){
-            mav.addObject("secretSecurityData", secretSecurityService.getSecretSecurity(secretSecurityId));
-        }
-        return mav;
-    }
-    
+     
     // 获取表格结构的所有会员密保数据
     @RequestMapping(value = "/list.json", method = RequestMethod.POST)
     @ResponseBody
