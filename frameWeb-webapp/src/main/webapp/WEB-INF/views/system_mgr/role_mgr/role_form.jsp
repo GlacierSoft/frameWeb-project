@@ -7,12 +7,12 @@
 			<td>角色名称：</td>
 			<td>
 				<input type="hidden" name="roleId" value="${roleData.roleId}" />
-				<input name="roleCnName" class="easyui-validatebox spinner" style="width:268px" value="${roleData.roleCnName}" required="true" validType="customReg['^[\\u4E00-\\u9FA5\\uf900-\\ufa2d\\w]{2,10}$','<fmt:message key="Role.roleCnName.illegal"/>']"/>
+				<input name="roleCnName" class="easyui-validatebox spinner" style="width:268px" value="${roleData.roleCnName}" required="true" validType="customReg['^[\u0391-\uFFE5]{2,10}','<fmt:message key="Role.roleCnName.illegal"/>']"/>
 			</td>
 		</tr>
 		<tr>
 			<td>英文名称：</td>
-			<td><input name="roleEnName" class="easyui-validatebox spinner" style="width:268px" value="${roleData.roleEnName}" required="true" validType="customReg['^[A-Z_]{2,16}$','<fmt:message key="Role.roleEnName.illegal"/>']"/></td>
+			<td><input name="roleEnName" class="easyui-validatebox spinner" style="width:268px" value="${roleData.roleEnName}" required="true" validType="customReg['^[A-Z_]{4,16}$','<fmt:message key="Role.roleEnName.illegal"/>']"/></td>
 		</tr>
 		<tr>
 			<td>备注：</td>

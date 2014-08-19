@@ -10,11 +10,11 @@
 			<td>
 				<input type="hidden" name="creditTypeId" value="${creditTypeData.creditTypeId}" />
 				<c:if test="${creditTypeData.creditTypeId!=null}">
-					<input type="hidden" name="creditType" value="${creditTypeData.creditType}">
-					<input disabled="disabled" readonly="readonly" id="creditType_detail_creditType" class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.creditType}" data-options="validType:'code'"/>
+					<input type="hidden" name="creditType" value="${creditTypeData.creditType}"  validType="customReg['^[\u0391-\uFFE5]{2,10}','<fmt:message key="ParameterCreditType.creditType.illegal"/>']">
+					<input disabled="disabled" readonly="readonly" id="creditType_detail_creditType" class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.creditType}" data-options="validType:'code'" />
 				</c:if>
 				<c:if test="${creditTypeData.creditTypeId==null}">
-					<input name="creditType" class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.creditType}" data-options="validType:'code'"/>
+					<input name="creditType" class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.creditType}" data-options="validType:'code'" validType="customReg['^[\u0391-\uFFE5]{2,10}','<fmt:message key="ParameterCreditType.creditType.illegal"/>']"/>
 				</c:if>
 			</td>
 		</tr>

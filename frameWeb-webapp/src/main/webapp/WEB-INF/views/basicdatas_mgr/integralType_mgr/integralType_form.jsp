@@ -10,12 +10,12 @@
 			<td>
 				<input type="hidden" name="integralTypeId" value="${creditTypeData.integralTypeId}" />
 				<c:if test="${creditTypeData.integralTypeId!=null}">
-					<input type="hidden" name="integralType" value="${creditTypeData.integralType}">
-					<input disabled="disabled" readonly="readonly" id="creditType_detail_creditType"  class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.integralType}" data-options="validType:'code'"/>
+					<input type="hidden" name="integralType" value="${creditTypeData.integralType}" validType="customReg['^[a-zA-Z][a-zA-Z0-9_]{4,15}','<fmt:message key="ParameterIntegralType.integralType.illegal"/>']">
+					 <input   name="integralType"   class="easyui-validatebox spinner " style="width:268px" required="true" value="${creditTypeData.integralType}" data-options="validType:'code'"/>
 				</c:if>
 				<c:if test="${creditTypeData.integralTypeId==null}">
-					<input name="integralType" id="creditType_detail_creditType"  class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.integralType}" data-options="validType:'code'"/>
-				</c:if>
+					 	<input name="integralType"  class="easyui-validatebox spinner" style="width:268px" required="true" value="${creditTypeData.integralType}" data-options="validType:'code'" validType="customReg['^[a-zA-Z][a-zA-Z0-9_]{4,15}','<fmt:message key="ParameterIntegralType.integralType.illegal"/>']"/>
+			 	</c:if>
 			</td>
 		</tr>
 		<tr>

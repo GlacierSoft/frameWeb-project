@@ -2,11 +2,16 @@ package com.glacier.frame.entity.basicdatas;
 
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class ParameterCreditType {
     private String creditTypeId;
-
+    /**
+     * 类型名称，长度为2-10
+     */
+    @Pattern(regexp = "^[\u0391-\uFFE5]{2,10}", message = "{ParameterCreditType.creditType.illegal}")
     private String creditType;
 
     private String changeType;

@@ -2,11 +2,17 @@ package com.glacier.frame.entity.basicdatas;
 
 import java.util.Date;
 
+import javax.validation.constraints.Pattern;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class ParameterIntegralType {
     private String integralTypeId;
 
+    /**
+     * 积分名称，长度为2-10
+     */
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{3,15}", message = "{ParameterIntegralType.integralType.illegal}")
     private String integralType;
 
     private String changeType;

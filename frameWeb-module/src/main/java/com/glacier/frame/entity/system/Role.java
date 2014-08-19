@@ -18,13 +18,13 @@ public class Role {
     /**
      * 角色英文名 字母组成，长度为2-25
      */
-    @Pattern(regexp = "^[A-Z_]{2,16}$", message = "{Role.roleEnName.illegal}")
+    @Pattern(regexp = "^[A-Z_]{4,16}$", message = "{Role.roleEnName.illegal}")
     private String roleEnName;
 
     /**
      * 角色名
      */
-    @Pattern(regexp = "^[\\u4E00-\\u9FA5\\uf900-\\ufa2d\\w]{2,16}$", message = "{Role.roleCnName.illegal}")
+    @Pattern(regexp = "^[\u0391-\uFFE5]{2,10}", message = "{Role.roleCnName.illegal}")
     private String roleCnName;
 
     private CommonBuiltin builtin;
