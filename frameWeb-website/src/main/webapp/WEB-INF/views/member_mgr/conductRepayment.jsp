@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     response.setDateHeader("Expires", 0);
     response.setHeader("Pragma","no-cache"); 
   %>
-<jsp:include page="../nav_mgr/navMember.jsp"/>
+<jsp:include page="../nav.jsp"/>
        
 	    <!-- CONTAINER START======================== -->
 	    <div class="container">

@@ -62,20 +62,20 @@
       <div class="row">
       	<div class="col-lg-4">
           <img src="${pageContext.request.contextPath}/resources/images/index/5.jpg"  alt="Generic placeholder image">
-          <h2>信用借款</h2>
-          <p>成为借款人，按照要求完善信用信息，获得信用认证后，通过发标进行借款，最快2.5小时可获得所需资金。</p>
+          <h2>Title One</h2>
+          <p>Contents</p>
           <p><a class="btn btn-default" href="${ctx}/borrowingProcess.htm" role="button">查看详情 >></a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img src="${pageContext.request.contextPath}/resources/images/index/4.jpg" alt="Generic placeholder image">
-          <h2>投资理财</h2>
-          <p>成为理财人，通过主动投标或加入优选理财计划将资金进行出借投资，可获得预期12%-14%的稳定年化收益。</p>
+          <h2>Title Two</h2>
+          <p>Contents</p>
           <p><a class="btn btn-default" href="${ctx}/investmentProcess.htm" role="button">查看详情 >></a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img src="${pageContext.request.contextPath}/resources/images/index/6.jpg"  alt="Generic placeholder image">
-          <h2>安全保障</h2>
-          <p>所有投资标的100%适用本金保障计划，如遇借款人违约，人人贷将通过风险备用金有效保障理财人的本金安全。</p>
+          <h2>Title Three</h2>
+          <p>Contents</p>
           <p><a class="btn btn-default" href="${ctx}/riskGuarantee.htm" role="button">查看详情 >></a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->

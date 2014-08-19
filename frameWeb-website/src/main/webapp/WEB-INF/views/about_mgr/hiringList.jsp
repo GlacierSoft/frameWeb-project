@@ -23,7 +23,7 @@
   </head>
 
   <body>
-  <jsp:include page="../nav_mgr/navAbout.jsp"/>
+  <jsp:include page="../nav.jsp"/>
        
 	    <div class="container">
 		  	<div class="row">

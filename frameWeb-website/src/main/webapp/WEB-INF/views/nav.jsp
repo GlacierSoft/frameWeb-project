@@ -14,24 +14,24 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="${ctx}/index.htm">冰川网贷平台</a>
+	          <a class="navbar-brand" href="${ctx}/index.htm">冰川网站模板</a>
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
 	            <li class="active"><a href="${ctx}/index.htm">主页</a></li>
 	            <li class="dropdown">
-	              <a href="${ctx}/investment/index.htm?&p=1">我要投资</a>
+	              <a href="#">Navigation1</a>
 	             </li>
-	            <li><a href="${ctx}/borrow.htm">我要借款</a></li>
+	            <li><a href="#">Navigation2</a></li>
 	            <li class="dropdown">
-	              <a href="${ctx}/borrowingProcess.htm" class="dropdown-toggle" data-toggle="dropdown">新手引导<b class="caret"></b></a>
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation3<b class="caret"></b></a>
 	              <ul class="dropdown-menu">
-	                <li><a href="${ctx}/borrowingProcess.htm">借款流程</a></li>
-	                <li><a href="${ctx}/investmentProcess.htm">投资流程</a></li>
-	                <li><a href="${ctx}/riskGuarantee.htm">风险保障</a></li>
+	                <li><a href="#">One</a></li>
+	                <li><a href="#">Two</a></li>
+	                <li><a href="#">Three</a></li>
 	              </ul>
 	            </li>
-	            <li><a href="${ctx}/member/index.htm">个人中心</a></li>
+	            <li><a href="#">Navigation4</a></li>
 	            <li class="dropdown">
 	              <a href="${ctx}/aboutUs.htm" class="dropdown-toggle" data-toggle="dropdown">关于我们<b class="caret"></b></a>
 	              <ul class="dropdown-menu">

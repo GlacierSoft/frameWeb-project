@@ -17,7 +17,7 @@
   </head>
 
   <body>
- <jsp:include page="../nav_mgr/navNewbie.jsp"/>
+ <jsp:include page="../nav.jsp"/>
 	    <div class="container">
 	  	<div class="row">
 		    <div class="col-md-2">
