@@ -21,6 +21,7 @@ package com.glacier.frame.web.controller.common;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.glacier.frame.entity.member.Member;
 import com.glacier.frame.service.website.WebsiteAnnouncementService;
+import com.glacier.frame.service.website.WebsiteNavService;
 import com.glacier.frame.service.website.WebsiteNewsService;
 import com.glacier.jqueryui.util.JqPager;
 
@@ -52,6 +54,9 @@ public class CommonController {
 	@Autowired
 	private WebsiteNewsService newsService;//注入新闻业务类
 	
+	@Autowired
+	private WebsiteNavService NavService;//注入网站导航业务类
+	
     /**
      * 
      * @Title: index
@@ -63,11 +68,12 @@ public class CommonController {
      *             <p>
      */
     @RequestMapping(value = "/")
-    private Object index(JqPager pager) {
+    private Object index(JqPager pager,HttpSession sessionStauts) {
         ModelAndView mav = new ModelAndView("index");
         // 进入首页初始化导航信息
         mav.addObject("announcementDatas", announcementService.listAsWebsite(pager, 1));//主页加载公告信息
         mav.addObject("newsDatas", newsService.listAsWebsite(pager, 1));//主页加载新闻信息
+        sessionStauts.setAttribute("newClass", "");
         return mav;
     }
 

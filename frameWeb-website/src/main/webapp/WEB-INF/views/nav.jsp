@@ -17,33 +17,49 @@
 	          <a class="navbar-brand" href="${ctx}/index.htm">冰川网站模板</a>
 	        </div>
 	        <div class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">
-	            <li class="active"><a href="${ctx}/index.htm">主页</a></li>
-	            <li class="dropdown">
-	              <a href="#">Navigation1</a>
-	             </li>
-	            <li><a href="#">Navigation2</a></li>
-	            <li class="dropdown">
-	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation3<b class="caret"></b></a>
-	              <ul class="dropdown-menu">
-	                <li><a href="#">One</a></li>
-	                <li><a href="#">Two</a></li>
-	                <li><a href="#">Three</a></li>
-	              </ul>
-	            </li>
-	            <li><a href="#">Navigation4</a></li>
-	            <li class="dropdown">
-	              <a href="${ctx}/aboutUs.htm" class="dropdown-toggle" data-toggle="dropdown">关于我们<b class="caret"></b></a>
-	              <ul class="dropdown-menu">
-	                <li><a href="${ctx}/aboutUs.htm">公司简介</a></li>
-	                <li><a href="${ctx}/announcement/announcement.htm?&p=1">网站公告</a></li>
-					<li><a href="${ctx}/news/news.htm?&p=1">网站新闻</a></li>
-	                <li><a href="${ctx}/hiring/hiring.htm?&p=1">招纳贤士</a></li>
-	                <li><a href="${ctx}/contactUs.htm">联系我们</a></li>
-	                <li><a href="${ctx}/others/otherAddress.htm">公司地图</a></li>
-	                <li><a href="${ctx}/others/others.htm?&str=IPNumber">其他业务</a></li>
-	             </ul>
-	            </li>
+	          <ul id="topNavBar" class="nav navbar-nav">
+	            <script type="text/javascript">
+	            	//页面进来即刻加载
+	            	$(function(){
+	            	    $.ajax({
+	            	    	type:"post",
+	            	    	url:"${ctx}/nav/levelWebNav.json",
+	            	    	dataType:"json",
+	            	    	success:function(data){
+	            	    		//循环开始 
+	            	    		$.each(data,function(index,comment){
+	            	    		        if(index==0){
+	            	    		        	$("<li class='active'><a id='navABar"+index+"' href='${ctx}/index.htm'>"+comment.webNavName+"</a></li>").appendTo("#topNavBar");
+	            	    		        }else{
+	            	    		        	$("<li id='nav"+index+"' class='dropdown' onclick='getWebNavPname(\""+comment.webNavId+"\",this);'><a id='navABar"+index+"' href='${ctx}"+comment.webNavUrl+"'  class='dropdown-toggle' data-toggle='dropdown'>"+comment.webNavName+"</a></li>").appendTo("#topNavBar");
+	            	    		        }
+	            	    		  });
+	            	    	}
+	            	    });
+	            	});
+	            	//点击时取出子项
+	            	function getWebNavPname(webNavId,obj){
+	            		var id = $(obj).attr('id');//获取Id属性
+	            		$.post("${ctx}/nav/list.json","webNavId="+webNavId,function(data){
+	            			//构建一个UL元素
+	            			if(data!=""){
+	            				var ul="<ul class='dropdown-menu'>";
+	            			}
+	            			$.each(data,function(i,v){
+	            				ul+="<li onclick='clickBackGrounp(\""+id+"\")'><a href='${ctx}"+v.webNavUrl+"'>"+v.webNavName+"</a></li>";
+	            			});
+	            			if(data!=""){
+	            				ul+="<ul>";
+	            				$("#"+id).append(ul);//追加内容在某个元素结束前
+	            			}
+	            		},"json");
+	            	}
+	            	
+	            	function clickBackGrounp(id){
+	            		var ulNum = $("#topNavBar>li").length;
+	            		$("#"+id).addClass("active");
+	            	}
+	            </script>
 	          </ul>
 	          	<p class="navbar-text navbar-right">
 	          	<c:choose>

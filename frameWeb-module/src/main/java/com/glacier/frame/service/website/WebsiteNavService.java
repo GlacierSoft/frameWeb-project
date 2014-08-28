@@ -54,6 +54,36 @@ public class WebsiteNavService {
 	}
 	
 	/**
+	 * @Title: getNav 
+	 * @Description: TODO(取出一级导航信息的数据) 
+	 * @param @param
+	 * @param @return    设定文件 
+	 * @return Object    返回类型 
+	 * @throws
+	 */
+	public Object getOneLevelWebNav(){
+		WebsiteNavExample websiteNavExample = new WebsiteNavExample();
+		websiteNavExample.createCriteria().andWebNavPidIsNull();
+		List<WebsiteNav> websiteNavList =  websiteNavMapper.selectByExample(websiteNavExample);
+		return websiteNavList;
+	}
+	
+	/**
+	 * @Title: getNav 
+	 * @Description: TODO(取出一级导航信息的数据) 
+	 * @param @param
+	 * @param @return    设定文件 
+	 * @return Object    返回类型 
+	 * @throws
+	 */
+	public Object getSubitemWebNav(String webNavId){
+		WebsiteNavExample websiteNavExample = new WebsiteNavExample();
+		websiteNavExample.createCriteria().andWebNavPidEqualTo(webNavId);
+		List<WebsiteNav> websiteNavList =  websiteNavMapper.selectByExample(websiteNavExample);
+		return websiteNavList;
+	}
+	
+	/**
      * @Title: listAsGrid 
      * @Description: TODO(获取所有导航信息) 
      * @param @param pnavr

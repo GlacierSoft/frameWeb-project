@@ -27,6 +27,7 @@ import com.glacier.frame.entity.member.MemberAuthWithBLOBs;
 import com.glacier.frame.entity.member.MemberWork;
 import com.glacier.frame.service.member.MemberAuthService;
 import com.glacier.frame.service.member.MemberService;
+import com.glacier.frame.service.website.WebsiteNavService;
 import com.glacier.jqueryui.util.JqReturnJson;
 
 @Controller
@@ -37,6 +38,9 @@ public class RegisterController extends AbstractController {
 
     @Autowired
     private MemberAuthService memberAuthService;
+    
+    @Autowired
+	private WebsiteNavService NavService;//注入网站导航业务类
 
     /**
      * @Title: intoregister
@@ -448,7 +452,8 @@ public class RegisterController extends AbstractController {
     // 转到“联系我们”页面
     @RequestMapping(value = "/contactUs.htm")
     public Object contactUs() {
-        return "about_mgr/contactUs";
+    	ModelAndView mav = new ModelAndView("about_mgr/contactUs");
+        return mav;
     }
 
     // 转到“新手引导、借款流程”页面
