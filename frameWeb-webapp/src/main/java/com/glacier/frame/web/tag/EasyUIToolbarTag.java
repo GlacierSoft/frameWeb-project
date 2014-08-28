@@ -1,3 +1,13 @@
+/**
+ * @author xichao.dong   
+ * @email 406592176@qq.com
+ * @date 2014-8-15 上午8:50:38 
+ * @company (开发公司)    珠海市冰川软件有限公司
+ * @copyright (版权)    本文件归属珠海市冰川软件有限公司所有
+ * @version V1.0
+ * @modify (修改) : 2014-8-15 上午8:50:38  xichao.dong 
+ * @Review (审核人) ：xichao.dong 
+ */
 package com.glacier.frame.web.tag;
 
 import java.sql.ResultSet;
@@ -14,12 +24,11 @@ import com.glacier.frame.entity.system.Action;
 import com.glacier.frame.entity.system.util.ActionType;
 
 /**
- * 
- * @ClassName: EasyUIToolbarTag
- * @Description: TODO(通过Shiro控制EasyUI显示内容，自定义标签根据用户权限获取页面数据)
- * @author zhenfei.zhang
- * @email zhangzhenfei_email@163.com
- * @date 2013-8-26 下午2:33:56
+ * @ClassName: EasyUIToolbarTag 
+ * @Description: TODO(通过Shiro控制EasyUI显示内容，自定义标签根据用户权限获取页面数据) 
+ * @author xichao.dong	
+ * @email 406592176@qq.com
+ * @date 2014-8-28 下午5:36:05
  */
 public class EasyUIToolbarTag extends TagSupport {
 
