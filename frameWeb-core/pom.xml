@@ -258,5 +258,12 @@
 			<scope>compile</scope>
 		</dependency>
 		<!-- json-lib end -->
+		
+		<!-- poi begin -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<!-- poi end -->
   </dependencies>
 </project>

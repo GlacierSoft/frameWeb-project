@@ -70,6 +70,7 @@
 		<javax.servlet.version>2.5</javax.servlet.version>
 		<javax.servlet.jsp.version>2.2</javax.servlet.jsp.version>
 		<!-- provided end -->
+		<org.apache.poi.version>3.10-FINAL</org.apache.poi.version>
 	</properties>
 
 	<!-- 管理jar的依赖，在此处相当于生命各种jar的版本和作用域，那么在子POM中就可以不用重复定义该jar的版本和作用,默认的scope为compile,默认的type为jar -->
@@ -343,7 +344,7 @@
 				<artifactId>shiro-ehcache</artifactId>
 				<version>${org.apache.shiro.version}</version>
 			</dependency>
-			<!-- shiro begin -->
+			<!-- shiro end -->
 
 			<!-- compent begin -->
 			<dependency>
@@ -362,7 +363,7 @@
 				<classifier>jdk15</classifier>
 				<version>${com.google.code.kaptcha}</version>
 			</dependency>
-			<!-- compent begin -->
+			<!-- compent end -->
 
 			<!-- provided begin -->
 			<dependency>
@@ -389,8 +390,17 @@
 				<version>${javax.servlet.jsp.version}</version>
 				<scope>provided</scope>
 			</dependency>
-			<!-- provided begin -->
+			<!-- provided end -->
 
+			<!-- poi begin -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${org.apache.poi.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- poi end -->
+			
 		</dependencies>
 	</dependencyManagement>
 
